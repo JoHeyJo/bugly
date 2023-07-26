@@ -1,0 +1,45 @@
+.Post-solution {
+  max-width: 60vw;
+  border-bottom: 2px solid #545454;
+  padding: 1rem;
+  text-align: left;
+}
+
+.Post-subtitle {
+  border-bottom: 2px solid #545454;
+}
+
+h6 {
+  /* border-bottom: 2px solid #545454; */
+  /* text-align: left; */
+}
+
+#problem-stack {
+  /* align-items: baseline; */
+}
+
+.Post-title {
+  text-align: center;
+  background: #AC8307;
+  -webkit-box-shadow: inset 0px 0px 5px #664D02;
+  -moz-box-shadow: inset 0px 0px 5px #664D02;
+  box-shadow: inset 0px 0px 5px #664D02;
+  outline: none;
+  padding: 2px;
+}
+
+.Post-subtitle {
+  width: 100%;
+}
+
+.Post-post {
+  margin: 10px;
+  padding: 20px;
+  width: 98%;
+  background-color: #AC8307;
+  border-radius: 10px;
+  box-shadow:
+    0 8px 12px rgba(0, 0, 0, 0.15),
+    0 -4px 6px rgba(0, 0, 0, 0.3);
+  position: relative;
+}

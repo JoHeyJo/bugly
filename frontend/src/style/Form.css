@@ -1,0 +1,9 @@
+.Form-input {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+}

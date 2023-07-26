@@ -1,0 +1,48 @@
+.PostForm-control{
+  /* height: 150px;
+ */
+ /* border: 1px solid grey; */
+ /* border-radius: 5px; */
+ opacity: .5;
+}
+
+.input {
+  height: 150px;
+}
+
+.PostForm-controls {
+  padding-top: .9rem;
+}
+
+/* changes text input box */
+.PostForm-title {
+  background-color: #212529;
+  /* border: 1px solid rgba(128, 128, 128 0.502); */
+  color: #adb5bd;
+}
+
+.form-control {
+  border: 1px solid grey;
+}
+
+.PostForm-title:focus {
+  background-color: #212529;
+  color: #adb5bd;
+}
+
+.PostForm-col{
+  background-color: #212529;
+}
+
+/* changes title text box */
+.PostForm-label {
+  background-color: transparent;
+}
+
+.PostForm-form {
+  background-color: #212529;
+}
+
+* {
+  background-color: transparent;
+}

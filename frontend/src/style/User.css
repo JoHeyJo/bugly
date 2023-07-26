@@ -1,0 +1,15 @@
+img {
+  /* display: inline; */
+  width: 8rem;
+  height: 8rem;
+}
+
+.User-post-details {
+  border: 2px solid grey;
+  padding: 1rem;
+  min-height: 65vh;
+}
+
+.User-posts {
+  /* border: 2px solid grey; */
+}

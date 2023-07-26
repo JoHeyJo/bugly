@@ -1,0 +1,37 @@
+.custom-modal-header {
+  background-color: #212529;
+  color: #adb5bd;
+  border-bottom: 1px solid grey;
+
+}
+
+.custom-modal-footer{
+  background-color: #212529;
+  border-top: solid rgba(128, 128, 128 0.5);
+}
+
+.custom-modal {
+  background-color: transparent;
+
+}
+.custom-modal-body {
+  background-color: #212529;
+  color: #adb5bd;
+}
+
+.btn {
+  border: none;
+}
+
+/* Add hover effect */
+.btn:hover {
+  background-color: #AC8307;
+  > svg {
+      color: grey;
+  }
+}
+
+.btn:focus {
+  background-color: #AC8307;
+}
+

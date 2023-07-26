@@ -1,0 +1,9 @@
+.Users-container {
+  display: flex;
+  flex-direction: column;
+  text-align: justify;
+}
+
+button {
+  margin: 1rem;
+}

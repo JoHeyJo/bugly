@@ -1,0 +1,40 @@
+#Homepage {
+    background: #AC8307;
+      -webkit-box-shadow: inset 0px 0px 5px #664D02;
+      -moz-box-shadow: inset 0px 0px 5px #664D02;
+      box-shadow: inset 0px 0px 5px #664D02;
+      outline: none;
+      padding: 2rem;
+}
+
+.Homepage-title {
+  text-align: center;
+  background: #AC8307;
+  -webkit-box-shadow: inset 0px 0px 5px #664D02;
+  -moz-box-shadow: inset 0px 0px 5px #664D02;
+  box-shadow: inset 0px 0px 5px #664D02;
+  outline: none;
+  padding: 5px;
+  margin-bottom: 2rem;
+}
+
+.Homepage-post-title {
+text-transform: capitalize;
+}
+
+
+.Homepage-post {
+      margin: 10px;
+      padding: 20px;
+      width: 98%;
+      background-color: #AC8307;
+      border-radius: 10px;
+      box-shadow:
+        0 8px 12px rgba(0, 0, 0, 0.15),
+        0 -4px 6px rgba(0, 0, 0, 0.3);
+      position: relative;
+}
+
+.Homepage-footer {
+  border-bottom: 1px solid #5B5151;
+}

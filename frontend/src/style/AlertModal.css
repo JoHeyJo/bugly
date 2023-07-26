@@ -1,0 +1,23 @@
+.btn-custom {
+  background-color: transparent;
+  border: none;
+  color: inherit;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  cursor: pointer;
+  padding-left: 1rem;
+  color: transparent;
+  /* Add any additional custom styles as needed */
+}
+
+.btn-custom-selected { 
+    background-color: transparent;
+      border: none;
+      color: inherit;
+      padding: 0;
+      margin: 0;
+      font: inherit;
+      cursor: pointer;
+      padding-left: 1rem;
+}

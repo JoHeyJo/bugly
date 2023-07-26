@@ -1,0 +1,47 @@
+.DraftEditor-control {
+  border: 1px solid grey;
+  border-radius: 5px;
+  opacity: .5;
+  height: 10rem;
+}
+
+.basicStyling {
+  padding: 10px;
+  border: 1px solid grey;
+  min-height: 200px;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  /* border: 1px solid rgba(128, 128, 128 0.5); */
+  /* border: rgb(128, 128, 128); */
+  background-color: #fff;
+  border-radius: 5px;
+}
+
+/* .public-DraftStyleDefault-block */
+.my-editor.focused {
+  border:1px solid #86b7fe;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  border-radius: 5px;
+}
+
+.my-editor {
+  background-color: #212529;
+  color: #adb5bd;
+}
+
+/* Styles Editor container */
+.basicStyling { 
+  background-color: #212529;
+  color: #adb5bd;
+}
+
+
+.form-label { 
+  background-color: #212529;
+  color: #adb5bd;
+}
+
+/* .form-group {
+  background-color: #f5f6f7;
+} */
