@@ -23,9 +23,9 @@ class User(db.Model):
     first_name = db.Column(db.String(50), nullable=False)
     last_name = db.Column(db.String(50), nullable=False)
     image_url = db.Column(db.String, nullable=True)
-    email = db.Column(db.String(255), unique=True, nullable=False,)
+    email = db.Column(db.String(255), unique=True, nullable=False)
     # ********************CHANGE TO NOT NULL BEFORE DEPLOYMENT 
-    password = db.Column(db.Text)
+    password = db.Column(db.Text, nullable=False)
 
     posts = db.relationship("Post", backref="user")
 
