@@ -47,13 +47,13 @@ function App() {
   }
 
   async function loginUser(formData: IUser) {
-    // try {
+    try {
       const token = await login(formData);
       BuglyApi.token = token;
       setToken(token);
-    // } catch (error: any) {
-    //   console.error('App userLogin error:', error)
-    // }
+    } catch (error: any) {
+      console.error('App userLogin error:', error)
+    }
   }
 
   async function logout() {
