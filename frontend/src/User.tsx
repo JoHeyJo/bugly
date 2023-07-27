@@ -37,13 +37,17 @@ function User() {
   const params = useParams();
 
   /** fetches user with matching ID from database */
-  useEffect(() => {
-    async function fetchUser(id: number | undefined) {
-      const res = await userGet(id);
-      setUser(res)
-    }
-    fetchUser(+params.user_id!)
-  }, [postId])
+  try{
+    useEffect(() => {
+      async function fetchUser(id: number | undefined) {
+        const res = await userGet(id);
+        setUser(res)
+      }
+      fetchUser(+params.user_id!)
+    }, [postId])
+  }catch(error:any){
+    console.log('error fetching user')
+  }
 
   /** navigates to user edit page */
   const handleClick = () => {
