@@ -1,7 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import DateTime
 from datetime import datetime
-from freezegun import freeze_time
 from flask_bcrypt import Bcrypt
 from flask_jwt_extended import create_access_token
 
@@ -24,7 +23,6 @@ class User(db.Model):
     last_name = db.Column(db.String(50), nullable=False)
     image_url = db.Column(db.String, nullable=True)
     email = db.Column(db.String(255), unique=True, nullable=False)
-    # ********************CHANGE TO NOT NULL BEFORE DEPLOYMENT 
     password = db.Column(db.Text, nullable=False)
 
     posts = db.relationship("Post", backref="user")
@@ -75,6 +73,24 @@ class User(db.Model):
         """Serialize to dict"""
         return {"id": self.id, "email": self.email, "first_name": self.first_name, "last_name": self.last_name, "image_url": self.image_url}
     
+    
+class Project(db.Model):
+    """Project model"""
+    
+    __tablename__ = "projects"
+
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.String(50), nullable=False)
+    description = db.Column(db.Text)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    users = db.relationship("User", backref="project")
+    posts = db.relationship("Post", backref="project")
+
+    def serialize(self):
+        """Serialize to dict"""
+        return {"id": self.id, "name": self.name, "description": self.description, "user_id": self.user_id}
+    
+
 class Post(db.Model):
     """Post model"""
 
@@ -94,23 +110,6 @@ class Post(db.Model):
     def serialize(self):
         """Serialize to dict"""
         return {"id": self.id, "title": self.title, "content": self.content, "problem": self.problem, "solution": self.solution,  "created_at": self.created_at.strftime("%d, %Y, %I:%M %p"), "user_id": self.user_id, "project_id":self.project_id}
-    
-class Project(db.Model):
-    """Project model"""
-    
-    __tablename__ = "projects"
-
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    name = db.Column(db.String(50), nullable=False)
-    description = db.Column(db.Text)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    users = db.relationship("User", backref="project")
-    posts = db.relationship("Post", backref="project")
-
-    def serialize(self):
-        """Serialize to dict"""
-        return {"id": self.id, "name": self.name, "description": self.description, "user_id": self.user_id}
-
 
 
 def connect_db(app):

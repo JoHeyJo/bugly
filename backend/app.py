@@ -11,13 +11,16 @@ from datetime import timedelta
 
 ######## Double check exception key works ##########
 app = Flask(__name__)
+# CORS(app, origins=["https://bugly-olive.vercel.app"])
 CORS(app)
+# CORS(app, resources={r"/*": {"origins": "*"}})
+# app.config['SQLALCHEMY_DATABASE_URI'] = database_url
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///blogly_fs'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 # app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
-app.config['SECRET_KEY'] = 'i-have-a-secret'
-app.config["JWT_SECRET_KEY"] = "super-duper-secret"
+app.config['SECRET_KEY'] = os.environ['SECRET_KEY']
+app.config["JWT_SECRET_KEY"] = os.environ['JWT_SECRET_KEY']
 app.config['JWT_ACCESS_TOKEN_EXPIRES'] = timedelta(days=7)
 app.app_context().push()
 jwt = JWTManager(app)
@@ -72,7 +75,8 @@ def signup():
         message = pgerror.split('DETAIL: ')[0].strip()
         return jsonify({"error": message}), 401
     
-@app.post('/login')
+
+@app.route('/login', methods=['POST', 'OPTIONS'])
 def login():
     """Validates user credentials."""
     email = request.json['email']
@@ -107,7 +111,7 @@ def users_all():
 def users_get(id):
     """Retrieves user with matching ID"""
     try:
-        user = User.query.filter(User.email == id).first() if type(id) == str else User.query.get_or_404(int(id))
+        user = User.query.filter(User.email == id).first() if type(id) == int else User.query.get_or_404(int(id))
 
         serialized = User.serialize(user)
         user_data = {'id': serialized['id'], 'email': serialized['email'], 'firstName': serialized['first_name'],
@@ -115,7 +119,7 @@ def users_get(id):
         return jsonify(user_data)
     except LookupError as error:
         print('Lookup error >>>>>>>>>', error)
-        return jsonify({"error": error})
+        return jsonify({"error": error}), 500
 
 
 @app.post("/users/new")
