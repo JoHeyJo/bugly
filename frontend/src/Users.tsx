@@ -8,7 +8,7 @@ import { usersGet } from "./api";
 import HomePage from "./HomePages";
 // style
 import './style/Users.css';
-
+//******** INACTIVE ********
 /** displays list of all users
  * 
  * State:
@@ -19,13 +19,13 @@ function Users() {
   const [users, setUsers] = useState<IUser[]>([]);
 
   /**Fetches all users from database */
-  useEffect(() => {
-    async function fetchUsers() {
-      const res = await usersGet();
-      setUsers(res)
-    }
-    fetchUsers();
-  }, [])
+  // useEffect(() => {
+  //   async function fetchUsers() {
+  //     const res = await usersGet();
+  //     setUsers(res)
+  //   }
+  //   fetchUsers();
+  // }, [])
 
   return (
     // <Container>
@@ -39,7 +39,7 @@ function Users() {
         {/* <Link to="/signup">
           <Button variant="primary">Add user</Button>
         </Link> */}
-        <HomePage />
+        {/* <HomePage /> */}
       </div>
     // {/* </Container> */}
   )

@@ -5,6 +5,7 @@ import { postsGetAll } from './api'
 import { Link } from 'react-router-dom';
 import { IPost } from "./interface";
 import "./style/HomePage.css"
+import { errorHandling } from "./utils/errorHandling";
 
 /** Homepage for Bugly. Shows 5 most recent posts 
  * 
@@ -16,15 +17,23 @@ import "./style/HomePage.css"
 function HomePage() {
   const [posts, setPosts] = useState<IPost[]>([])
 
-  useEffect(() => {
-    async function fetchPosts() {
-      let res = await postsGetAll();
-      res.reverse();
-      res = res.slice(0, 6)
-      setPosts(res)
-    }
-    fetchPosts()
-  }, [])
+  try {
+    useEffect(() => {
+      async function fetchPosts() {
+        try {
+          let res = await postsGetAll();
+          res.reverse();
+          res = res.slice(0, 6)
+          setPosts(res)
+        } catch (error:any) {
+          errorHandling("Error in fetchPosts - postsGetAll", error)
+        }
+      }
+      fetchPosts()
+    }, [])
+  } catch (error: any) {
+    errorHandling("Error in fetchPosts =>", error)
+  }
 
   return (
     <div id="Homepage">

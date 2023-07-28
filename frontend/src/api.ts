@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { IUser, IPost, IProject } from './interface'
+import { errorHandling } from './utils/errorHandling';
 
 
 type ApiResponse = {
@@ -54,12 +55,11 @@ async function login(userData: IUser) {
   }
 }
 
-/**Returns first and last of all users */
+/**Returns all users */
+// INACTIVE
 async function usersGet() {
-  console.log('TOKEN in api', BuglyApi.token)
-  const headers = { Authorization: `Bearer ${BuglyApi.token}` }; // Replace `token` with your actual token value
   try {
-    const res = await axios.get(`${BASE_URL}/users`, { headers });
+    const res = await axios.get(`${BASE_URL}/users`);
     return res.data;
   } catch (error: any) {
     console.error("API get all users Error:" + error.response);
@@ -79,12 +79,12 @@ async function userAdd(data: IUser) {
 }
 
 /**returns user with matching ID */
-async function userGet(email: number | string | undefined | null) {
+async function userGet(id: number | string | undefined | null) {
   try {
-    const res = await axios.get(`${BASE_URL}/users/${email}`)
+    const res = await axios.get(`${BASE_URL}/users/${id}`)
     return res.data
   } catch (error: any) {
-    console.error("API get user Error:" + error.message)
+    errorHandling("API: userGet", error)
   }
 }
 
@@ -94,7 +94,7 @@ async function userEdit(id: number | undefined) {
     const res = await axios.get(`${BASE_URL}/users/${id}/edit`)
     return res.data
   } catch (error: any) {
-    console.error("API get user Error:" + error.message)
+    console.error("API edit user Error:" + error.message)
   }
 }
 
@@ -103,8 +103,8 @@ async function userUpdate(id: number, data: IUser) {
   try {
     const res = await axios.patch(`${BASE_URL}/users/${id}/edit`, data)
     return res.data;
-  } catch (error: any) {
-    console.error("API update Error:" + error.message)
+  } catch (error: any) {  
+    console.error("API userUpdate Error:" + error.message)
   }
 }
 
@@ -219,9 +219,7 @@ async function projectsGet(userId: number | undefined) {
     const res = await axios.get(`${BASE_URL}/users/${userId}/projects`);
     return res.data;
   } catch (error: any) {
-    console.log('>>>>>', error)
-    console.error('Error in projectsGet', error);
-    console.log(error)
+    errorHandling('Error in API projectsGet', error)
     throw error.response.data
   }
 }

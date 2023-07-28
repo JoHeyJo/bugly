@@ -59,8 +59,12 @@ function Posts({ posts, isPostsShowing }: PostsProps) {
 
   /** fetches Project post onClick */
   async function fetchPost(postId: number) {
-    const res = await postGet(postId);
-    setPost(res);
+    try {
+      const res = await postGet(postId);
+      setPost(res);
+    } catch (error) {
+      console.error('Error in fetchPost =>',error)
+    }
   }
 
   /** Sets boolean state if a post should be rendering */
