@@ -158,7 +158,7 @@ function PostForm({ handleClose, postId, fetchEditPost }: PostFormProp) {
    *  overlay if there is no logged in user  */
   function renderSubmitButton() {
     return <div className="">
-      {user?.email === 'jpf@gmail.com'
+      {user?.email === 'jpf0628@gmail.com'
         ? <Button type="submit" variant="primary" onClick={handleClose}>Submit</Button>
         : <AlertBubble action={postData.id === 0 ? 'addPost' : 'editPost'} />
       }
@@ -173,7 +173,7 @@ function PostForm({ handleClose, postId, fetchEditPost }: PostFormProp) {
       {/* render delete button if data exists */}
       {postData.id !== 0 &&
         // handle overlay if user is logged in
-        (user?.email === 'jpf@gmail.com'
+        (user?.email === 'jpf0628@gmail.com'
 
           ? <Button onClick={() => {
             deletePost();

@@ -56,7 +56,7 @@ function AlertModal({ projectData, projectGet, isOpen }: AlertModalProps) {
           <Button variant="outline-secondary" onClick={handleClose}>
             Close
           </Button>
-          {user?.email === 'jpf@gmail.com'
+          {user?.email === 'jpf0628@gmail.com'
             ? <Button variant="outline-danger" onClick={() => {
               deleteProject();
               handleClose();

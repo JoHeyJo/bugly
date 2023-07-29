@@ -117,7 +117,6 @@ async function userDelete(id: number) {
     return res.data
   } catch (error: any) {
     console.error(`API Delete error: ${error}`)
-    throw error.response.data
   }
 }
 // ************POSTS*******************
@@ -128,6 +127,7 @@ async function postsGetAll() {
     return res.data;
   } catch (error: any) {
     errorHandling("API: postsGetAll", error)
+    throw error.response.data;
   }
 }
 
@@ -143,7 +143,6 @@ async function postGet(id: number) {
 
 /** Routes new post data */
 async function postAdd(postData: IPost) {
-  console.log('token in api', BuglyApi.token)
   const headers = { Authorization: `Bearer ${BuglyApi.token}` };
   try {
     const res = await axios.post(`${BASE_URL}/users/${postData.userId}/posts/new`, postData, { headers })
@@ -219,7 +218,7 @@ async function projectsGet(userId: number | undefined) {
     const res = await axios.get(`${BASE_URL}/users/${userId}/projects`);
     return res.data;
   } catch (error: any) {
-    errorHandling('Error in API projectsGet', error)
+    errorHandling('API: projectsGet', error)
     throw error.response.data
   }
 }

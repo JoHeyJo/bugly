@@ -119,7 +119,7 @@ function ProjectForm({ getProject, handleClose }: ProjectFormProp) {
 
         </Form.Group>
 
-        {user?.email === 'jpf@gmail.com'
+        {user?.email === 'jpf0628@gmail.com'
           ? <Button type='submit'>{!project.id ? 'Add Project' : 'Update Project'}</Button>
           : <AlertBubble action={!project.id ? 'addProject' : 'updateProject'} />
         }
