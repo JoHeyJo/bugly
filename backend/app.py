@@ -13,7 +13,7 @@ from datetime import timedelta
 app = Flask(__name__)
 # CORS(app, origins=["https://bugly-olive.vercel.app"])
 CORS(app)
-# CORS(app, resources={r"/*": {"origins": "*"}})
+# CORS(app, resources={r"/*": {"origins": "https://bugly-olive.vercel.app"}})
 # app.config['SQLALCHEMY_DATABASE_URI'] = database_url
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///blogly_fs'
@@ -76,7 +76,7 @@ def signup():
         return jsonify({"error": message}), 401
     
 
-@app.route('/login', methods=['POST', 'OPTIONS'])
+@app.post('/login')
 def login():
     """Validates user credentials."""
     email = request.json['email']
@@ -111,7 +111,7 @@ def users_all():
 def users_get(id):
     """Retrieves user with matching ID"""
     try:
-        user = User.query.filter(User.email == id).first() if type(id) == int else User.query.get_or_404(int(id))
+        user = User.query.get_or_404(int(id)) if id.isnumeric() else User.query.filter(User.email == id).first()
 
         serialized = User.serialize(user)
         user_data = {'id': serialized['id'], 'email': serialized['email'], 'firstName': serialized['first_name'],
