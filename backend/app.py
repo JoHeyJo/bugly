@@ -11,10 +11,8 @@ from datetime import timedelta
 
 ######## Double check exception key works ##########
 app = Flask(__name__)
-# CORS(app, origins=["https://bugly-olive.vercel.app"])
 CORS(app)
 # CORS(app, resources={r"/*": {"origins": "https://bugly-olive.vercel.app"}})
-# app.config['SQLALCHEMY_DATABASE_URI'] = database_url
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///blogly_fs'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False

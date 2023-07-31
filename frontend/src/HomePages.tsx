@@ -27,13 +27,13 @@ function HomePage() {
           res = res.slice(0, 6)
           setPosts(res)
         } catch (error:any) {
-          errorHandling("Error in fetchPosts - postsGetAll", error)
+          errorHandling("HomePage: fetchPost -> postsGetAll", error)
         }
       }
       fetchPosts()
     }, [])
   } catch (error: any) {
-    errorHandling("Error in fetchPosts =>", error)
+    errorHandling("HomePage: fetchPosts", error)
   }
 
   return (
