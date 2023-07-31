@@ -30,7 +30,6 @@ export class BuglyApi {
 }
 
 
-console.log('api token ===', BuglyApi.token)
 /**Sign up user */
 async function signup(userData: IUser) {
   try {
@@ -46,8 +45,6 @@ async function signup(userData: IUser) {
 async function login(userData: IUser) {
   try {
     const res: ApiResponse = await axios.post(`${BASE_URL}/login`, userData);
-    console.log('login res =====', res)
-    console.log('signup', res)
     return res.data.token;
   } catch (error: any) {
     console.error("Login Error:", error);
