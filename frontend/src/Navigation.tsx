@@ -12,6 +12,7 @@ function Navigation({ logout }: NavBarProp) {
   const { user } = useContext(UserContext);
   const location = useLocation();
   const currentURL = location.pathname;
+  console.log('currentURL', currentURL)
 
   function loggedInNav() {
     return (
@@ -52,7 +53,7 @@ function Navigation({ logout }: NavBarProp) {
         <DropDown logout={logout} />
         <ul className="navbar-nav ms-auto">
           <li className="nav-item me-4">
-            <NavLink className="nav-link" to={currentURL === '/' ? `users/5` : '/'}>
+            <NavLink className="nav-link" to={currentURL === '/' ? `users/1` : '/'}>
               {currentURL !== '/' ? 'Home' : 'Projects'}
             </NavLink>
           </li>

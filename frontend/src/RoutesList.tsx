@@ -28,7 +28,6 @@ type RoutesListProps = {
  */
 
 function RoutesList({ signup, login, currentUser }: RoutesListProps) {
- console.log(currentUser)
   return (
     <>
       <Routes>
@@ -36,12 +35,10 @@ function RoutesList({ signup, login, currentUser }: RoutesListProps) {
         <Route path='/signup' element={<SignupForm signup={signup} />} />
         <Route path="/login" element={<LoginForm login={login} />} />
         <Route path="/projects" element={<Projects userId={currentUser?.id} />} />
-        {/* <Route path='/users' element={<Users />} /> */}
         <Route path='/users/:user_id' element={<User />} />
         <Route path='/users/:user_id/edit' element={<UserForm />} />
         <Route path="posts/:post_id" element={<Post />} />
         <Route path='/homepage' element={<HomePage />} />
-        {/* <Route path='/users/:user_id/projects/new' element={<ProjectForm />} /> */}
         <Route path='/users/:user_id/projects/:project_id' element={<Project />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
