@@ -73,7 +73,7 @@ function Post({ initialPost, handlePostRender, fetchEditPost }: any) {
           <h5 className="Post-content ms-2">{content}</h5>
         </Stack>
         <Stack direction="vertical" className="" id="problem-stack">
-          <h6 className="Post-subtitle">Problem:</h6>
+          <h6 className="Post-subtitle">Issue:</h6>
           <div className="Post-problem ms-2">{problem}</div>
         </Stack>
         <Stack direction="vertical" className="">

@@ -16,7 +16,7 @@ type SignUpFormProp = {
  * Routes -> SignupForm -> Alert
  * Routed as /signup
  */
-
+  
 function SignupForm({ signup }: any) {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -42,7 +42,7 @@ function SignupForm({ signup }: any) {
     evt.preventDefault();
     try {
       await signup(formData);
-      navigate("/users")
+      navigate("/")
     } catch (err: any) {
       setFormErrors(err);
     }
