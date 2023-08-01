@@ -1,6 +1,6 @@
 from flask_jwt_extended.exceptions import JWTDecodeError
 import os
-from flask import Flask, request, redirect, jsonify, url_for
+from flask import Flask, request, redirect, jsonify
 from models import db, connect_db, User, Post, Project
 from flask_cors import CORS
 from flask_debugtoolbar import DebugToolbarExtension
@@ -192,6 +192,7 @@ def posts_all():
         posts_user = [dict(User.serialize(User.query.get(
             post.user_id)), **Post.serialize(post)) for post in posts]
         # `**` unpacks the two dicts and merges them into a single dictionary
+
         posts_user_data = [
             {
                 'content': post['content'],
@@ -208,10 +209,17 @@ def posts_all():
             }
             for post in posts_user
         ]
-        return posts_user_data
+
+        posts_user_data_with_project = [
+            {**{'name': Project.serialize(Project.query.get(post['projectId']))['name']}, **post} for post in posts_user_data
+        ]
+
+        print('*********',posts_user_data_with_project[0]['createdAt'])
+
+        return jsonify(posts_user_data_with_project)
     except Exception as error:
         print("Lookup error", error)
-        return jsonify({"error in posts_all =>": error})
+        return jsonify({"error in posts_all =>": error}), 500
 
 
 @app.get("/users/<int:user_id>/posts")
@@ -222,14 +230,13 @@ def posts_all_user(user_id):
             Post.user_id == user_id).order_by(Post.created_at)
         serialized = [Post.serialize(post) for post in posts]
         return jsonify(serialized)
-    except LookupError as error:
+    except Exception as error:
         print('Lookup error >>>>>>>>>', error)
-        return jsonify({"error": error})
+        return jsonify({"error in posts_all_user": error}), 500
     
 
 @app.post("/users/<int:user_id>/posts/new")
 @jwt_required()
-
 def posts_add(user_id):
     """Adds new post"""
     try:

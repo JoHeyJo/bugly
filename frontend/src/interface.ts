@@ -19,6 +19,10 @@ export interface IPost {
   projectId: number;
 }
 
+export interface IPostWithProject extends IPost {
+  name: string;
+}
+
 export interface IPostData extends IPost {
   imageUrl: string | null;
 }

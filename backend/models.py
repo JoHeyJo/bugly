@@ -109,7 +109,7 @@ class Post(db.Model):
 
     def serialize(self):
         """Serialize to dict"""
-        return {"id": self.id, "title": self.title, "content": self.content, "problem": self.problem, "solution": self.solution,  "created_at": self.created_at.strftime("%d, %Y, %I:%M %p"), "user_id": self.user_id, "project_id":self.project_id}
+        return {"id": self.id, "title": self.title, "content": self.content, "problem": self.problem, "solution": self.solution,  "created_at": self.created_at.strftime("%D, %Y, %I:%M %p"), "user_id": self.user_id, "project_id":self.project_id}
 
 
 def connect_db(app):

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { postsGetAll } from './api'
 //Components & models
 import { Link } from 'react-router-dom';
-import { IPost } from "./interface";
+import { IPostWithProject } from "./interface";
 import "./style/HomePage.css"
 import { errorHandling } from "./utils/errorHandling";
 import DraftEditorConvertFromRaw from "./DraftEditorConvertFromRaw";
@@ -16,7 +16,7 @@ import DraftEditorConvertFromRaw from "./DraftEditorConvertFromRaw";
  * RouteList -> Homepage
 */
 function HomePage() {
-  const [posts, setPosts] = useState<IPost[]>([])
+  const [posts, setPosts] = useState<IPostWithProject[]>([])
 
   try {
     useEffect(() => {
@@ -45,7 +45,7 @@ function HomePage() {
             <h2 className="Homepage-post-title">{post.title}</h2>
           </Link>
           <h4><DraftEditorConvertFromRaw rawContent={post.content} /></h4>
-          <h6 className="Homepage-footer">By {post.firstName} {post.lastName} {post.createdAt}</h6>
+          <h6 className="Homepage-footer">Project: {post.name} - {post.createdAt}</h6>
         </section>
       )}
 
