@@ -44,7 +44,7 @@ function HomePage() {
           <Link to={`/posts/${post.id}`}>
             <h2 className="Homepage-post-title">{post.title}</h2>
           </Link>
-          <h4><DraftEditorConvertFromRaw rawContent={post.problem} /></h4>
+          <h4><DraftEditorConvertFromRaw rawContent={post.content} /></h4>
           <h6 className="Homepage-footer">By {post.firstName} {post.lastName} {post.createdAt}</h6>
         </section>
       )}

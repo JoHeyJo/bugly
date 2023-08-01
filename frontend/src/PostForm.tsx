@@ -162,7 +162,6 @@ function PostForm({ handleClose, postId, fetchEditPost }: PostFormProp) {
         ? <Button type="submit" variant="primary" onClick={handleClose}>Submit</Button>
         : <AlertBubble action={postData.id === 0 ? 'addPost' : 'editPost'} />
       }
-      {/* <Button variant="dark" onClick={handleClose}>Cancel</Button> */}
     </div>
   }
 
