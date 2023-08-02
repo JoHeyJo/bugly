@@ -92,7 +92,6 @@ function App() {
 
 
   if (isLoading) return <p>Loading...</p>;
-console.log('user in App', currentUser)
   return (
     <Container className="User-container">
 

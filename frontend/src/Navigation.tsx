@@ -12,7 +12,6 @@ function Navigation({ logout }: NavBarProp) {
   const { user } = useContext(UserContext);
   const location = useLocation();
   const currentURL = location.pathname;
-  console.log('currentURL', currentURL)
 
   function loggedInNav() {
     return (

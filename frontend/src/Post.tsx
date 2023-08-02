@@ -40,7 +40,6 @@ function Post({ initialPost, handlePostRender, fetchEditPost }: any) {
     try {
       const res = await postGet(postId);
       setPost(res);
-      console.log('res in  fetchPost', res)
       return res;
     } catch (error: any) {
       console.error(`Error in fetchPost => ${error}`)

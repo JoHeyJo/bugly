@@ -57,7 +57,6 @@ function PostForm({ handleClose, postId, fetchEditPost }: PostFormProp) {
       if (postId) {
         const post: IPost = await fetchPost(postId);
         fetchUser(post.userId);
-        console.log('rawData', rawData)
       }
       if (projectId) {
         setPostData(p => {

@@ -78,7 +78,6 @@ async function userAdd(data: IUser) {
 /**returns user with matching ID */
 async function userGet(id: number | string | undefined | null) {
   try {
-    console.log('id',id)
     const res = await axios.get(`${BASE_URL}/users/${id}`)
     return res.data
   } catch (error: any) {

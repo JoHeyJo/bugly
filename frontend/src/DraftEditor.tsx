@@ -49,7 +49,6 @@ function DraftEditor({ raw, onEditorDataChange }: DraftEditorProp) {
     const newState = RichUtils.handleKeyCommand(editorState[field], command)
 
     if (newState) {
-      console.log('NEWSTATE key command', newState)
       onEditorChange(field, newState)
       return 'handled';
     }

@@ -36,7 +36,6 @@ function User() {
       fetchUser(+params.user_id!)
     }, [postId])
   }catch(error:any){
-    console.log('error fetching user')
   }
 
   /** navigates to user edit page */

@@ -1,5 +1,5 @@
 .Post-solution {
-  max-width: 60vw;
+  /* max-width: 60vw; */
   border-bottom: 2px solid #545454;
   padding: 1rem;
   text-align: left;
@@ -7,15 +7,6 @@
 
 .Post-subtitle {
   border-bottom: 2px solid #545454;
-}
-
-h6 {
-  /* border-bottom: 2px solid #545454; */
-  /* text-align: left; */
-}
-
-#problem-stack {
-  /* align-items: baseline; */
 }
 
 .Post-title {
