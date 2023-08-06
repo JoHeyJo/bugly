@@ -214,8 +214,6 @@ def posts_all():
             {**{'name': Project.serialize(Project.query.get(post['projectId']))['name']}, **post} for post in posts_user_data
         ]
 
-        print('*********',posts_user_data_with_project[0]['createdAt'])
-
         return jsonify(posts_user_data_with_project)
     except Exception as error:
         print("Lookup error", error)
