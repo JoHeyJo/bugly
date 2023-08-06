@@ -119,23 +119,24 @@ function PostForm({ handleClose, postId, fetchEditPost }: PostFormProp) {
   /**Submit post data */
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    //adds post that doesn't correspond to project
-    if (userId && !projectId) {
-      try {
-        await postAdd(postData);
-        setPostData(defaultPost);
-      } catch (error: any) {
-        setAlert(error)
-        console.error(`Error adding new post => ${error.error}`)
-      }
-    }
+    //adds post that doesn't correspond to project DEPRECATED no stand alone posts 
+    // if (userId && !projectId) {
+    //   try {
+    //     await postAdd(postData);
+    //     setPostData(defaultPost);
+    //   } catch (error: any) {
+    //     setAlert(error)
+    //     console.error(`Error adding new post => ${error.error}`)
+    //   }
+    // }
     //edit individual post
-    if (postId && fetchEditPost) {
+    console.log(postId, fetchEditPost)
+    if (postId) {
       try {
         await postUpdate(postId, postData);
         setPostData(defaultPost);
         fetchProjectPosts();
-        fetchEditPost(postId);
+        fetchEditPost && fetchEditPost(postId);
       } catch (error: any) {
         console.error(`Error updating post => ${error.error}`)
       }
