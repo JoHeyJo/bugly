@@ -1,5 +1,7 @@
 # Bugly
 
+https://github.com/JoHeyJo/bugly/assets/89425954/9248a39d-5e8e-4c98-a7f8-ff722bc453cf
+
 Bugly is a full stack blog application I developed to track the problem-solving process by cataloging projects and their corresponding "bugs" as posts. Main functionality is confined to a single page application that corresponds to a user. Secondary page displays a list of the most recent posts and which project they belong to.
 
 ## Features
@@ -44,7 +46,7 @@ npm start
 
 - Search for projects and posts.
 - Section for project technical details and short blurb.
-# bugly
 
-https://github.com/JoHeyJo/bugly/assets/89425954/9248a39d-5e8e-4c98-a7f8-ff722bc453cf
+
+
 
