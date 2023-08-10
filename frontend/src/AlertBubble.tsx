@@ -15,6 +15,12 @@ function AlertBubble({action, icon}: AlertBubbleProp) {
   const [show, setShow] = useState(false);
   const target = useRef(null);
 
+  if(show){
+    setTimeout(()=>
+      setShow(false),1500
+    )
+  }
+
   return (
     <>
       <Button className={actionProperties[action].class} variant={actionProperties[action].variant} ref={target} onClick={() => setShow(!show)}>
