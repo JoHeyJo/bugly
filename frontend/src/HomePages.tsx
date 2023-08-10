@@ -7,6 +7,7 @@ import { IPostWithProject } from "./interface";
 import "./style/HomePage.css"
 import { errorHandling } from "./utils/errorHandling";
 import DraftEditorConvertFromRaw from "./DraftEditorConvertFromRaw";
+import LoadingSpinner from "./LoadingSpinner";
 
 /** Homepage for Bugly. Shows 5 most recent posts 
  * 
@@ -17,6 +18,7 @@ import DraftEditorConvertFromRaw from "./DraftEditorConvertFromRaw";
 */
 function HomePage() {
   const [posts, setPosts] = useState<IPostWithProject[]>([])
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   try {
     useEffect(() => {
@@ -26,8 +28,10 @@ function HomePage() {
           res.reverse();
           res = res.slice(0, 6)
           setPosts(res)
+          setIsLoading(false);
         } catch (error:any) {
           errorHandling("HomePage: fetchPost -> postsGetAll", error)
+          setIsLoading(false);
         }
       }
       fetchPosts()
@@ -35,6 +39,8 @@ function HomePage() {
   } catch (error: any) {
     errorHandling("HomePage: fetchPosts", error)
   }
+
+  if(isLoading) return <LoadingSpinner/>;
 
   return (
     <div id="Homepage">

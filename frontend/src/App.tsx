@@ -10,6 +10,7 @@ import { UserContextType, UserContext } from './userContext';
 import decode from "jwt-decode";
 import RoutesList from './RoutesList';
 import Navigation from './Navigation';
+import LoadingSpinner from "./LoadingSpinner";
 // style
 import './style/App.css';
 
@@ -29,7 +30,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState<IUser | null>(null);
   //this allows app to retrieve token on render. However, at first render it'll trigger error handling for getUser
   const [token, setToken] = useState<string | null>(localStorage.getItem("blogly-token"));
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const UserData: UserContextType = {
     user: currentUser,
@@ -91,7 +92,7 @@ function App() {
   }, [token])
 
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <LoadingSpinner />;
   return (
     <Container className="User-container">
 
