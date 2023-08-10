@@ -9,6 +9,7 @@ import Col from 'react-bootstrap/Col';
 //components / modules
 import { projectGet, projectPostsGet } from './api';
 import { IProject, IPost } from "./interface";
+import { errorHandling } from "./utils/errorHandling";
 
 
 
@@ -29,18 +30,23 @@ function Project() {
   const userId = +params.user_id!;
 
   /** fetches project on mount*/
-  useEffect(() => {
-    async function fetchProject() {
-      const res = await projectGet(projectId);
-      setProject(res);
-    };
-    async function fetchPosts(){
-      const res = await projectPostsGet(userId, projectId)
-      setPosts(res)
-    }
-    fetchProject();
-    fetchPosts();
-  }, [])
+  try {
+    useEffect(() => {
+      async function fetchProject() {
+        const res = await projectGet(projectId);
+        setProject(res);
+      };
+      async function fetchPosts() {
+        const res = await projectPostsGet(userId, projectId)
+        setPosts(res)
+      }
+      fetchProject();
+      fetchPosts();
+    }, [])
+
+  } catch (error: any) {
+    errorHandling("Project: fetchProject", error)
+  }
 
   return (
     <>

@@ -46,7 +46,11 @@ function Projects({ userId }: ProjectProps) {
   const [projects, setProjects] = useState<IProject[]>([])
   const [projectData, setProjectData] = useState<ProjectData>({ name: '', id: 0 });
   const [posts, setPosts] = useState<IPost[]>([]);
-  const [isPostsShowing, setIsPostsShowing] = useState<boolean | undefined | number>(false);
+  // const [isPostsShowing, setIsPostsShowing] = useState<boolean | undefined | number>(false);
+  const [isLoading, setIsLoading] = useState(true);
+  console.log('*************')
+  console.log('isPostsShowing',open)
+  console.log('*************')
 
   const { user } = useContext(UserContext);
 
@@ -88,24 +92,33 @@ function Projects({ userId }: ProjectProps) {
   async function isOpen(id?: number, projectId?: number) {
     if (!open) {
       // if closed, open slideover
-      await fetchPosts(id, projectId)
-      setOpen(true)
+      try {
+        await fetchPosts(id, projectId)
+        setIsLoading(false);
+        setOpen(true)
+      } catch (error) {
+        if (isLoading) return <p>Loading...</p>;
+      }
     } else if (projectId !== projectData.id) {
       // if opening a different project, close current and open new project
-      setOpen(false);
-      setTimeout(async () => {
-        await fetchPosts(id, projectId);
-        setOpen(true)
-      }, 500)
-
+      try {
+        setOpen(false);
+        
+        setTimeout(async () => {
+          await fetchPosts(id, projectId);
+          setOpen(true)
+        }, 500)
+      } catch (error) {
+        if (isLoading) return <p>Loading...</p>;
+      }
     } else {
       setOpen(false)
     }
   }
 
-  const handleParentStateChange = () => {
-    setIsPostsShowing(!isPostsShowing);
-  };
+  // const handleParentStateChange = () => {
+  //   setIsPostsShowing(!isPostsShowing);
+  // };
 
   return (
     <div className="Projects">
@@ -149,7 +162,7 @@ function Projects({ userId }: ProjectProps) {
               <Col>
                 <div className="Project-User-posts">
                   <ProjectContext.Provider value={ProjectData}>
-                    <Posts isPostsShowing={handleParentStateChange} posts={posts || []} />
+                    <Posts isPostsShowing={open} posts={posts || []} />
                   </ProjectContext.Provider>
                 </div>
               </Col>

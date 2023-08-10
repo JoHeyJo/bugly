@@ -24,7 +24,7 @@ import { ProjectContextType } from "./userContext";
 
 type PostsProps = {
   posts: IPost[];
-  isPostsShowing: () => void;
+  isPostsShowing: boolean;
 }
 /** Renders list of posts by title
  * 
@@ -50,7 +50,7 @@ type PostsProps = {
 function Posts({ posts, isPostsShowing }: PostsProps) {
   const [isPostRendering, setIsPostRendering] = useState<boolean>(false)
   const [post, setPost] = useState<IPost>()
-
+// console.log('isPostRendering',isPostRendering)
 
   const PostData: PostContextType = {
     fetchEditPost: undefined,

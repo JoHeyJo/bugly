@@ -11,6 +11,7 @@ import AlertPopUp from './AlertPopUp';
 import { ProjectContext, PostContext, UserContext } from "./userContext";
 import DraftEditor from "./DraftEditor";
 import AlertBubble from "./AlertBubble";
+import { errorHandling } from "./utils/errorHandling";
 //styles
 import './style/PostForm.css';
 
@@ -43,35 +44,43 @@ function PostForm({ handleClose, postId, fetchEditPost }: PostFormProp) {
 
 
   /** fetches data on mount*/
-  useEffect(() => {
-    //in response to new post, fetch user data and update state w/ user data
-    async function fetchData() {
-      if (userId) {
-        setPostData(p => {
-          p.userId = userId
-          return p
-        })
-        fetchUser(userId);
-      }
-      //in response to post edit, fetch post data and update state w/ post data
-      if (postId) {
-        const post: IPost = await fetchPost(postId);
-        fetchUser(post.userId);
-      }
-      if (projectId) {
-        setPostData(p => {
-          p.projectId = projectId
-          return p;
-        })
-      }
-    };
-    fetchData();
-  }, [])
+  try {
+    useEffect(() => {
+      //in response to new post, fetch user data and update state w/ user data
+      async function fetchData() {
+        if (userId) {
+          setPostData(p => {
+            p.userId = userId
+            return p
+          })
+          fetchUser(userId);
+        }
+        //in response to post edit, fetch post data and update state w/ post data
+        if (postId) {
+          const post: IPost = await fetchPost(postId);
+          fetchUser(post.userId);
+        }
+        if (projectId) {
+          setPostData(p => {
+            p.projectId = projectId
+            return p;
+          })
+        }
+      };
+      fetchData();
+    }, [])
+  } catch (error: any) {
+    errorHandling('PostForm: fetchData', error)
+  }
 
   /** Fetches user data*/
   async function fetchUser(userId: number) {
-    const res = await userGet(userId);
-    setUserData(res);
+    try {
+      const res = await userGet(userId);
+      setUserData(res);
+    } catch (error: any) {
+      errorHandling("PostForm: fetchUser", error)
+    }
   };
 
   /** Fetches post data*/
