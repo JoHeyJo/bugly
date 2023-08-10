@@ -46,12 +46,7 @@ function Projects({ userId }: ProjectProps) {
   const [projects, setProjects] = useState<IProject[]>([])
   const [projectData, setProjectData] = useState<ProjectData>({ name: '', id: 0 });
   const [posts, setPosts] = useState<IPost[]>([]);
-  // const [isPostsShowing, setIsPostsShowing] = useState<boolean | undefined | number>(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [actionInProgress, setActionInProgress] = useState(false);
-  console.log('*************')
-  console.log('isPostsShowing',open)
-  console.log('*************')
 
   const { user } = useContext(UserContext);
 
@@ -91,7 +86,6 @@ function Projects({ userId }: ProjectProps) {
 
   /** controls when slideover opens/closes */
   async function isOpen(id?: number, projectId?: number) {
-    setActionInProgress(true);
     if (!open) {
       // if closed, open slideover
       try {
@@ -116,12 +110,7 @@ function Projects({ userId }: ProjectProps) {
     } else {
       setOpen(false)
     }
-    setActionInProgress(false);
   }
-
-  // const handleParentStateChange = () => {
-  //   setIsPostsShowing(!isPostsShowing);
-  // };
 
   return (
     <div className="Projects">
