@@ -18,7 +18,7 @@ import LoadingSpinner from "./LoadingSpinner";
 */
 function HomePage() {
   const [posts, setPosts] = useState<IPostWithProject[]>([])
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   try {
     useEffect(() => {
