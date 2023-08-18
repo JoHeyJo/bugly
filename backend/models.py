@@ -13,7 +13,6 @@ db = SQLAlchemy()
 
 class User(db.Model):
     """User model."""
-
     __tablename__ = "users"
 
     id = db.Column(db.Integer,
@@ -75,8 +74,7 @@ class User(db.Model):
     
     
 class Project(db.Model):
-    """Project model"""
-    
+    """Project model."""
     __tablename__ = "projects"
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -85,15 +83,58 @@ class Project(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     users = db.relationship("User", backref="project")
     posts = db.relationship("Post", backref="project")
+    details = db.relationship("Detail", backref="project")
 
     def serialize(self):
         """Serialize to dict"""
         return {"id": self.id, "name": self.name, "description": self.description, "user_id": self.user_id}
     
 
-class Post(db.Model):
-    """Post model"""
+class ProjectTech(db.Model):
+    """Mapping of a project to a technology"""
 
+    __tablename__ = "projects_technologies"
+
+    project_id = db.Column(db.Integer, 
+                           db.ForeignKey("projects.id"), 
+                           primary_key=True,
+                           nullable=False)
+    tech_id = db.Column(db.Integer, 
+                        db.ForeignKey("technologies.id"), 
+                        primary_key=True,
+                        nullable=False)
+
+class Detail(db.Model):
+    """Detail model."""
+
+    __tablename__ = "details"
+
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    detail = db.Column(db.String(50), nullable=False)
+    project_id = db.Column(db.Integer, db.ForeignKey('projects.id'), nullable=False)
+
+    def serialize(self):
+        """Serialize to dict"""
+        return { "id": self.id, "detail": self.detail, "projecft_id": self.project_id}
+    
+
+class Tech (db.Model):
+    """Tech model. Projects can be assigned to this."""
+    __tablename__ = "technologies"
+
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    tech = db.Column(db.String(50), nullable=False)
+    projects = db.relationship('Project',
+                               secondary='projects_technologies',
+                               backref='technologies')
+
+    def serialize(self):
+        """Serialize to dict"""
+        return {"id": self.id, "tech": self.tech }
+
+    
+class Post(db.Model):
+    """Post model."""
     __tablename__ = "posts"
 
     id = db.Column(db.Integer,
