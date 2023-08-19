@@ -8,6 +8,7 @@ from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 from flask_jwt_extended import JWTManager, jwt_required, get_jwt_identity
 from datetime import timedelta
+from data_service import combine_tech_and_detail
 
 ######## Double check exception key works ##########
 app = Flask(__name__)
@@ -497,6 +498,18 @@ def projects_delete(project_id):
         print('projects_delete error =>', e)
         return jsonify({"error": f"{str(e)}"})
 
+######### Project info routes ########### ########### ########### ########### ###################### ########### ########### ########### ###########
+@app.get("/info/<project_int>")
+def get_info(project_id):
+    """Gets information of post: info:{tech,details}"""
+    info = combine_tech_and_detail(project_id)
+    return info
+
+@app.post("/info/<project_id>")
+def post_info(project_id):
+    """Adds info to corresponding project"""
+
+    
 
 
 

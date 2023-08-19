@@ -13,6 +13,7 @@ db = SQLAlchemy()
 
 class User(db.Model):
     """User model."""
+
     __tablename__ = "users"
 
     id = db.Column(db.Integer,
@@ -75,6 +76,7 @@ class User(db.Model):
     
 class Project(db.Model):
     """Project model."""
+
     __tablename__ = "projects"
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -103,7 +105,6 @@ class ProjectTech(db.Model):
                         db.ForeignKey("technologies.id"), 
                         primary_key=True,
                         nullable=False)
-
 class Detail(db.Model):
     """Detail model."""
 
@@ -117,9 +118,9 @@ class Detail(db.Model):
         """Serialize to dict"""
         return { "id": self.id, "detail": self.detail, "projecft_id": self.project_id}
     
-
 class Tech (db.Model):
     """Tech model. Projects can be assigned to this."""
+
     __tablename__ = "technologies"
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -135,6 +136,7 @@ class Tech (db.Model):
     
 class Post(db.Model):
     """Post model."""
+    
     __tablename__ = "posts"
 
     id = db.Column(db.Integer,
