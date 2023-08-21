@@ -1,7 +1,7 @@
 from flask_jwt_extended.exceptions import JWTDecodeError
 import os
 from flask import Flask, request, redirect, jsonify
-from models import db, connect_db, User, Post, Project
+from models import db, connect_db, User, Post, Project, Detail, Tech
 from flask_cors import CORS
 from flask_debugtoolbar import DebugToolbarExtension
 # from werkzeug.exceptions import BadRequest
@@ -508,8 +508,23 @@ def get_info(project_id):
 @app.post("/info/<project_id>")
 def post_info(project_id):
     """Adds info to corresponding project"""
+    try:
+        detail = request.json["detail"]
+        new_detail = Detail(detail=detail,project_id=project_id)
 
-    
+        tech = request.json["tech"]
+        new_tech = Tech(tech=tech)
+        
+        project = Project.query.get_or_404(project_id)
+        project.technologies.append(new_tech)
+
+        db.session.add_all([new_detail,new_tech])
+        db.session.commit()
+
+        return Detail.serialize(new_detail)
+    except Exception as e:
+        print('post_info error =>', e)
+        return jsonify({"error": f"{str(e)}"})
 
 
 
