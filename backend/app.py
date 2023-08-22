@@ -499,7 +499,7 @@ def projects_delete(project_id):
         return jsonify({"error": f"{str(e)}"})
 
 ######### Project info routes ########### ########### ########### ########### ###################### ########### ########### ########### ###########
-@app.get("/info/<project_int>")
+@app.get("/info/<int:project_id>")
 def get_info(project_id):
     """Gets information of post: info:{tech,details}"""
     info = combine_tech_and_detail(project_id)
@@ -521,7 +521,9 @@ def post_info(project_id):
         db.session.add_all([new_detail,new_tech])
         db.session.commit()
 
-        return Detail.serialize(new_detail)
+        info_data = combine_tech_and_detail(project_id)
+
+        return info_data
     except Exception as e:
         print('post_info error =>', e)
         return jsonify({"error": f"{str(e)}"})
