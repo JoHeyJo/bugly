@@ -8,7 +8,7 @@ from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 from flask_jwt_extended import JWTManager, jwt_required, get_jwt_identity
 from datetime import timedelta
-from data_service import combine_tech_and_detail
+from data_service import tech_and_detail
 
 ######## Double check exception key works ##########
 app = Flask(__name__)
@@ -502,31 +502,36 @@ def projects_delete(project_id):
 @app.get("/info/<int:project_id>")
 def get_info(project_id):
     """Gets information of post: info:{tech,details}"""
-    info = combine_tech_and_detail(project_id)
+    info = tech_and_detail(project_id)
     return info
 
 @app.post("/info/<project_id>")
 def post_info(project_id):
     """Adds info to corresponding project"""
     try:
-        detail = request.json["detail"]
-        new_detail = Detail(detail=detail,project_id=project_id)
 
-        tech = request.json["tech"]
-        new_tech = Tech(tech=tech)
+        detail = request.json.get("details", None)
+        if detail is not None:
+            new_detail = Detail(detail=detail,project_id=project_id)
+            db.session.add(new_detail)
+
+        tech = request.json.get("tech", None)
+        if tech is not None:
+            new_tech = Tech(tech=tech)
         
-        project = Project.query.get_or_404(project_id)
-        project.technologies.append(new_tech)
+            project = Project.query.get_or_404(project_id)
+            project.technologies.append(new_tech)
+            db.session.add(new_tech)
 
-        db.session.add_all([new_detail,new_tech])
         db.session.commit()
 
-        info_data = combine_tech_and_detail(project_id)
+        info_data = tech_and_detail(project_id)
 
         return info_data
     except Exception as e:
         print('post_info error =>', e)
         return jsonify({"error": f"{str(e)}"})
+
 
 
 
