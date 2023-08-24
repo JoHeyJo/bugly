@@ -50,3 +50,8 @@ export interface IProject {
   description: string | undefined;
   user_id: number | undefined;
 }
+
+export interface IInfoData {
+  detail: string;
+  tech: string;
+}

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { IUser, IPost, IProject } from './interface'
+import { IUser, IPost, IProject, IInfoData } from './interface'
 import { errorHandling } from './utils/errorHandling';
 
 
@@ -289,6 +289,28 @@ async function projectDelete(projectId?: number) {
   }
 }
 
+// ************PROJECTS*******************
 
+/** Gets all info corresponding to project */
+async function getInfo(projectId: number){
+  try {
+    const res = await axios.get(`${BASE_URL}/info/${projectId}`)
+    return res;
+  } catch (error: any) {
+    errorHandling('getInfo', error)
+    throw error.response.data
+  }
+}
+
+/** Posts new info : {details, tech} */
+async function postInfo(projectId: number, infoData: IInfoData ){
+  try {
+    const res = await axios.post(`${BASE_URL}/info/${projectId}`)
+    return res
+  } catch (error: any) {
+    errorHandling('postInfo', error)
+    throw error.response.data    
+  }
+}
 export { login, signup, projectDelete, projectPostsGet, projectPostAdd, projectGet, projectsGetAll, userGet, usersGet, userAdd, userUpdate, userDelete, userEdit, postsGetAll, postGet, postAdd, postEdit, postUpdate, postDelete, projectAdd, projectUpdate, projectEdit, projectsGet };
 
