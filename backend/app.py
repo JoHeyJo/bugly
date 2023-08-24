@@ -1,7 +1,7 @@
 from flask_jwt_extended.exceptions import JWTDecodeError
 import os
 from flask import Flask, request, redirect, jsonify
-from models import db, connect_db, User, Post, Project, Detail, Tech
+from models import db, connect_db, User, Post, Project, Detail, Tech, ProjectTech
 from flask_cors import CORS
 from flask_debugtoolbar import DebugToolbarExtension
 # from werkzeug.exceptions import BadRequest
@@ -543,7 +543,7 @@ def update_info(detail_id):
         db.session.commit()
         return jsonify(Detail.serialize(detail))
     except Exception as e:
-        print('post_info error =>', e)
+        print('update_info error =>', e)
         return jsonify({"error": f"{str(e)}"})
 
 @app.patch("/tech/<tech_id>")
@@ -557,9 +557,24 @@ def update_tech(tech_id):
         db.session.commit()
         return jsonify(Tech.serialize(tech))
     except Exception as e:
-        print('post_info error =>', e)
+        print('update_tech error =>', e)
         return jsonify({"error": f"{str(e)}"})
 
+@app.delete("/tech/<tech_id>")
+def delete_tech(tech_id):
+    """Delete tech"""
+    try:
+        tech = Tech.query.get_or_404(tech_id)
+        project_tech_associations= ProjectTech.query.filter(ProjectTech.tech_id == tech_id).all()
+        for record in project_tech_associations:
+            db.session.delete(record)
+            db.session.commit()  
+        db.session.delete(tech)
+        db.session.commit()
+        return jsonify({'message':'Project deleted'})
+    except Exception as e:
+        print('delete_tech error =>', e)
+        return jsonify({"error": f"{str(e)}"})
 
 
 # Error handling for missing or invalid JWT
