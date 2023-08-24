@@ -1,6 +1,8 @@
 from models import User, Post, Tech, Detail, ProjectTech, Project
+from flask_sqlalchemy import SQLAlchemy
 from flask import jsonify
-from app import db
+
+db = SQLAlchemy()
 
 def tech_and_detail(project_id):
     """Join data from two separate tables that don't reference each other"""

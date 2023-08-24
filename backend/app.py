@@ -506,8 +506,12 @@ def get_info(project_id):
     return info
 
 @app.post("/info/<project_id>")
+@jwt_required()
 def post_info(project_id):
     """Adds info to corresponding project"""
+    jwt_identity = get_jwt_identity()
+
+    user = Project
     try:
 
         detail = request.json.get("details", None)
@@ -533,6 +537,7 @@ def post_info(project_id):
         return jsonify({"error": f"{str(e)}"})
 
 @app.patch("/details/<int:detail_id>")
+@jwt_required()
 def update_info(detail_id):
     """Updates project details"""
     try:
@@ -547,6 +552,7 @@ def update_info(detail_id):
         return jsonify({"error": f"{str(e)}"})
 
 @app.patch("/tech/<tech_id>")
+@jwt_required()
 def update_tech(tech_id):
     """Updates project tech"""
     try:
@@ -561,6 +567,7 @@ def update_tech(tech_id):
         return jsonify({"error": f"{str(e)}"})
 
 @app.delete("/tech/<tech_id>")
+@jwt_required()
 def delete_tech(tech_id):
     """Delete tech"""
     try:
@@ -577,13 +584,14 @@ def delete_tech(tech_id):
         return jsonify({"error": f"{str(e)}"})
 
 @app.delete("/details/<int:detail_id>")
+@jwt_required()
 def delete_details(detail_id):
     """Delete detail"""
     try:
         detail = Detail.query.get_or_404(detail_id)
         db.session.delete(detail)
         db.session.commit()
-        return jsonify({"Message":"detail deleted"})
+        return jsonify({"Message":"Detail deleted"})
     except Exception as e:
         print('delete_tech error =>', e)
         return jsonify({"error": f"{str(e)}"})
