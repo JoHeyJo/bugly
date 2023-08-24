@@ -1,4 +1,5 @@
 from flask_jwt_extended.exceptions import JWTDecodeError
+from dotenv import load_dotenv
 import os
 from flask import Flask, request, redirect, jsonify
 from models import db, connect_db, User, Post, Project, Detail, Tech, ProjectTech
@@ -13,6 +14,7 @@ from data_service import tech_and_detail
 ######## Double check exception key works ##########
 app = Flask(__name__)
 CORS(app)
+load_dotenv()
 # CORS(app, resources={r"/*": {"origins": "https://bugly-olive.vercel.app"}})
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///blogly_fs'
@@ -28,6 +30,8 @@ jwt = JWTManager(app)
 # however, if you want to turn it off, you can uncomment this line:
 #
 # app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
+# maybe do this....
+# db = SQLAlchemy(app)
 
 toolbar = DebugToolbarExtension(app)
 connect_db(app)
@@ -502,7 +506,7 @@ def projects_delete(project_id):
 @app.get("/info/<int:project_id>")
 def get_info(project_id):
     """Gets information of post: info:{tech,details}"""
-    info = tech_and_detail(project_id)
+    info = tech_and_detail(db, project_id)
     return info
 
 @app.post("/info/<project_id>")
@@ -529,7 +533,7 @@ def post_info(project_id):
 
         db.session.commit()
 
-        info_data = tech_and_detail(project_id)
+        info_data = tech_and_detail(db, project_id)
 
         return info_data
     except Exception as e:
