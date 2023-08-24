@@ -571,11 +571,22 @@ def delete_tech(tech_id):
             db.session.commit()  
         db.session.delete(tech)
         db.session.commit()
-        return jsonify({'message':'Project deleted'})
+        return jsonify({'message':'tech deleted'})
     except Exception as e:
         print('delete_tech error =>', e)
         return jsonify({"error": f"{str(e)}"})
 
+@app.delete("/details/<int:detail_id>")
+def delete_details(detail_id):
+    """Delete detail"""
+    try:
+        detail = Detail.query.get_or_404(detail_id)
+        db.session.delete(detail)
+        db.session.commit()
+        return jsonify({"Message":"detail deleted"})
+    except Exception as e:
+        print('delete_tech error =>', e)
+        return jsonify({"error": f"{str(e)}"})
 
 # Error handling for missing or invalid JWT
 
