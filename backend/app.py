@@ -535,19 +535,29 @@ def post_info(project_id):
 @app.patch("/detail/<int:detail_id>")
 def update_info(detail_id):
     """Updates project details"""
-
     try:
         updated_detail = request.json["details"]
         detail = Detail.get_or_404(detail_id)
         detail.detail = updated_detail
         db.session.add(detail)
         db.session.commit()
-    
     except Exception as e:
         print('post_info error =>', e)
         return jsonify({"error": f"{str(e)}"})
 
-@app.patch("/tech")
+@app.patch("/tech/<tech_id>")
+def update_tech(tech_id):
+    """Updates project tech"""
+    try:
+        updated_tech = request.json["tech"]
+        tech = Tech.query.get_or_404(tech_id)
+        tech.tech = updated_tech
+        db.session.add(tech)
+        db.session.commit()
+    except Exception as e:
+        print('post_info error =>', e)
+        return jsonify({"error": f"{str(e)}"})
+
 # Error handling for missing or invalid JWT
 
 # from flask_jwt_extended import jwt_required, JWTManager, get_jwt_identity
