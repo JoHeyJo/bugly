@@ -532,15 +532,16 @@ def post_info(project_id):
         print('post_info error =>', e)
         return jsonify({"error": f"{str(e)}"})
 
-@app.patch("/detail/<int:detail_id>")
+@app.patch("/details/<int:detail_id>")
 def update_info(detail_id):
     """Updates project details"""
     try:
         updated_detail = request.json["details"]
-        detail = Detail.get_or_404(detail_id)
+        detail = Detail.query.get_or_404(detail_id)
         detail.detail = updated_detail
         db.session.add(detail)
         db.session.commit()
+        return jsonify(Detail.serialize(detail))
     except Exception as e:
         print('post_info error =>', e)
         return jsonify({"error": f"{str(e)}"})
@@ -554,9 +555,12 @@ def update_tech(tech_id):
         tech.tech = updated_tech
         db.session.add(tech)
         db.session.commit()
+        return jsonify(Tech.serialize(tech))
     except Exception as e:
         print('post_info error =>', e)
         return jsonify({"error": f"{str(e)}"})
+
+
 
 # Error handling for missing or invalid JWT
 
