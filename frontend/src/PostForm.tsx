@@ -139,7 +139,6 @@ function PostForm({ handleClose, postId, fetchEditPost }: PostFormProp) {
     //   }
     // }
     //edit individual post
-    console.log(postId, fetchEditPost)
     if (postId) {
       try {
         await postUpdate(postId, postData);
@@ -209,6 +208,8 @@ function PostForm({ handleClose, postId, fetchEditPost }: PostFormProp) {
                 onChange={handleChange}
                 value={postData.title}
                 name="title"
+                maxLength={50}
+                placeholder="50 character limit"
               />
             </Form.Group>
             <DraftEditor raw={rawData} onEditorDataChange={handleEditorData} />
