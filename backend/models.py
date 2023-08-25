@@ -24,6 +24,7 @@ class User(db.Model):
     image_url = db.Column(db.String, nullable=True)
     email = db.Column(db.String(255), unique=True, nullable=False)
     password = db.Column(db.Text, nullable=False)
+    project = db.relationship("Project", backref="user")
 
     posts = db.relationship("Post", backref="user")
 
@@ -83,10 +84,9 @@ class Project(db.Model):
     name = db.Column(db.String(50), nullable=False)
     description = db.Column(db.Text)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    users = db.relationship("User", backref="project")
+    # user = db.relationship("User", backref="project")
     posts = db.relationship("Post", backref="project")
     details = db.relationship("Detail", backref="project")
-
     def serialize(self):
         """Serialize to dict"""
         return {"id": self.id, "name": self.name, "description": self.description, "user_id": self.user_id}
@@ -105,6 +105,8 @@ class ProjectTech(db.Model):
                         db.ForeignKey("technologies.id"), 
                         primary_key=True,
                         nullable=False)
+    
+    
 class Detail(db.Model):
     """Detail model."""
 

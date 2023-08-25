@@ -2,7 +2,7 @@ from flask_jwt_extended.exceptions import JWTDecodeError
 from dotenv import load_dotenv
 import os
 from flask import Flask, request, redirect, jsonify
-from models import db, connect_db, User, Post, Project, Detail, Tech, ProjectTech
+from models import db, connect_db, User, Post, Project, Detail, ProjectTech, Tech
 from flask_cors import CORS
 from flask_debugtoolbar import DebugToolbarExtension
 # from werkzeug.exceptions import BadRequest
@@ -27,7 +27,7 @@ app.app_context().push()
 jwt = JWTManager(app)
 
 # Having the Debug Toolbar show redirects explicitly is often useful;
-# however, if you want to turn it off, you can uncomment this line:
+# however, if you want to turn it off, you can uncomment this line
 #
 # app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 # maybe do this....
@@ -408,6 +408,7 @@ def projects_get(user_id):
         print('>>>>>',serialized)
         return jsonify(serialized)
     except Exception as e:
+        db.session.rollback()
         print('projects_get error =>', e)
         return jsonify({"error": f"{str(e)}"})
 
@@ -488,7 +489,7 @@ def projects_delete(project_id):
         User.id == project['user_id']).first())
 
     if user['email'] != jwt_identity:
-        return jsonify({"error": "Unauthorize access"}), 401
+        return jsonify({"error": "Unauthorized access"}), 401
     try:
         project = Project.query.get_or_404(project_id)
         posts = Post.query.filter(Post.project_id==project_id).all()
@@ -513,9 +514,14 @@ def get_info(project_id):
 @jwt_required()
 def post_info(project_id):
     """Adds info to corresponding project"""
+
     jwt_identity = get_jwt_identity()
 
-    user = Project
+    email = Project.query.get(project_id).users.email
+
+    if email != jwt_identity:
+        return jsonify({"error": "Unauthorized access"}), 401
+    
     try:
 
         detail = request.json.get("details", None)
@@ -544,6 +550,13 @@ def post_info(project_id):
 @jwt_required()
 def update_info(detail_id):
     """Updates project details"""
+
+    jwt_identity = get_jwt_identity()
+    email = Detail.query.get_or_404(detail_id).project.user.email
+
+    if email != jwt_identity:
+        return jsonify({"error": "Unauthorized access"}), 401
+
     try:
         updated_detail = request.json["details"]
         detail = Detail.query.get_or_404(detail_id)
@@ -555,10 +568,22 @@ def update_info(detail_id):
         print('update_info error =>', e)
         return jsonify({"error": f"{str(e)}"})
 
-@app.patch("/tech/<tech_id>")
+@app.patch("/info/<int:project_id>/tech/<tech_id>")
 @jwt_required()
-def update_tech(tech_id):
+def update_tech(project_id, tech_id):
     """Updates project tech"""
+
+    jwt_identity = get_jwt_identity()
+
+    email = User.query.join(Project).join(ProjectTech).join(Tech).filter(
+        Project.id == project_id,
+        Tech.id == tech_id
+    ).first().email
+    # .with_entities(User.email).scalar() can also be chain instead to retrieve email
+
+    if email != jwt_identity:
+        return jsonify({"error": "Unauthorized access"}), 401
+    
     try:
         updated_tech = request.json["tech"]
         tech = Tech.query.get_or_404(tech_id)
@@ -570,10 +595,21 @@ def update_tech(tech_id):
         print('update_tech error =>', e)
         return jsonify({"error": f"{str(e)}"})
 
-@app.delete("/tech/<tech_id>")
+@app.delete("/info/<project_id>/tech/<tech_id>")
 @jwt_required()
-def delete_tech(tech_id):
+def delete_tech(project_id, tech_id):
     """Delete tech"""
+
+    jwt_identity = get_jwt_identity()
+
+    email = User.query.join(Project).join(ProjectTech).join(Tech).filter(
+        Project.id == project_id,
+        Tech.id == tech_id
+    ).first().email
+
+    if email != jwt_identity:
+        return jsonify({"error": "Unauthorized access"}), 401
+    
     try:
         tech = Tech.query.get_or_404(tech_id)
         project_tech_associations= ProjectTech.query.filter(ProjectTech.tech_id == tech_id).all()
@@ -582,7 +618,7 @@ def delete_tech(tech_id):
             db.session.commit()  
         db.session.delete(tech)
         db.session.commit()
-        return jsonify({'message':'tech deleted'})
+        return jsonify({'message':'Tech deleted'})
     except Exception as e:
         print('delete_tech error =>', e)
         return jsonify({"error": f"{str(e)}"})
@@ -591,6 +627,13 @@ def delete_tech(tech_id):
 @jwt_required()
 def delete_details(detail_id):
     """Delete detail"""
+
+    jwt_identity = get_jwt_identity()
+    email = Detail.query.get_or_404(detail_id).project.user.email
+
+    if email != jwt_identity:
+        return jsonify({"error": "Unauthorized access"}), 401
+
     try:
         detail = Detail.query.get_or_404(detail_id)
         db.session.delete(detail)
