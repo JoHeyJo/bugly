@@ -14,6 +14,7 @@ import { ProjectContextType, ProjectContext, UserContext } from "./userContext";
 import AlertModal from "./AlertModal";
 import PopOut from "./PopOut";
 
+
 //styles
 import './style/Projects.css';
 
@@ -147,6 +148,7 @@ function Projects({ userId }: ProjectProps) {
             }
           </ListGroup>
         </Col>
+        <Col></Col>
       </Row>
       <Row className="Projects-posts-post m-0">
         <div className="Project-collapse-background">
