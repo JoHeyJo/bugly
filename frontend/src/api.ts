@@ -100,7 +100,7 @@ async function userUpdate(id: number, data: IUser) {
   try {
     const res = await axios.patch(`${BASE_URL}/users/${id}/edit`, data)
     return res.data;
-  } catch (error: any) {  
+  } catch (error: any) {
     console.error("API userUpdate Error:" + error.message)
   }
 }
@@ -292,7 +292,7 @@ async function projectDelete(projectId?: number) {
 // ************PROJECTS*******************
 
 /** Gets all info corresponding to project */
-async function getInfo(projectId: number){
+async function getInfo(projectId: number) {
   try {
     const res = await axios.get(`${BASE_URL}/info/${projectId}`)
     return res;
@@ -303,14 +303,89 @@ async function getInfo(projectId: number){
 }
 
 /** Posts new info : {details, tech} */
-async function postInfo(projectId: number, infoData: IInfoData ){
+async function postInfo(projectId: number, infoData: IInfoData) {
+  const headers = { Authorization: `Bearer ${BuglyApi.token}` }
   try {
-    const res = await axios.post(`${BASE_URL}/info/${projectId}`)
+    const res = await axios.post(`${BASE_URL}/info/${projectId}`, { headers })
     return res
   } catch (error: any) {
     errorHandling('postInfo', error)
-    throw error.response.data    
+    throw error.response.data
   }
 }
-export { login, signup, projectDelete, projectPostsGet, projectPostAdd, projectGet, projectsGetAll, userGet, usersGet, userAdd, userUpdate, userDelete, userEdit, postsGetAll, postGet, postAdd, postEdit, postUpdate, postDelete, projectAdd, projectUpdate, projectEdit, projectsGet };
+
+/** Edits details */
+async function editDetail(detailId: number) {
+  const headers = { Authorization: `Bearer ${BuglyApi.token}` }
+  try {
+    const res = await axios.get(`${BASE_URL}/detail/${detailId}`, { headers });
+    return res;
+  } catch (error: any) {
+    errorHandling('editDetail', error)
+    throw error.response.data
+  }
+}
+
+/** Edits tech */
+async function editTech(projectId: number, techId: number) {
+  const headers = { Authorization: `Bearer ${BuglyApi.token}` }
+  try {
+    const res = await axios.get(`${BASE_URL}/info/${projectId}/detail/${techId}`, { headers });
+    return res;
+  } catch (error: any) {
+    errorHandling('editTech', error)
+    throw error.response.data
+  }
+}
+
+/** Update details */
+async function updateDetail(detailId: number, detailData: string) {
+  const headers = { Authorization: `Bearer ${BuglyApi.token}` }
+  try {
+    const res = await axios.patch(`${BASE_URL}/detail/${detailId}`, detailData, { headers });
+    return res;
+  } catch (error: any) {
+    errorHandling('postDetail', error)
+    throw error.response.data
+  }
+}
+
+/** Update tech */
+async function updateTech(projectId: number, techId: number, techData: string) {
+  const headers = { Authorization: `Bearer ${BuglyApi.token}` }
+  try {
+    const res = await axios.patch(`${BASE_URL}/info/${projectId}/detail/${techId}`, techData, { headers });
+    return res;
+  } catch (error: any) {
+    errorHandling('updateTech', error)
+    throw error.response.data
+  }
+}
+
+/** Delete tech */
+async function deleteTech(projectId: number, techId: number) {
+  const headers = { Authorization: `Bearer ${BuglyApi.token}` }
+  try {
+    const res = await axios.delete(`${BASE_URL}/info/${projectId}/tech/${techId}`, { headers })
+    return res
+  } catch (error: any) {
+    errorHandling('deleteTech', error)
+    throw error.response.data
+  }
+}
+
+/** Delete detail */
+async function deleteDetail(projectId: number, detailId: number) {
+  const headers = { Authorization: `Bearer ${BuglyApi.token}` }
+  try {
+    const res = await axios.delete(`${BASE_URL}/info/${projectId}/tech/${detailId}`, { headers })
+    return res
+  } catch (error: any) {
+    errorHandling('deleteDetail', error)
+    throw error.response.data
+  }
+}
+
+
+export {  deleteDetail, deleteTech, postInfo, updateTech, updateDetail, editTech, editDetail, getInfo, login, signup, projectDelete, projectPostsGet, projectPostAdd, projectGet, projectsGetAll, userGet, usersGet, userAdd, userUpdate, userDelete, userEdit, postsGetAll, postGet, postAdd, postEdit, postUpdate, postDelete, projectAdd, projectUpdate, projectEdit, projectsGet };
 
