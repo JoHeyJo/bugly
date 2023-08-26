@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Collapse from 'react-bootstrap/Collapse';
 
-function Example() {
+function SlideOver() {
   const [open, setOpen] = useState(false);
 
   return (
@@ -25,4 +25,4 @@ function Example() {
   );
 }
 
-export default Example;
+export default SlideOver;
