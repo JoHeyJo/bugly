@@ -125,7 +125,7 @@ function Projects({ userId }: ProjectProps) {
       </h3>
 
       <Row>
-        <Col className="mx-2">
+        <Col xs={5}className="mx-2">
           <ListGroup>
             {
               projects.map(project =>
@@ -152,7 +152,7 @@ function Projects({ userId }: ProjectProps) {
               )
             }
           </ListGroup></Col>
-        <Col><SlideOver /></Col>
+        {/* <Col><SlideOver /></Col> */}
       </Row>
       <Row className="Projects-posts-post m-0">
         <div className="Project-collapse-background">
