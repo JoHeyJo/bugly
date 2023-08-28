@@ -517,7 +517,7 @@ def post_info(project_id):
 
     jwt_identity = get_jwt_identity()
 
-    email = Project.query.get(project_id).users.email
+    email = Project.query.get(project_id).user.email
 
     if email != jwt_identity:
         return jsonify({"error": "Unauthorized access"}), 401
