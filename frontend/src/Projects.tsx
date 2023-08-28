@@ -125,7 +125,7 @@ function Projects({ userId }: ProjectProps) {
       </h3>
 
       <Row>
-        <Col xs={5}className="mx-2">
+        <Col xs={6}className="mx-2">
           <ListGroup>
             {
               projects.map(project =>
