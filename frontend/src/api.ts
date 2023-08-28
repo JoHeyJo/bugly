@@ -280,7 +280,6 @@ async function projectDelete(projectId?: number) {
   const headers = { Authorization: `Bearer ${BuglyApi.token}` }
   try {
     const res = await axios.delete(`${BASE_URL}/projects/${projectId}/delete`, { headers })
-    console.log('post delete', res.data)
     return res.data
   } catch (error: any) {
     console.log(`Error in projecDelete => ${error}`)
@@ -289,57 +288,58 @@ async function projectDelete(projectId?: number) {
   }
 }
 
-// ************PROJECTS*******************
+// ************INFO*******************
 
 /** Gets all info corresponding to project */
-async function getInfo(projectId: number) {
+async function infoGet(projectId: number | undefined) {
   try {
     const res = await axios.get(`${BASE_URL}/info/${projectId}`)
-    return res;
+    console.log(res)
+    return res.data;
   } catch (error: any) {
-    errorHandling('getInfo', error)
+    errorHandling('infoGet', error)
     throw error.response.data
   }
 }
 
 /** Posts new info : {details, tech} */
-async function postInfo(projectId: number, infoData: IInfoData) {
+async function infoPost(projectId: number, infoData: IInfoData) {
   const headers = { Authorization: `Bearer ${BuglyApi.token}` }
   try {
     const res = await axios.post(`${BASE_URL}/info/${projectId}`, { headers })
     return res
   } catch (error: any) {
-    errorHandling('postInfo', error)
+    errorHandling('infoPost', error)
     throw error.response.data
   }
 }
 
 /** Edits details */
-async function editDetail(detailId: number) {
+async function detailEdit(detailId: number) {
   const headers = { Authorization: `Bearer ${BuglyApi.token}` }
   try {
     const res = await axios.get(`${BASE_URL}/detail/${detailId}`, { headers });
     return res;
   } catch (error: any) {
-    errorHandling('editDetail', error)
+    errorHandling('detailEdit', error)
     throw error.response.data
   }
 }
 
 /** Edits tech */
-async function editTech(projectId: number, techId: number) {
+async function techEdit(projectId: number, techId: number) {
   const headers = { Authorization: `Bearer ${BuglyApi.token}` }
   try {
     const res = await axios.get(`${BASE_URL}/info/${projectId}/detail/${techId}`, { headers });
     return res;
   } catch (error: any) {
-    errorHandling('editTech', error)
+    errorHandling('techEdit', error)
     throw error.response.data
   }
 }
 
 /** Update details */
-async function updateDetail(detailId: number, detailData: string) {
+async function detailUpdate(detailId: number, detailData: string) {
   const headers = { Authorization: `Bearer ${BuglyApi.token}` }
   try {
     const res = await axios.patch(`${BASE_URL}/detail/${detailId}`, detailData, { headers });
@@ -351,41 +351,41 @@ async function updateDetail(detailId: number, detailData: string) {
 }
 
 /** Update tech */
-async function updateTech(projectId: number, techId: number, techData: string) {
+async function techUpdate(projectId: number, techId: number, techData: string) {
   const headers = { Authorization: `Bearer ${BuglyApi.token}` }
   try {
     const res = await axios.patch(`${BASE_URL}/info/${projectId}/detail/${techId}`, techData, { headers });
     return res;
   } catch (error: any) {
-    errorHandling('updateTech', error)
+    errorHandling('techUpdate', error)
     throw error.response.data
   }
 }
 
 /** Delete tech */
-async function deleteTech(projectId: number, techId: number) {
+async function techDelete(projectId: number, techId: number) {
   const headers = { Authorization: `Bearer ${BuglyApi.token}` }
   try {
     const res = await axios.delete(`${BASE_URL}/info/${projectId}/tech/${techId}`, { headers })
     return res
   } catch (error: any) {
-    errorHandling('deleteTech', error)
+    errorHandling('techDelete', error)
     throw error.response.data
   }
 }
 
 /** Delete detail */
-async function deleteDetail(projectId: number, detailId: number) {
+async function detailDelete(projectId: number, detailId: number) {
   const headers = { Authorization: `Bearer ${BuglyApi.token}` }
   try {
     const res = await axios.delete(`${BASE_URL}/info/${projectId}/tech/${detailId}`, { headers })
     return res
   } catch (error: any) {
-    errorHandling('deleteDetail', error)
+    errorHandling('detailDelete', error)
     throw error.response.data
   }
 }
 
 
-export {  deleteDetail, deleteTech, postInfo, updateTech, updateDetail, editTech, editDetail, getInfo, login, signup, projectDelete, projectPostsGet, projectPostAdd, projectGet, projectsGetAll, userGet, usersGet, userAdd, userUpdate, userDelete, userEdit, postsGetAll, postGet, postAdd, postEdit, postUpdate, postDelete, projectAdd, projectUpdate, projectEdit, projectsGet };
+export {  detailDelete, techDelete, infoPost, techUpdate, detailUpdate, techEdit, detailEdit, infoGet, login, signup, projectDelete, projectPostsGet, projectPostAdd, projectGet, projectsGetAll, userGet, usersGet, userAdd, userUpdate, userDelete, userEdit, postsGetAll, postGet, postAdd, postEdit, postUpdate, postDelete, projectAdd, projectUpdate, projectEdit, projectsGet };
 

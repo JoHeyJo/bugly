@@ -7,8 +7,8 @@ import Collapse from 'react-bootstrap/Collapse';
 import decode from "jwt-decode";
 
 // components/ modules
-import { IProject, IPost } from './interface';
-import { projectsGet, projectPostsGet } from './api';
+import { IProject, IPost, IInfoData } from './interface';
+import { projectsGet, projectPostsGet, infoGet } from './api';
 import Posts from "./Posts";
 import { ProjectContextType, ProjectContext, UserContext } from "./userContext";
 import AlertModal from "./AlertModal";
@@ -46,6 +46,7 @@ function Projects({ userId }: ProjectProps) {
   const [open, setOpen] = useState(false);
   const [projects, setProjects] = useState<IProject[]>([])
   const [projectData, setProjectData] = useState<ProjectData>({ name: '', id: 0 });
+  const [projectInfo, setProjectInfo] = useState<IInfoData>()
   const [posts, setPosts] = useState<IPost[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -61,8 +62,11 @@ function Projects({ userId }: ProjectProps) {
 
   /**gets projects */
   async function getProject() {
-    const res = await projectsGet(userId);
-    setProjects(res);
+    const projectData = await projectsGet(userId);
+    // const projectInfo = await infoGet(projectData.id);
+    console.log('in here')
+    setProjects(projectData);
+    // setProjectInfo(projectInfo);
   }
 
   /** On mount fetches users' projects */
@@ -100,7 +104,7 @@ function Projects({ userId }: ProjectProps) {
       // if opening a different project, close current and open new project
       try {
         setOpen(false);
-        
+
         setTimeout(async () => {
           await fetchPosts(id, projectId);
           setOpen(true)
@@ -120,12 +124,13 @@ function Projects({ userId }: ProjectProps) {
         <PopOut getProject={getProject} action={'new project'} postId={undefined} fetchEditPost={undefined} />
       </h3>
 
-      <Row className="Projects-container">
-        <Col className="col-6 mx-2">
-          <ListGroup className="">
+      <Row>
+        <Col className="mx-2">
+          <ListGroup>
             {
               projects.map(project =>
-                <ListGroup.Item key={project.id} className={projectData.id === project.id ? "Projects-project selected" : "Projects-project "} onClick={(e) => {
+                <ListGroup.Item key={project.id} className={projectData.id === project.id ? "Projects-project selected" : "Projects-project "} onClick={async (e) => {
+                  setProjectInfo(await infoGet(project.id))
                   setProjectData(p => ({
                     ...p, name: project.name, id: project.id
                   }
@@ -133,10 +138,10 @@ function Projects({ userId }: ProjectProps) {
                   isOpen(project.user_id, project.id)
                 }}>
                   <div className="Projects-project-title"
-                    style={{ all: 'unset' }} 
-                    // onClick={async (e) => {
-                    //   await isOpen(project.user_id, project.id)
-                    // }}
+                    style={{ all: 'unset' }}
+                  // onClick={async (e) => {
+                  //   await isOpen(project.user_id, project.id)
+                  // }}
                   >
                     {project.name}
                     {' - '}
@@ -146,9 +151,8 @@ function Projects({ userId }: ProjectProps) {
                 </ListGroup.Item>
               )
             }
-          </ListGroup>
-        </Col>
-        <Col><SlideOver/></Col>
+          </ListGroup></Col>
+        <Col><SlideOver /></Col>
       </Row>
       <Row className="Projects-posts-post m-0">
         <div className="Project-collapse-background">

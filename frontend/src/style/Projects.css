@@ -21,14 +21,12 @@
 
 .Projects-container {
   margin-bottom: 1rem;
-  /* min-height: 25vh; */
 }
 
 /* corrects the curved affect of the bottom border due to margin-collapsing  */
 .Projects-project {
   margin: 1px;
   width: 100%;
-  /* border-radius: 0 !important; */
   background-color: #AC8307;
   border: none;
   border-bottom: 1px solid transparent;
@@ -58,30 +56,6 @@
   -moz-box-shadow: inset 0px 0px 5px #664D02;
   box-shadow: inset 0px 0px 5px #664D02;
   outline: none;
-  /* pointer-events: none; */
-}
-
-.Projects-project::after {
-  /* content: "";
-  display: block;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 1px;
-  background-color: #AC8307; */
-}
-
-.selected::after {
-  /* content: "";
-  display: block;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 1px; */
-
-  /* border-bottom: 4px solid rgba(211, 211, 211, .9); */
 }
 
 .Projects-title {
