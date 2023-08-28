@@ -130,7 +130,7 @@ function Projects({ userId }: ProjectProps) {
             {
               projects.map(project =>
                 <ListGroup.Item key={project.id} className={projectData.id === project.id ? "Projects-project selected" : "Projects-project "} onClick={async (e) => {
-                  setProjectInfo(await infoGet(project.id))
+                  // setProjectInfo(await infoGet(project.id))
                   setProjectData(p => ({
                     ...p, name: project.name, id: project.id
                   }
