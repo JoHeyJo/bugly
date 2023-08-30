@@ -137,25 +137,24 @@ function Projects({ userId }: ProjectProps) {
           <ListGroup>
             {
               projects.map(project =>
-                <ListGroup.Item key={project.id} className={projectData.id === project.id ? "Projects-project selected" : "Projects-project "}
+                <ListGroup.Item key={project.id} className={projectData.id === project.id ? "Projects-project selected d-flex justify-content-start" : "Projects-project d-flex justify-content-start"}
                   onClick={async (e) => {
-                    handleOpenDetails()
                     setProjectInfo(await infoGet(project.id))
                     setProjectData(p => ({
                       ...p, name: project.name, id: project.id
-                    }
-                    ))
+                    }))
                     isOpen(project.user_id, project.id)
+                  {console.log(projectData.id, project.id)}
                   }}>
-                  <div className="Projects-project-title"
-                    style={{ all: 'unset' }}
-                  >
+                  <div className="Projects-project-title" style={{ all: 'unset' }}>
                     {project.name}{' - '}{project.description}
                   </div>
                   <AlertModal projectData={projectData} projectGet={getProject} isOpen={setOpenPosts} />
-                  <button>
-                    <FontAwesomeIcon icon={faAsterisk} />
-                  </button>
+                  {projectData.id === project.id &&
+                    <span onClick={handleOpenDetails} className="projects-asterisk ms-auto">
+                      <FontAwesomeIcon icon={faAsterisk} />
+                    </span>
+                  }
                 </ListGroup.Item>
               )
             }

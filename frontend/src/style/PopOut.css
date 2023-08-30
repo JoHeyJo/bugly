@@ -5,7 +5,7 @@
 
 }
 
-.custom-modal-footer{
+.custom-modal-footer {
   background-color: #212529;
   border-top: solid rgba(128, 128, 128 0.5);
 }
@@ -14,6 +14,7 @@
   background-color: transparent;
 
 }
+
 .custom-modal-body {
   background-color: #212529;
   color: #adb5bd;
@@ -26,8 +27,9 @@
 /* Add hover effect */
 .btn:hover {
   background-color: #AC8307;
-  > svg {
-      color: grey;
+
+  >svg {
+    color: grey;
   }
 }
 
@@ -35,3 +37,7 @@
   background-color: #AC8307;
 }
 
+.projects-asterisk:hover {
+  transform: translateY(1px);
+  color: darkgray;
+}
