@@ -4,11 +4,14 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faPenToSquare } from '@fortawesome/free-solid-svg-icons'
+// Components/ modules
 import PostForm from './PostForm';
 import { ProjectContext } from './userContext';
 import ProjectForm from './ProjectForm';
-import { faPenToSquare } from '@fortawesome/free-solid-svg-icons'
 import { UserContext } from './userContext';
+import InfoForm from './InfoForm'
+// Styles
 import './style/PopOut.css';
 type PopOutProp = {
   action: string;
@@ -42,12 +45,14 @@ function PopOut({ getProject, action, postId, fetchEditPost }: PopOutProp) {
   }
 
   function modalAction() {
+    if (action === 'new info') return <InfoForm />;
     return action === 'new project'
       ? <ProjectForm handleClose={handleClose} getProject={getProject} />
       : <PostForm handleClose={handleClose} postId={postId} fetchEditPost={fetchEditPost} />
   }
 
   function modalHeader() {
+    if (action === 'new info') return 'Add project detail'
     if (action === 'new project') return 'Create new project'
     if (action === 'new post') return 'Create new post'
     if (action === 'edit') return `Edit post for ${projectName}`
