@@ -14,7 +14,6 @@ function RenderInfo(data: InfoProp) {
   return (
     <>
       <List list={data.projectData.details} />
-      {/* <List list={projectData.details} /> */}
     </>
   )
 }
