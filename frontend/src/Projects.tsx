@@ -4,7 +4,10 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Collapse from 'react-bootstrap/Collapse';
-import decode from "jwt-decode";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faAsterisk } from '@fortawesome/free-solid-svg-icons'
+import { Button } from "react-bootstrap";
+
 
 // components/ modules
 import { IProject, IPost, IInfoData } from './interface';
@@ -13,7 +16,8 @@ import Posts from "./Posts";
 import { ProjectContextType, ProjectContext, UserContext } from "./userContext";
 import AlertModal from "./AlertModal";
 import PopOut from "./PopOut";
-import SlideOver from "./SlideOver"
+import DetailsSlideOver from "./DetailsSlideOver";
+
 
 //styles
 import './style/Projects.css';
@@ -43,12 +47,13 @@ type ProjectData = {
  * User - Projects
  */
 function Projects({ userId }: ProjectProps) {
-  const [open, setOpen] = useState(false);
+  const [openPosts, setOpenPosts] = useState(false);
   const [projects, setProjects] = useState<IProject[]>([])
   const [projectData, setProjectData] = useState<ProjectData>({ name: '', id: 0 });
-  const [projectInfo, setProjectInfo] = useState<IInfoData>()
+  const [projectInfo, setProjectInfo] = useState<IInfoData>({ details: [], tech: [] })
   const [posts, setPosts] = useState<IPost[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [openDetails, setOpenDetails] = useState(false);
 
   const { user } = useContext(UserContext);
 
@@ -91,30 +96,33 @@ function Projects({ userId }: ProjectProps) {
 
   /** controls when slideover opens/closes */
   async function isOpen(id?: number, projectId?: number) {
-    if (!open) {
-      // if closed, open slideover
+    if (!openPosts) {
+      // if closed, openPosts slideover
       try {
         await fetchPosts(id, projectId)
         setIsLoading(false);
-        setOpen(true)
+        setOpenPosts(true)
       } catch (error) {
         if (isLoading) return <p>Loading...</p>;
       }
     } else if (projectId !== projectData.id) {
-      // if opening a different project, close current and open new project
+      // if opening a different project, close current and openPosts new project
       try {
-        setOpen(false);
+        setOpenPosts(false);
 
         setTimeout(async () => {
           await fetchPosts(id, projectId);
-          setOpen(true)
+          setOpenPosts(true)
         }, 500)
       } catch (error) {
         if (isLoading) return <p>Loading...</p>;
       }
     } else {
-      setOpen(false)
+      setOpenPosts(false)
     }
+  }
+  function handleOpenDetails() {
+    setOpenDetails(!openDetails)
   }
 
   return (
@@ -125,44 +133,45 @@ function Projects({ userId }: ProjectProps) {
       </h3>
 
       <Row>
-        <Col xs={6}className="mx-2">
+        <Col xs={6} className="mx-2">
           <ListGroup>
             {
               projects.map(project =>
-                <ListGroup.Item key={project.id} className={projectData.id === project.id ? "Projects-project selected" : "Projects-project "} onClick={async (e) => {
-                  // setProjectInfo(await infoGet(project.id))
-                  setProjectData(p => ({
-                    ...p, name: project.name, id: project.id
-                  }
-                  ))
-                  isOpen(project.user_id, project.id)
-                }}>
+                <ListGroup.Item key={project.id} className={projectData.id === project.id ? "Projects-project selected" : "Projects-project "}
+                  onClick={async (e) => {
+                    handleOpenDetails()
+                    setProjectInfo(await infoGet(project.id))
+                    setProjectData(p => ({
+                      ...p, name: project.name, id: project.id
+                    }
+                    ))
+                    isOpen(project.user_id, project.id)
+                  }}>
                   <div className="Projects-project-title"
                     style={{ all: 'unset' }}
-                  // onClick={async (e) => {
-                  //   await isOpen(project.user_id, project.id)
-                  // }}
                   >
-                    {project.name}
-                    {' - '}
-                    {project.description}
+                    {project.name}{' - '}{project.description}
                   </div>
-                  <AlertModal projectData={projectData} projectGet={getProject} isOpen={setOpen} />
+                  <AlertModal projectData={projectData} projectGet={getProject} isOpen={setOpenPosts} />
+                  <button>
+                    <FontAwesomeIcon icon={faAsterisk} />
+                  </button>
                 </ListGroup.Item>
               )
             }
-          </ListGroup></Col>
-        {/* <Col><SlideOver /></Col> */}
+          </ListGroup>
+        </Col>
+        <Col><DetailsSlideOver open={openDetails} details={projectInfo} /></Col>
       </Row>
       <Row className="Projects-posts-post m-0">
         <div className="Project-collapse-background">
           <Col>
             <h3 className='Projects-post-title' style={{ width: '400px', textAlign: 'center' }}>Posts</h3>
-            <Collapse in={open} dimension="width">
+            <Collapse in={openPosts} dimension="width">
               <Col>
                 <div className="Project-User-posts">
                   <ProjectContext.Provider value={ProjectData}>
-                    <Posts isPostsShowing={open} posts={posts || []} />
+                    <Posts isPostsShowing={openPosts} posts={posts || []} />
                   </ProjectContext.Provider>
                 </div>
               </Col>

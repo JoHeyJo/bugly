@@ -55,3 +55,4 @@ export interface IInfoData {
   details: string[];
   tech: string[];
 }
+
