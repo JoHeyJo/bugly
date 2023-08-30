@@ -5,7 +5,7 @@ import './style/SlideOver.css';
 import Card from 'react-bootstrap/Card';
 import { IInfoData } from './interface';
 import RenderInfo from './RenderInfo';
-
+import './style/DetailSlideOver.css';
 
 type DetailsSlideOverProps = {
   open: boolean;
@@ -20,8 +20,8 @@ function DetailsSlideOver({ open, details }: DetailsSlideOverProps) {
   return (
     <div style={{ minHeight: '150px' }}>
       <Collapse in={open} dimension="width">
-        <div className='collapse-text' >
-          <Card body style={{ width: '400px' }}>
+        <div className='collapse-text DetailSlideOver-content' >
+          <Card body style={{ width: '26rem' }}>
             <RenderInfo projectData={details} />
           </Card>
         </div>

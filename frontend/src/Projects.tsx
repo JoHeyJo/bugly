@@ -129,9 +129,9 @@ function Projects({ userId }: ProjectProps) {
   }
 
   /** Controls when slideover for project info opens/closes */
-  async function handleOpenInfo(e: any, id: number | undefined, projectId: number | undefined){
+  async function handleOpenInfo(e: any, id: number | undefined, projectId: number | undefined) {
     e.stopPropagation()
-    if(!isDetailsOpen){
+    if (!isDetailsOpen) {
       const info = await infoGet(projectId)
       setProjectInfo(info)
       handleOpenDetails()
@@ -165,7 +165,7 @@ function Projects({ userId }: ProjectProps) {
                   </div>
                   <AlertModal projectData={projectData} projectGet={getProject} isOpen={setIsPostsOpen} />
                   {projectData.id === project.id &&
-                    <span onClick={(e)=>handleOpenInfo(e,project.user_id, project.id)} className="projects-asterisk ms-auto">
+                    <span onClick={(e) => handleOpenInfo(e, project.user_id, project.id)} className="projects-asterisk ms-auto">
                       <FontAwesomeIcon icon={faAsterisk} />
                     </span>
                   }
@@ -174,7 +174,9 @@ function Projects({ userId }: ProjectProps) {
             }
           </ListGroup>
         </Col>
-        <Col><DetailsSlideOver open={isDetailsOpen} details={projectInfo} /></Col>
+        <Col>
+          <DetailsSlideOver open={isDetailsOpen} details={projectInfo} />
+        </Col>
       </Row>
       <Row className="Projects-posts-post m-0">
         <div className="Project-collapse-background">

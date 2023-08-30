@@ -35,6 +35,7 @@ function PopOut({ getProject, action, postId, fetchEditPost }: PopOutProp) {
   const customDialogClassName = 'custom-modal-dialog';
 
   function buttonStyle() {
+    if (action === 'new info') return <Button onClick={handleShow} className="btn" variant="outline-dark"><FontAwesomeIcon icon={faPlus} /></Button>
     if (action === 'new post') return <Button onClick={handleShow} className="my-0 py-3 btn" variant="outline-dark" style={{ marginLeft: 'auto' }}><FontAwesomeIcon icon={faPlus} /></Button>
     if (action === 'edit') return <div onClick={handleShow}><FontAwesomeIcon icon={faPenToSquare} /></div>
     if (action === 'new project') return <Button onClick={handleShow} className="m-0 btn" variant="outline-dark" style={{ marginRight: 'auto' }}><FontAwesomeIcon icon={faPlus} /></Button>
