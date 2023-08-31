@@ -50,7 +50,7 @@ function Projects({ userId }: ProjectProps) {
   const [isPostsOpen, setIsPostsOpen] = useState(false);
   const [projects, setProjects] = useState<IProject[]>([])
   const [projectData, setProjectData] = useState<ProjectData>({ name: '', id: 0 });
-  const [projectInfo, setProjectInfo] = useState<IInfoData>({ details: [], tech: [] })
+  const [projectInfo, setProjectInfo] = useState<IInfoData>({ details: [] })
   const [posts, setPosts] = useState<IPost[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);

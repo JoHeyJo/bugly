@@ -303,7 +303,7 @@ async function infoGet(projectId: number | undefined) {
 }
 
 /** Posts new info : {details, tech} */
-async function postInfo(projectId: number, infoData: IInfoData) {
+async function postInfo(projectId: number | undefined, infoData: IInfoData) {
   const headers = { Authorization: `Bearer ${BuglyApi.token}` }
   try {
     const res = await axios.post(`${BASE_URL}/info/${projectId}`, { headers })
