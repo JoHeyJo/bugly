@@ -3,13 +3,13 @@ import Button from 'react-bootstrap/Button';
 import Collapse from 'react-bootstrap/Collapse';
 import './style/SlideOver.css';
 import Card from 'react-bootstrap/Card';
-import { IInfoData } from './interface';
+import { IDetailData } from './interface';
 import RenderInfo from './RenderInfo';
 import './style/DetailSlideOver.css';
 
 type DetailsSlideOverProps = {
   open: boolean;
-  details: IInfoData
+  details: IDetailData
 }
 
 /** SlideOver component that handles rendering animation for info

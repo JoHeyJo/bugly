@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { IUser, IPost, IProject, IInfoData } from './interface'
+import { IUser, IPost, IProject, IDetailData } from './interface'
 import { errorHandling } from './utils/errorHandling';
 
 
@@ -294,7 +294,6 @@ async function projectDelete(projectId?: number) {
 async function infoGet(projectId: number | undefined) {
   try {
     const res = await axios.get(`${BASE_URL}/info/${projectId}`)
-    console.log(res)
     return res.data;
   } catch (error: any) {
     errorHandling('infoGet', error)
@@ -303,10 +302,11 @@ async function infoGet(projectId: number | undefined) {
 }
 
 /** Posts new info : {details, tech} */
-async function postInfo(projectId: number | undefined, infoData: IInfoData) {
+async function postInfo(projectId: number | undefined, infoData: string[]) {
   const headers = { Authorization: `Bearer ${BuglyApi.token}` }
+  console.log(projectId,infoData)
   try {
-    const res = await axios.post(`${BASE_URL}/info/${projectId}`, { headers })
+    const res = await axios.post(`${BASE_URL}/info/${projectId}`, infoData, { headers })
     return res
   } catch (error: any) {
     errorHandling('postInfo', error)

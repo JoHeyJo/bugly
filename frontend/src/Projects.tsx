@@ -10,7 +10,7 @@ import { Button } from "react-bootstrap";
 
 
 // components/ modules
-import { IProject, IPost, IInfoData } from './interface';
+import { IProject, IPost, IDetailData } from './interface';
 import { projectsGet, projectPostsGet, infoGet } from './api';
 import Posts from "./Posts";
 import { ProjectContextType, ProjectContext, UserContext } from "./userContext";
@@ -50,7 +50,7 @@ function Projects({ userId }: ProjectProps) {
   const [isPostsOpen, setIsPostsOpen] = useState(false);
   const [projects, setProjects] = useState<IProject[]>([])
   const [projectData, setProjectData] = useState<ProjectData>({ name: '', id: 0 });
-  const [projectInfo, setProjectInfo] = useState<IInfoData>({ details: [] })
+  const [projectInfo, setProjectInfo] = useState<IDetailData>({ details: [] })
   const [posts, setPosts] = useState<IPost[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
@@ -139,12 +139,12 @@ function Projects({ userId }: ProjectProps) {
       handleOpenDetails()
     }
   }
-
+console.log('projectData', projectData)
   return (
     <div className="Projects">
       <h3 className="Projects-title">
         Projects
-        <PopOut getProject={getProject} action={'new project'} postId={undefined} fetchEditPost={undefined} />
+        <PopOut id={projectData.id} getProject={getProject} action={'new project'} postId={undefined} fetchEditPost={undefined} />
       </h3>
 
       <Row>

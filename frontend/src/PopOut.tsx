@@ -18,6 +18,7 @@ type PopOutProp = {
   postId: number | undefined;
   fetchEditPost?: (postId: number) => Promise<void>;
   getProject: () => void;
+  id: number | undefined;
 }
 
 
@@ -25,9 +26,10 @@ type PopOutProp = {
  * 
  * [Projects, Posts, Post ] => PopOut
  */
-function PopOut({ getProject, action, postId, fetchEditPost }: PopOutProp) {
+function PopOut({ id, getProject, action, postId, fetchEditPost }: PopOutProp) {
   const [show, setShow] = useState(false);
   const { projectName, projectId } = useContext(ProjectContext);
+  console.log('project id ', projectId)
 
   const { user } = useContext(UserContext);
 
@@ -45,12 +47,11 @@ function PopOut({ getProject, action, postId, fetchEditPost }: PopOutProp) {
   }
 
   function modalAction() {
-    if (action === 'new info') return <InfoForm projectId={projectId}/>;
+    if (action === 'new info') return <InfoForm />;
     return action === 'new project'
       ? <ProjectForm handleClose={handleClose} getProject={getProject} />
       : <PostForm handleClose={handleClose} postId={postId} fetchEditPost={fetchEditPost} />
   }
-
   function modalHeader() {
     if (action === 'new info') return 'Add project detail'
     if (action === 'new project') return 'Create new project'
