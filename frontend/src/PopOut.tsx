@@ -24,7 +24,7 @@ type PopOutProp = {
 
 /** Popout component 
  * 
- * [Projects, Posts, Post ] => PopOut
+ * [Projects, Posts, Post] => PopOut
  */
 function PopOut({ id, getProject, action, postId, fetchEditPost }: PopOutProp) {
   const [show, setShow] = useState(false);

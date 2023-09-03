@@ -13,6 +13,7 @@ type InfoProp = {
 function RenderInfo(data: InfoProp) {
 
   const { projectId } = useContext(ProjectContext)
+  // console.log('RenderInfo>>>>>>>>', projectId)
 
   return (
     <>

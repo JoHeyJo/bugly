@@ -175,7 +175,9 @@ console.log('projectData', projectData)
           </ListGroup>
         </Col>
         <Col>
+          <ProjectContext.Provider value={ProjectData}>
           <DetailsSlideOver open={isDetailsOpen} details={projectInfo} />
+          </ProjectContext.Provider>
         </Col>
       </Row>
       <Row className="Projects-posts-post m-0">
