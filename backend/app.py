@@ -521,13 +521,13 @@ def post_info(project_id):
 
     if email != jwt_identity:
         return jsonify({"error": "Unauthorized access"}), 401
-    
+    print('*********',request.json)
     try:
-
-        detail = request.json.get("details", None)
-        if detail is not None:
-            new_detail = Detail(detail=detail,project_id=project_id)
-            db.session.add(new_detail)
+        details = request.json.get("details", None)
+        if details is not None:
+            for detail in details:
+                new_detail = Detail(detail=detail,project_id=project_id)
+                db.session.add(new_detail)
 
         tech = request.json.get("tech", None)
         if tech is not None:
