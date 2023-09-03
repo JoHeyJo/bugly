@@ -1,4 +1,5 @@
 import React from "react";
+import './style/List.css'
 
 type ListProp = {
   list: string[]
@@ -8,9 +9,11 @@ type ListProp = {
 */
 function List({ list }: ListProp) {
   return (
-    <ul>
-      {list.map((listItem, i) => <li key={i}>{listItem}</li>)}
-    </ul>
+    <div className="List-container">
+      <ul>
+        {list.map((listItem, i) => <li key={i}>{listItem}</li>)}
+      </ul>
+    </div>
   )
 }
 
