@@ -29,7 +29,6 @@ type PopOutProp = {
 function PopOut({ id, getProject, action, postId, fetchEditPost }: PopOutProp) {
   const [show, setShow] = useState(false);
   const { projectName, projectId } = useContext(ProjectContext);
-  console.log('project id ', projectId)
 
   const { user } = useContext(UserContext);
 

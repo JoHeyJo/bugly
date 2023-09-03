@@ -19,7 +19,6 @@ type DetailsSlideOverProps = {
 function DetailsSlideOver({ open, details }: DetailsSlideOverProps) {
 
   const { projectId } = useContext(ProjectContext)
-  console.log('DetailsSlideOver>>>>>>>>', projectId)
   
   return (
     <div style={{ minHeight: '150px' }}>
