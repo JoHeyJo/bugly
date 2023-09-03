@@ -19,12 +19,12 @@ type DetailsSlideOverProps = {
 function DetailsSlideOver({ open, details }: DetailsSlideOverProps) {
 
   const { projectId } = useContext(ProjectContext)
-  
+
   return (
-    <div style={{ minHeight: '150px' }}>
+    <div style={{ minHeight: '150px', marginRight: "1rem" }}>
       <Collapse in={open} dimension="width">
-        <div className='collapse-text DetailSlideOver-content' >
-          <Card body style={{ width: '26rem' }}>
+        <div className='DetailSlideOver-content'>
+          <Card body style={{ width: '600px' }}>
             <RenderInfo projectData={details} />
           </Card>
         </div>

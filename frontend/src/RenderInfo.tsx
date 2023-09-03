@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import List from './List';
 import { IDetailData } from "./interface";
 import PopOut from './PopOut';
@@ -13,13 +13,13 @@ type InfoProp = {
 function RenderInfo(data: InfoProp) {
 
   const { projectId } = useContext(ProjectContext)
-  console.log('RenderInfo>>>>>>>>', projectId)
 
   return (
     <>
-      <div id="RenderInfo-add">
-      <PopOut id={projectId} action={"new info"} getProject={()=>{}} postId={undefined} />
-    </div>
+      <span id="RenderInfo-add">
+        <h3>Details</h3>
+        <PopOut id={projectId} action={"new info"} getProject={() => { }} postId={undefined} />
+      </span>
       <List list={data.projectData.details} />
     </>
   )
