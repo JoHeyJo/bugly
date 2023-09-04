@@ -48,7 +48,6 @@ function InfoForm({ handleClose }: InfoFormProp) {
     </div>
   }
 
-
   /** Submits project details */
   async function submitDetails(e: any) {
     e.preventDefault()
@@ -64,10 +63,11 @@ function InfoForm({ handleClose }: InfoFormProp) {
     <>
       <Button className="mx-1 my-2" variant="outline-warning" onClick={createDetailField}>additional detail</Button>
       <Form onSubmit={submitDetails}>
-        {details.map((detail, i) => <ul>
-          <li key={i}><InfoInput updateState={updateDetails} index={i} /></li>
+        <ul>
+          {details.map((detail, i) =>
+            <li key={i}><InfoInput updateState={updateDetails} index={i} /></li>
+          )}
         </ul>
-        )}
         {renderSubmitButton()}
       </Form>
     </>

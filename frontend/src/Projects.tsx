@@ -140,7 +140,6 @@ function Projects({ userId }: ProjectProps) {
       handleOpenDetails()
     }
   }
-  console.log('projectData', projectData)
   return (
     <div className="Projects">
       <h3 className="Projects-title">
