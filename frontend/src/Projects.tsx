@@ -114,7 +114,6 @@ function Projects({ userId }: ProjectProps) {
         setTimeout(async () => {
           await fetchPosts(id, projectId);
           const infoData = await infoGet(projectId)
-          // setProjectInfo(await infoGet(projectId))
           setProjectInfo(infoData)
           setIsPostsOpen(true)
         }, 500)
