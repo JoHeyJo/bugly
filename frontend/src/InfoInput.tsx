@@ -26,8 +26,9 @@ function InfoInput({ updateState, index }: InfoInputProp) {
       value={detailData}
       name="detail"
       type="text"
-      placeholder="Add detail..."
+      placeholder="Add detail...50 character limit"
       onChange={handleChange}
+      maxLength={50}
     />
   )
 }

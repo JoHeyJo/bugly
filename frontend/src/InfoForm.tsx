@@ -53,7 +53,6 @@ function InfoForm({ handleClose }: InfoFormProp) {
     e.preventDefault()
     try {
       await postInfo(projectId, details)
-      console.log('submitting details')
     } catch (error: any) {
       errorHandling('submitDetails in InfoForm', error)
     }
