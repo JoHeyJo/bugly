@@ -63,7 +63,7 @@ function Post({ initialPost, handlePostRender, fetchEditPost }: any) {
       <Stack gap={3}>
         <h2 className="Post-title">{title}</h2>
         <span className="d-flex justify-content-end">
-          <PopOut getProject={()=>{}}  action={'edit'} postId={post?.id || postId} fetchEditPost={fetchEditPost} />
+          <PopOut id={undefined} getProject={()=>{}}  action={'edit'} postId={post?.id || postId} fetchEditPost={fetchEditPost} />
           {/* { initialPost && <ViewPopOut post={convertedPost} />} */}
           <ViewPopOut post={convertedPost} />
         </span>

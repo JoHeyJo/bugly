@@ -56,7 +56,7 @@ function LoginForm({ login }:any) {
         <h3 className="mb-3">Log In</h3>
 
         <div className="card">
-          <div className="card-body">
+          <div className="card-body-loginForm">
             <form onSubmit={handleSubmit}>
               <div className="mb-3">
                 <label className="form-label">Username</label>

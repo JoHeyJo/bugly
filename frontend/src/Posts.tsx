@@ -87,7 +87,7 @@ function Posts({ posts, isPostsShowing }: PostsProps) {
               <Card className="custom-card" key={'Warning'} style={{ width: '400px' }}>
                 <div className="Posts-posts-container">
                 <ListGroup className="align-items-start">
-                  <PopOut getProject={()=>{}} action={'new post'} postId={undefined} fetchEditPost={fetchPost} />
+                  <PopOut id={undefined} getProject={()=>{}} action={'new post'} postId={undefined} fetchEditPost={fetchPost} />
                   {
                     posts.map(p =>
                       <ListGroup.Item key={p.id} className="Posts-post" onClick={() => {

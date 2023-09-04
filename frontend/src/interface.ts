@@ -51,7 +51,8 @@ export interface IProject {
   user_id: number | undefined;
 }
 
-export interface IInfoData {
+export interface IDetailData {
   details: string[];
-  tech: string[];
+  // tech: string[];
 }
+

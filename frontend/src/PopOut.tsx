@@ -4,27 +4,31 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faPenToSquare } from '@fortawesome/free-solid-svg-icons'
+// Components/ modules
 import PostForm from './PostForm';
 import { ProjectContext } from './userContext';
 import ProjectForm from './ProjectForm';
-import { faPenToSquare } from '@fortawesome/free-solid-svg-icons'
 import { UserContext } from './userContext';
+import InfoForm from './InfoForm'
+// Styles
 import './style/PopOut.css';
 type PopOutProp = {
   action: string;
   postId: number | undefined;
   fetchEditPost?: (postId: number) => Promise<void>;
   getProject: () => void;
+  id: number | undefined;
 }
 
 
 /** Popout component 
  * 
- * [Projects, Posts, Post ] => PopOut
+ * [Projects, Posts, Post] => PopOut
  */
-function PopOut({ getProject, action, postId, fetchEditPost }: PopOutProp) {
+function PopOut({ id, getProject, action, postId, fetchEditPost }: PopOutProp) {
   const [show, setShow] = useState(false);
-  const { projectName } = useContext(ProjectContext);
+  const { projectName, projectId } = useContext(ProjectContext);
 
   const { user } = useContext(UserContext);
 
@@ -35,18 +39,20 @@ function PopOut({ getProject, action, postId, fetchEditPost }: PopOutProp) {
   const customDialogClassName = 'custom-modal-dialog';
 
   function buttonStyle() {
+    if (action === 'new info') return <Button onClick={handleShow} className="btn" variant="outline-dark"><FontAwesomeIcon icon={faPlus} /></Button>
     if (action === 'new post') return <Button onClick={handleShow} className="my-0 py-3 btn" variant="outline-dark" style={{ marginLeft: 'auto' }}><FontAwesomeIcon icon={faPlus} /></Button>
     if (action === 'edit') return <div onClick={handleShow}><FontAwesomeIcon icon={faPenToSquare} /></div>
     if (action === 'new project') return <Button onClick={handleShow} className="m-0 btn" variant="outline-dark" style={{ marginRight: 'auto' }}><FontAwesomeIcon icon={faPlus} /></Button>
   }
 
   function modalAction() {
+    if (action === 'new info') return <InfoForm handleClose={handleClose}/>;
     return action === 'new project'
       ? <ProjectForm handleClose={handleClose} getProject={getProject} />
       : <PostForm handleClose={handleClose} postId={postId} fetchEditPost={fetchEditPost} />
   }
-
   function modalHeader() {
+    if (action === 'new info') return 'Add project detail'
     if (action === 'new project') return 'Create new project'
     if (action === 'new post') return 'Create new post'
     if (action === 'edit') return `Edit post for ${projectName}`

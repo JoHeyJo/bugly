@@ -1,0 +1,5 @@
+.List-container {
+  /* width: 300px; */
+  height: 6.25rem;
+  overflow: auto;
+}
