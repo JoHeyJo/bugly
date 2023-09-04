@@ -1,12 +1,10 @@
-import { useState, useContext } from 'react';
-import Button from 'react-bootstrap/Button';
+import { useState } from 'react';
 import Collapse from 'react-bootstrap/Collapse';
 import './style/SlideOver.css';
 import Card from 'react-bootstrap/Card';
 import { IDetailData } from './interface';
 import RenderInfo from './RenderInfo';
 import './style/DetailSlideOver.css';
-import { ProjectContext } from './userContext';
 
 type DetailsSlideOverProps = {
   open: boolean;
@@ -18,7 +16,6 @@ type DetailsSlideOverProps = {
  */
 function DetailsSlideOver({ open, details }: DetailsSlideOverProps) {
 
-  const { projectId } = useContext(ProjectContext)
 
   return (
     <div style={{ minHeight: '150px', marginRight: "1rem" }}>

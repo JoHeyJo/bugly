@@ -113,7 +113,9 @@ function Projects({ userId }: ProjectProps) {
 
         setTimeout(async () => {
           await fetchPosts(id, projectId);
+          const infoData = await infoGet(projectId)
           // setProjectInfo(await infoGet(projectId))
+          setProjectInfo(infoData)
           setIsPostsOpen(true)
         }, 500)
       } catch (error) {
@@ -139,7 +141,7 @@ function Projects({ userId }: ProjectProps) {
       handleOpenDetails()
     }
   }
-console.log('projectData', projectData)
+  console.log('projectData', projectData)
   return (
     <div className="Projects">
       <h3 className="Projects-title">
@@ -175,7 +177,7 @@ console.log('projectData', projectData)
         </Col>
         <Col>
           <ProjectContext.Provider value={ProjectData}>
-          <DetailsSlideOver open={isDetailsOpen} details={projectInfo} />
+            <DetailsSlideOver open={isDetailsOpen} details={projectInfo} />
           </ProjectContext.Provider>
         </Col>
       </Row>
