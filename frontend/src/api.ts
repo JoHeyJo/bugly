@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { IUser, IPost, IProject, IInfoData } from './interface'
+import { IUser, IPost, IProject, IDetailData } from './interface'
 import { errorHandling } from './utils/errorHandling';
 
 
@@ -294,7 +294,6 @@ async function projectDelete(projectId?: number) {
 async function infoGet(projectId: number | undefined) {
   try {
     const res = await axios.get(`${BASE_URL}/info/${projectId}`)
-    console.log(res)
     return res.data;
   } catch (error: any) {
     errorHandling('infoGet', error)
@@ -303,13 +302,13 @@ async function infoGet(projectId: number | undefined) {
 }
 
 /** Posts new info : {details, tech} */
-async function infoPost(projectId: number, infoData: IInfoData) {
+async function postInfo(projectId: number | undefined, infoData: string[]) {
   const headers = { Authorization: `Bearer ${BuglyApi.token}` }
   try {
-    const res = await axios.post(`${BASE_URL}/info/${projectId}`, { headers })
+    const res = await axios.post(`${BASE_URL}/info/${projectId}`, { "details": infoData }, { headers })
     return res
   } catch (error: any) {
-    errorHandling('infoPost', error)
+    errorHandling('postInfo', error)
     throw error.response.data
   }
 }
@@ -387,5 +386,5 @@ async function detailDelete(projectId: number, detailId: number) {
 }
 
 
-export {  detailDelete, techDelete, infoPost, techUpdate, detailUpdate, techEdit, detailEdit, infoGet, login, signup, projectDelete, projectPostsGet, projectPostAdd, projectGet, projectsGetAll, userGet, usersGet, userAdd, userUpdate, userDelete, userEdit, postsGetAll, postGet, postAdd, postEdit, postUpdate, postDelete, projectAdd, projectUpdate, projectEdit, projectsGet };
+export { detailDelete, techDelete, postInfo, techUpdate, detailUpdate, techEdit, detailEdit, infoGet, login, signup, projectDelete, projectPostsGet, projectPostAdd, projectGet, projectsGetAll, userGet, usersGet, userAdd, userUpdate, userDelete, userEdit, postsGetAll, postGet, postAdd, postEdit, postUpdate, postDelete, projectAdd, projectUpdate, projectEdit, projectsGet };
 

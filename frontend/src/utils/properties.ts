@@ -43,5 +43,12 @@ export const actionProperties: actionProperties = {
     variant: "outline-danger",
     style: "",
     message: "You need to be logged in to delete a Project"
+  },
+  addDetails: {
+    label: 'Add details',
+    class:"",
+    variant: "outline-warning",
+    style:"",
+    message:"You need to be logged in to add details"
   }
 }
