@@ -5,9 +5,9 @@ import Form from 'react-bootstrap/Form';
 import { errorHandling } from "./utils/errorHandling";
 import { Button } from "react-bootstrap";
 import { ProjectContext } from './userContext';
-import ProjectForm from './ProjectForm';
 import { UserContext } from './userContext';
 import AlertBubble from "./AlertBubble";
+import './style/InfoForm.css';
 
 type InfoFormProp = {
   handleClose: () => void | undefined;
@@ -62,9 +62,9 @@ function InfoForm({ handleClose }: InfoFormProp) {
     <>
       <Button className="mx-1 my-2" variant="outline-warning" onClick={createDetailField}>additional detail</Button>
       <Form onSubmit={submitDetails}>
-        <ul>
+        <ul id="InfoForm-detail-list">
           {details.map((detail, i) =>
-            <li key={i}><InfoInput updateState={updateDetails} index={i} /></li>
+            <li key={i} className="InfoForm-detail py-2"><InfoInput updateState={updateDetails} index={i} /></li>
           )}
         </ul>
         {renderSubmitButton()}
