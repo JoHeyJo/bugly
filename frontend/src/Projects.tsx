@@ -6,7 +6,6 @@ import Col from 'react-bootstrap/Col';
 import Collapse from 'react-bootstrap/Collapse';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAsterisk } from '@fortawesome/free-solid-svg-icons'
-import { Button } from "react-bootstrap";
 
 
 // components/ modules
@@ -17,7 +16,7 @@ import { ProjectContextType, ProjectContext, UserContext } from "./userContext";
 import AlertModal from "./AlertModal";
 import PopOut from "./PopOut";
 import DetailsSlideOver from "./DetailsSlideOver";
-
+import TechList from "./TechList";
 
 //styles
 import './style/Projects.css';
@@ -148,7 +147,7 @@ function Projects({ userId }: ProjectProps) {
       </h3>
 
       <Row>
-        <Col xs={6} className="mx-2">
+        <Col xs={6} className="mx-2 my-1">
           <ListGroup>
             {
               projects.map(project =>
