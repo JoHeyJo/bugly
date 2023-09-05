@@ -7,7 +7,7 @@ type ListProp = {
 /** Handles a list 
  * RenderInfo -> List
 */
-function List({ list }: ListProp) {
+function DetailsList({ list }: ListProp) {
   return (
     <div className="List-container">
       <ul>
@@ -17,4 +17,4 @@ function List({ list }: ListProp) {
   )
 }
 
-export default List;
+export default DetailsList;

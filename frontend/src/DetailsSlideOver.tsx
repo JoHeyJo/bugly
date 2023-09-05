@@ -5,7 +5,6 @@ import Card from 'react-bootstrap/Card';
 import { IDetailData } from './interface';
 import RenderInfo from './RenderInfo';
 import './style/DetailSlideOver.css';
-import TechList from './TechList';
 
 type DetailsSlideOverProps = {
   open: boolean;
@@ -16,6 +15,7 @@ type DetailsSlideOverProps = {
  * Projects -> DetailsSlideOver
  */
 function DetailsSlideOver({ open, details }: DetailsSlideOverProps) {
+  const [section, setSection] = useState({ 'details': false, 'tech': false, 'specs': false })
 
 
   return (
@@ -24,8 +24,6 @@ function DetailsSlideOver({ open, details }: DetailsSlideOverProps) {
         <div className='DetailSlideOver-content'>
           <Card body style={{ width: '600px' }}>
             <RenderInfo projectData={details} />
-            {/* <TechList /> */}
-
           </Card>
         </div>
       </Collapse>
