@@ -53,6 +53,6 @@ export interface IProject {
 
 export interface IDetailData {
   details: string[];
-  // tech: string[];
+  tech: string[];
 }
 

@@ -49,7 +49,7 @@ function Projects({ userId }: ProjectProps) {
   const [isPostsOpen, setIsPostsOpen] = useState(false);
   const [projects, setProjects] = useState<IProject[]>([])
   const [projectData, setProjectData] = useState<ProjectData>({ name: '', id: 0 });
-  const [projectInfo, setProjectInfo] = useState<IDetailData>({ details: [] })
+  const [projectInfo, setProjectInfo] = useState<IDetailData>({ details: [], tech:[] })
   const [posts, setPosts] = useState<IPost[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
@@ -113,6 +113,7 @@ function Projects({ userId }: ProjectProps) {
         setTimeout(async () => {
           await fetchPosts(id, projectId);
           const infoData = await infoGet(projectId)
+          console.log('info', infoData)
           setProjectInfo(infoData)
           setIsPostsOpen(true)
         }, 500)

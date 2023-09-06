@@ -22,7 +22,7 @@ function DetailsSlideOver({ open, details }: DetailsSlideOverProps) {
     <div style={{ minHeight: '150px', marginRight: "1rem" }}>
       <Collapse in={open} dimension="width">
         <div className='DetailSlideOver-content'>
-          <Card body style={{ width: '600px' }}>
+          <Card body style={{ width: '600px', height:'10.938rem' }}>
             <RenderInfo projectData={details} />
           </Card>
         </div>
@@ -31,4 +31,4 @@ function DetailsSlideOver({ open, details }: DetailsSlideOverProps) {
   );
 }
 
-export default DetailsSlideOver;
+export default DetailsSlideOver; 

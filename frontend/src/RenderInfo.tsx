@@ -61,7 +61,7 @@ function RenderInfo(data: InfoProp) {
         <PopOut id={projectId} action={"new info"} getProject={() => { }} postId={undefined} />
       </span>
       {section.details && <DetailsList list={data.projectData.details} />}
-      {section.tech && <TechList />}
+      {section.tech && <TechList tech={data.projectData.tech}/>}
     </>
   )
 }
