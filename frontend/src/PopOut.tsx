@@ -13,6 +13,7 @@ import { UserContext } from './userContext';
 import InfoForm from './InfoForm'
 // Styles
 import './style/PopOut.css';
+
 type PopOutProp = {
   action: string;
   postId: number | undefined;

@@ -15,8 +15,6 @@ type DetailsSlideOverProps = {
  * Projects -> DetailsSlideOver
  */
 function DetailsSlideOver({ open, details }: DetailsSlideOverProps) {
-  const [section, setSection] = useState({ 'details': false, 'tech': false, 'specs': false })
-
 
   return (
     <div style={{ minHeight: '150px', marginRight: "1rem" }}>

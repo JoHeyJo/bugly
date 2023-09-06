@@ -9,7 +9,7 @@ type DropDownProp = {
 }
 
 
-function DropDown({logout}: DropDownProp) {
+function LoginOut({logout}: DropDownProp) {
   const { user } = useContext(UserContext);
 
   return (
@@ -34,4 +34,4 @@ function DropDown({logout}: DropDownProp) {
   );
 }
 
-export default DropDown;
+export default LoginOut;

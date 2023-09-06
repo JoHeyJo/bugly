@@ -8,6 +8,7 @@ import PopOut from './PopOut';
 import TechList from './TechList';
 // style
 import './style/RenderInfo.css';
+import TechForm from "./TechForm";
 
 type InfoProp = {
   projectData: IDetailData
@@ -40,6 +41,11 @@ function RenderInfo(data: InfoProp) {
     })
   }
 
+  /** Handles dropdown display */
+  function handleDropDown(){
+
+  }
+
   return (
     <>
       <span id="RenderInfo-add">
@@ -58,10 +64,14 @@ function RenderInfo(data: InfoProp) {
             onClick={selectSection} className="RenderInfo-buttons">Specs
           </button>
         </h3>
-        <PopOut id={projectId} action={"new info"} getProject={() => { }} postId={undefined} />
+        {section.details && <PopOut id={projectId} action={"new info"} getProject={() => { }} postId={undefined} />}
+        {section.tech && <TechForm />}
+        {section.specs && <PopOut id={projectId} action={"new specs"} getProject={() => { }} postId={undefined} />}
+
       </span>
       {section.details && <DetailsList list={data.projectData.details} />}
       {section.tech && <TechList tech={data.projectData.tech}/>}
+      {section.specs && <h3>Coming soon...</h3>}
     </>
   )
 }

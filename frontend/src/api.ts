@@ -301,6 +301,17 @@ async function infoGet(projectId: number | undefined) {
   }
 }
 
+/** Gets all tech */
+async function techGet() {
+  try {
+    const res = await axios.get(`${BASE_URL}/tech`)
+    return res.data
+  } catch (error: any) {
+    errorHandling('techGet', error)
+    throw error.response.data
+  }
+}
+
 /** Posts new info : {details, tech} */
 async function postInfo(projectId: number | undefined, infoData: string[]) {
   const headers = { Authorization: `Bearer ${BuglyApi.token}` }
@@ -386,5 +397,5 @@ async function detailDelete(projectId: number, detailId: number) {
 }
 
 
-export { detailDelete, techDelete, postInfo, techUpdate, detailUpdate, techEdit, detailEdit, infoGet, login, signup, projectDelete, projectPostsGet, projectPostAdd, projectGet, projectsGetAll, userGet, usersGet, userAdd, userUpdate, userDelete, userEdit, postsGetAll, postGet, postAdd, postEdit, postUpdate, postDelete, projectAdd, projectUpdate, projectEdit, projectsGet };
+export { techGet, detailDelete, techDelete, postInfo, techUpdate, detailUpdate, techEdit, detailEdit, infoGet, login, signup, projectDelete, projectPostsGet, projectPostAdd, projectGet, projectsGetAll, userGet, usersGet, userAdd, userUpdate, userDelete, userEdit, postsGetAll, postGet, postAdd, postEdit, postUpdate, postDelete, projectAdd, projectUpdate, projectEdit, projectsGet };
 

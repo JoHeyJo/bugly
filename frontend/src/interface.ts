@@ -56,3 +56,7 @@ export interface IDetailData {
   tech: string[];
 }
 
+export interface ITech {
+  tech: string;
+  id: number;
+}

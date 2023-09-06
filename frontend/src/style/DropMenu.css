@@ -1,0 +1,21 @@
+.dropdown-toggle::after {
+  display: none;
+}
+
+.custom-dropdown {
+  /* background-color: #343a40; */
+  /* Dark color for the button */
+}
+
+.custom-dropdown .dropdown-menu {
+  background-color: #343a40;
+  /* Dark color for the dropdown menu */
+}
+
+.dropdown-item{
+  color: #AC8307;
+}
+.dropdown-item:hover {
+  background-color: #AC8307;
+  /* Dark color for the dropdown menu */
+}
