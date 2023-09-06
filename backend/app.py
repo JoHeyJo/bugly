@@ -510,6 +510,17 @@ def get_info(project_id):
     info = tech_and_detail(db, project_id)
     return info
 
+@app.get("/tech")
+def get_get():
+    """Returns all tech in database"""
+    try:
+        tech = Tech.query.all()
+        serialized = [Tech.serialize(t) for t in tech]
+        return jsonify(serialized)
+    except Exception as e:
+        print('post_info error =>', e)
+        return jsonify({"error": f"{str(e)}"})
+    
 @app.post("/info/<project_id>")
 @jwt_required()
 def post_info(project_id):
