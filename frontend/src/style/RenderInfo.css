@@ -12,6 +12,11 @@
   border-bottom: 5px hidden rgba(84, 84, 84, .5);
 }
 
+
 .RenderInfo-buttons {
-all: unset;
+  all: unset;
+}
+
+.active {
+  border-bottom: none;
 }
