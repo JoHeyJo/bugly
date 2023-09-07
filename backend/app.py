@@ -508,6 +508,7 @@ def projects_delete(project_id):
 def get_info(project_id):
     """Gets information of post: info:{tech,details}"""
     info = tech_and_detail(db, project_id)
+    print('info in app', info)
     return info
 
 @app.get("/tech")
@@ -556,7 +557,16 @@ def post_info(project_id):
     except Exception as e:
         print('post_info error =>', e)
         return jsonify({"error": f"{str(e)}"})
-
+    
+# @app.post("/tech/<project_id>")
+# def post_tech(project_id):
+#     """Adds tech to corresponding project"""
+#     try:
+#         tech = request.get
+#     except Exception as e:
+#         print('post_tech error =>', e)
+#         return jsonify({"error": f"{str(e)}"})
+    
 @app.patch("/details/<int:detail_id>")
 @jwt_required()
 def update_info(detail_id):
