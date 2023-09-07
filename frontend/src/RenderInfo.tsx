@@ -40,12 +40,7 @@ function RenderInfo(data: InfoProp) {
       return toggledSection
     })
   }
-
-  /** Handles dropdown display */
-  function handleDropDown() {
-
-  }
-
+console.log('data in RenderInfo',data)
   return (
     <>
       <span id="RenderInfo-add">
@@ -65,7 +60,7 @@ function RenderInfo(data: InfoProp) {
           </button>
         </h3>
         {section.details && <PopOut id={projectId} action={"new info"} getProject={() => { }} postId={undefined} />}
-        {section.tech && <TechForm />}
+        {section.tech && <TechForm projectTech={data.projectData.tech}/>}
         {section.specs && <PopOut id={projectId} action={"new specs"} getProject={() => { }} postId={undefined} />}
 
       </span>
