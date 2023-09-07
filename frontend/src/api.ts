@@ -294,6 +294,7 @@ async function projectDelete(projectId?: number) {
 async function infoGet(projectId: number | undefined) {
   try {
     const res = await axios.get(`${BASE_URL}/info/${projectId}`)
+    console.log('infoGet data in api',res.data)
     return res.data;
   } catch (error: any) {
     errorHandling('infoGet', error)

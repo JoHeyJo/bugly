@@ -15,7 +15,7 @@ type DetailsSlideOverProps = {
  * Projects -> DetailsSlideOver
  */
 function DetailsSlideOver({ open, details }: DetailsSlideOverProps) {
-
+  // console.log("DetailsSlideOVer details", details)
   return (
     <div style={{ minHeight: '150px', marginRight: "1rem" }}>
       <Collapse in={open} dimension="width">

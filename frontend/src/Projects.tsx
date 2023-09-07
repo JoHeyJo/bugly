@@ -68,7 +68,6 @@ function Projects({ userId }: ProjectProps) {
   async function getProject() {
     const projectData = await projectsGet(userId);
     // const projectInfo = await infoGet(projectData.id);
-    console.log('in here')
     setProjects(projectData);
     // setProjectInfo(projectInfo);
   }
@@ -113,7 +112,6 @@ function Projects({ userId }: ProjectProps) {
         setTimeout(async () => {
           await fetchPosts(id, projectId);
           const infoData = await infoGet(projectId)
-          console.log('info', infoData)
           setProjectInfo(infoData)
           setIsPostsOpen(true)
         }, 500)

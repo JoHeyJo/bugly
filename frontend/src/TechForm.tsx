@@ -14,7 +14,6 @@ type TechFormProp = {
   */
 
 function TechForm({ projectTech }: TechFormProp) {
-  console.log('projectTech', projectTech)
   const [technologies, setTechnologies] = useState<ITech[]>([{ tech: '', id: 0 }]);
   const [selected, setSelected] = useState<string[]>([]);
 
@@ -38,7 +37,6 @@ function TechForm({ projectTech }: TechFormProp) {
     console.log("data submitted")
   }
 
-  console.log(projectTech)
   useEffect(()=>setSelected(projectTech),[projectTech])
 
   return (
