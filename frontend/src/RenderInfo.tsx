@@ -42,7 +42,7 @@ function RenderInfo(data: InfoProp) {
   }
 
   /** Handles dropdown display */
-  function handleDropDown(){
+  function handleDropDown() {
 
   }
 
@@ -70,7 +70,7 @@ function RenderInfo(data: InfoProp) {
 
       </span>
       {section.details && <DetailsList list={data.projectData.details} />}
-      {section.tech && <TechList tech={data.projectData.tech}/>}
+      {section.tech && <TechList tech={data.projectData.tech} />}
       {section.specs && <h3>Coming soon...</h3>}
     </>
   )

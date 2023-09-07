@@ -13,7 +13,7 @@ type DropMenuProp = {
 
 function DropMenu({ list }: DropMenuProp) {
   return (
-    <DropdownButton className="custom-dropdown" id="dropdown-basic-button" variant="outline-dark" title={<FontAwesomeIcon icon={faPlus} />}>
+    <DropdownButton className="custom-dropdown py-1" id="dropdown-basic-button" variant="outline-dark" title={<FontAwesomeIcon icon={faPlus} />}>
       {list.map((item, idx) =>
         <Dropdown.Item data-bs-theme="dark" key={idx}>{item.tech}</Dropdown.Item>
       )}
