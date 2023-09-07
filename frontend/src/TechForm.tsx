@@ -14,6 +14,7 @@ type TechFormProp = {
 
 function TechForm() {
   const [tech, setTech] = useState<ITech[]>([{ tech: '', id: 0 }]);
+  const [selected, setSelected] = useState<number[]>([]);
 
   /** fetches all technologies */
   useEffect(() => {
@@ -22,11 +23,21 @@ function TechForm() {
       setTech(res);
     }
     fetchTech()
-  },[])
+  }, [])
+
+  /** Updates selection of technologies  */
+  function updateSelected(newTech: number) {
+    setSelected(tech => [...tech, newTech])
+  }
+
+  /**Submits tech data */
+  function submitData(){
+    console.log("data submitted")
+  }
 
   return (
     <>
-      <DropMenu list={tech} />
+      <DropMenu submit={submitData} selected={selected} updateState={updateSelected} list={tech} />
     </>
   )
 }

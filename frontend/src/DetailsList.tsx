@@ -11,7 +11,7 @@ function DetailsList({ list }: ListProp) {
   return (
     <div className="List-container">
       <ul>
-        {list.map((listItem, i) => <li key={i}>{listItem}</li>)}
+        {list.map((listItem, i) => <li className="DetailList-item" key={i}>{listItem}</li>)}
       </ul>
     </div>
   )

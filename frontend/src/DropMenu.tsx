@@ -9,13 +9,24 @@ import { ITech } from './interface';
 
 type DropMenuProp = {
   list: ITech[];
+  updateState: (id: number) => void;
+  selected: number[];
+  submit: () => void;
 }
 
-function DropMenu({ list }: DropMenuProp) {
+
+
+function DropMenu({ list, updateState, selected, submit }: DropMenuProp) {
   return (
-    <DropdownButton className="custom-dropdown py-1" id="dropdown-basic-button" variant="outline-dark" title={<FontAwesomeIcon icon={faPlus} />}>
-      {list.map((item, idx) =>
-        <Dropdown.Item data-bs-theme="dark" key={idx}>{item.tech}</Dropdown.Item>
+    <DropdownButton
+      onToggle={submit}
+      autoClose="outside"
+      className="custom-dropdown py-1"
+      id="dropdown-basic-button"
+      variant="outline-dark"
+      title={<FontAwesomeIcon icon={faPlus} />}>
+      {list.map((item) =>
+        <Dropdown.Item disabled={selected.includes(item.id)} onClick={() => updateState(item.id)} data-bs-theme="dark" key={item.id}>{item.tech}</Dropdown.Item>
       )}
     </DropdownButton>
   );

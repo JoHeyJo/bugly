@@ -313,10 +313,11 @@ async function techGet() {
 }
 
 /** Posts new info : {details, tech} */
-async function postInfo(projectId: number | undefined, infoData: string[]) {
+async function postInfo(projectId: number | undefined, infoData: {}) {
+
   const headers = { Authorization: `Bearer ${BuglyApi.token}` }
   try {
-    const res = await axios.post(`${BASE_URL}/info/${projectId}`, { "details": infoData }, { headers })
+    const res = await axios.post(`${BASE_URL}/info/${projectId}`, infoData, { headers })
     return res
   } catch (error: any) {
     errorHandling('postInfo', error)

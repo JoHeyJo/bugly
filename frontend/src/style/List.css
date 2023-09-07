@@ -1,5 +1,8 @@
 .List-container {
-  /* width: 300px; */
   height: 5rem;
   overflow: auto;
+}
+
+.DetailList-item {
+  padding: 1px;
 }
