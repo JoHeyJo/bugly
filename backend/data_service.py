@@ -9,7 +9,8 @@ def tech_and_detail(db, project_id):
     tech_data = db.session.query(Tech.tech, Tech.id).join(ProjectTech).join(Project).filter(Project.id == project_id).all()
     combined_data = {
         'details': [detail[0] for detail in detail_data],
-        'tech': [{'id': tech[0], 'tech': tech[1]} for tech in tech_data]
+        # 'tech': [tech[0] for tech in tech_data]
+        'tech': [{'id': tech[1], 'tech': tech[0]} for tech in tech_data]
     }
 
     return jsonify(combined_data)
