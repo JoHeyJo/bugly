@@ -20,6 +20,7 @@ type DropMenuProp = {
 
 function DropMenu({ list, updateState, selected, submit }: DropMenuProp) {
   const [searchText, setSearchText] = useState<string>("");
+  const [isOpen, setIsOpen] = useState(false);
 
   /** updates searchText state */
   function handleChange(e: React.ChangeEvent<HTMLInputElement>){
@@ -28,12 +29,27 @@ function DropMenu({ list, updateState, selected, submit }: DropMenuProp) {
     setSearchText(char);
   }
 
+
+/** updates state when dropdown is open/close */
+  const handleDropdownToggle = (nextOpenState:any) => {
+    setIsOpen(nextOpenState);
+  };
+
+  /** allows Dropdown button to serve a dual purpose by submitting data only when dropdown is open */
+  function submitIfOpen(){
+    if(isOpen) submit();
+  }
+
+  const selectedIds = selected.map(item => item.id)
+
   const searchQuery = list.filter(item => item.tech.includes(searchText))
 
   return (
     <>
       <DropdownButton
-        onToggle={submit}
+        onToggle={handleDropdownToggle}
+        show={isOpen}
+        onClick={submitIfOpen}
         autoClose="outside"
         className="custom-dropdown py-1"
         id="dropdown-basic-button"
@@ -43,7 +59,7 @@ function DropMenu({ list, updateState, selected, submit }: DropMenuProp) {
           <Form.Control onChange={handleChange} type="tech" placeholder="search..." />
         </Form.Group>
         {searchQuery.map((item) =>
-          <Dropdown.Item disabled={selected.includes(item)} onClick={() => updateState(item)} data-bs-theme="dark" key={item.id}>{item.tech}</Dropdown.Item>
+          <Dropdown.Item disabled={selectedIds.includes(item.id)} onClick={() => updateState(item)} data-bs-theme="dark" key={item.id}>{item.tech}</Dropdown.Item>
         )}
       </DropdownButton>
     </>
