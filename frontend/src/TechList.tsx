@@ -1,8 +1,10 @@
 import React from "react";
+import { ITech } from './interface'
 
 type TechListProp = {
-  tech: string[];
+  tech: ITech[];
 }
+
 /** Renders list of tech
  * 
  * RenderInfo -> TechList
@@ -12,7 +14,7 @@ function TechList({ tech }: TechListProp) {
     <>
       <ul>
         {tech.map((t, idx) =>
-          <li key={idx}>{t}</li>
+          <li key={idx}>{t.tech}</li>
         )}
       </ul>
     </>

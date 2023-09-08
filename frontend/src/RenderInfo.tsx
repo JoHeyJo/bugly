@@ -40,7 +40,7 @@ function RenderInfo(data: InfoProp) {
       return toggledSection
     })
   }
-// console.log('data in RenderInfo',data)
+console.log('data in RenderInfo',data)
   return (
     <>
       <span id="RenderInfo-add">

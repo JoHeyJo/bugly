@@ -11,8 +11,8 @@ import Form from 'react-bootstrap/Form';
 
 type DropMenuProp = {
   list: ITech[];
-  updateState: (tech: string) => void;
-  selected: string[];
+  updateState: (tech: ITech) => void;
+  selected: ITech[];
   submit: () => void;
 }
 
@@ -43,7 +43,7 @@ function DropMenu({ list, updateState, selected, submit }: DropMenuProp) {
           <Form.Control onChange={handleChange} type="tech" placeholder="search..." />
         </Form.Group>
         {searchQuery.map((item) =>
-          <Dropdown.Item disabled={selected.includes(item.tech)} onClick={() => updateState(item.tech)} data-bs-theme="dark" key={item.id}>{item.tech}</Dropdown.Item>
+          <Dropdown.Item disabled={selected.includes(item)} onClick={() => updateState(item)} data-bs-theme="dark" key={item.id}>{item.tech}</Dropdown.Item>
         )}
       </DropdownButton>
     </>

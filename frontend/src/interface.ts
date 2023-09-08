@@ -53,10 +53,11 @@ export interface IProject {
 
 export interface IDetailData {
   details: string[];
-  tech: string[];
+  tech: ITech[];
 }
 
 export interface ITech {
   tech: string;
   id: number;
 }
+
