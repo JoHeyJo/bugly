@@ -58,6 +58,6 @@ export interface IDetailData {
 
 export interface ITech {
   tech: string;
-  id: number;
+  id: number | undefined;
 }
 
