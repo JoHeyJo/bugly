@@ -64,18 +64,14 @@ function DropMenu({ list, updateState, selected, submit }: DropMenuProp) {
       </Dropdown.Item>
   }
 
-  /**Filters list of available tech in dropdown */
-  const searchQuery = list.reduce<any[]>((items, item) => {
-    const isTechAvailable = item.tech.toLowerCase().includes(searchText.toLowerCase());
-    if (isTechAvailable) {
-      items.push(dropdownElement(item));
-    }
-    return items;
-  }, []);
+  const listElements = list.map(item => dropdownElement(item));
 
-  if (searchQuery.length === 0 && searchText.trim() !== "") {
-    searchQuery.push(dropdownElement({ id: undefined, tech: '+ create....' }));
-  }
+  /**Filters list of available tech in dropdown */
+  const searchQuery = searchText === "" ? listElements : list.reduce<JSX.Element[]>((items, item) => {
+    const isTechAvailable = item.tech.toLowerCase().includes(searchText.toLowerCase())
+    if (isTechAvailable) items.push(dropdownElement(item));
+    return items;
+  }, [])
 
   console.log('>>>>', searchQuery)
   return (
@@ -92,10 +88,13 @@ function DropMenu({ list, updateState, selected, submit }: DropMenuProp) {
         <Form.Group className="mb" controlId="exampleForm.ControlInput1">
           <Form.Control onChange={handleChange} type="tech" placeholder="search..." />
         </Form.Group>
-        {searchQuery.map((item) =>
-          item
-          // <Dropdown.Item disabled={selectedIds.includes(item.id)} onClick={() => updateState(item)} data-bs-theme="dark" key={item.id || 0}>{item.tech}</Dropdown.Item>
-        )}
+        {
+        (searchQuery.length < 1)
+          ?
+          dropdownElement({ id: undefined, tech: '+ create....' })
+          :
+          searchQuery.map((item) => item)
+        }
       </DropdownButton>
     </>
   );
