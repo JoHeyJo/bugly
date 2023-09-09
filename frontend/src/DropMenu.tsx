@@ -6,7 +6,6 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import './style/DropMenu.css'
 import { ITech } from './interface';
 import Form from 'react-bootstrap/Form';
-import { isTemplateSpan } from 'typescript';
 /** Dropdown menu 
  */
 
@@ -43,13 +42,42 @@ function DropMenu({ list, updateState, selected, submit }: DropMenuProp) {
 
   const selectedIds = selected.map(item => item.id)
 
-  const searchQuery = list.reduce<ITech[]>((items, item) => {
-    const isTechAvailable = item.tech.toLowerCase().includes(searchText.toLowerCase())
-    if (isTechAvailable) items.push(item)
-    if (items.length < 1 && !isTechAvailable) items.push({ id: undefined, tech: '+ create....' });
-    return items
-  }, [])
+  /** creates dynamic react element */
+  const dropdownElement = (item: ITech) => {
+    item = item.id ? item : { ...item, tech: searchText }
+    return item.id
+      ?
+      <Dropdown.Item
+        disabled={selectedIds.includes(item.id)}
+        onClick={() => updateState(item)}
+        data-bs-theme="dark"
+        key={item.id}>
+        {item.tech}
+      </Dropdown.Item>
+      :
+      <Dropdown.Item
+        disabled={selectedIds.includes(item.id)}
+        onClick={() => updateState(item)}
+        data-bs-theme="dark"
+        key={0}>
+        + create....
+      </Dropdown.Item>
+  }
 
+  /**Filters list of available tech in dropdown */
+  const searchQuery = list.reduce<any[]>((items, item) => {
+    const isTechAvailable = item.tech.toLowerCase().includes(searchText.toLowerCase());
+    if (isTechAvailable) {
+      items.push(dropdownElement(item));
+    }
+    return items;
+  }, []);
+
+  if (searchQuery.length === 0 && searchText.trim() !== "") {
+    searchQuery.push(dropdownElement({ id: undefined, tech: '+ create....' }));
+  }
+
+  console.log('>>>>', searchQuery)
   return (
     <>
       <DropdownButton
@@ -65,7 +93,8 @@ function DropMenu({ list, updateState, selected, submit }: DropMenuProp) {
           <Form.Control onChange={handleChange} type="tech" placeholder="search..." />
         </Form.Group>
         {searchQuery.map((item) =>
-          <Dropdown.Item disabled={selectedIds.includes(item.id)} onClick={() => updateState(item)} data-bs-theme="dark" key={item.id || 0}>{item.tech}</Dropdown.Item>
+          item
+          // <Dropdown.Item disabled={selectedIds.includes(item.id)} onClick={() => updateState(item)} data-bs-theme="dark" key={item.id || 0}>{item.tech}</Dropdown.Item>
         )}
       </DropdownButton>
     </>
