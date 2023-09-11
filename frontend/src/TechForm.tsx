@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import DropMenu from "./DropMenu";
-import { techGet } from './api';
+import { techGet, infoPost } from './api';
 import { ITech } from "./interface";
 import Form from 'react-bootstrap/Form';
 
@@ -28,25 +28,25 @@ function TechForm({ projectTech }: TechFormProp) {
 
   /** Updates selection of technologies  */
   function updateSelected(newTech: ITech) {
-    console.log('tech in tech', newTech)
     setSelected(tech => [...tech, newTech])
-    setTechnologies(selected => [...selected, newTech]);
+    // const placeHolderTech = { ...newTech, id: 0 };
+    setTechnologies(tech => [...tech, newTech])
   }
 
   /**Submits tech data */
-  function submitData() {
-    // setSelected([])
+  async function submitData() {
+    // await infoPost()
     console.log("data submitted")
   }
 
 
-  useEffect(()=>setSelected(projectTech),[projectTech])
+  useEffect(() => setSelected(projectTech), [projectTech])
 
   return (
     <>
-    <Form>
-      <DropMenu submit={submitData} selected={selected} updateState={updateSelected} list={technologies} />
-    </Form>
+      <Form>
+        <DropMenu submit={submitData} selected={selected} updateState={updateSelected} list={technologies} />
+      </Form>
     </>
   )
 }

@@ -45,7 +45,7 @@ function DropMenu({ list, updateState, selected, submit }: DropMenuProp) {
   /** creates dynamic react element */
   const dropdownElement = (item: ITech) => {
     item = item.id ? item : { ...item, tech: searchText }
-    return item.id
+    return item.id !== undefined
       ?
       <Dropdown.Item
         disabled={selectedIds.includes(item.id)}

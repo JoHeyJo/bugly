@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import InfoInput from "./InfoInput";
-import { postInfo } from "./api";
+import { infoPost } from "./api";
 import Form from 'react-bootstrap/Form';
 import { errorHandling } from "./utils/errorHandling";
 import { Button } from "react-bootstrap";
@@ -52,7 +52,7 @@ function InfoForm({ handleClose }: InfoFormProp) {
   async function submitDetails(e: any) {
     e.preventDefault()
     try {
-      await postInfo(projectId, {"details":details})
+      await infoPost(projectId, {"details":details})
     } catch (error: any) {
       errorHandling('submitDetails in InfoForm', error)
     }
