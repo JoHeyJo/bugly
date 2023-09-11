@@ -41,10 +41,11 @@ function DropMenu({ list, updateState, selected, submit }: DropMenuProp) {
   }
 
   const selectedIds = selected.map(item => item.id)
-
+console.log('selectedIds', selectedIds)
   /** creates dynamic react element */
   const dropdownElement = (item: ITech) => {
     item = item.id ? item : { ...item, tech: searchText }
+    console.log('item',item,item.id)
     return item.id !== undefined
       ?
       <Dropdown.Item
@@ -66,7 +67,7 @@ function DropMenu({ list, updateState, selected, submit }: DropMenuProp) {
         }}
         data-bs-theme="dark"
         key={0}>
-        + create....
+        { item.id === 0 ? item.tech : "+ create...."}
       </Dropdown.Item>
   }
 

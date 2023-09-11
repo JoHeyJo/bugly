@@ -28,9 +28,9 @@ function TechForm({ projectTech }: TechFormProp) {
 
   /** Updates selection of technologies  */
   function updateSelected(newTech: ITech) {
-    setSelected(tech => [...tech, newTech])
-    // const placeHolderTech = { ...newTech, id: 0 };
-    setTechnologies(tech => [...tech, newTech])
+    const placeHolderTech = { ...newTech, id: 0 };
+    setSelected(tech => [...tech, placeHolderTech])
+    setTechnologies(tech => [...tech, placeHolderTech])
   }
 
   /**Submits tech data */
