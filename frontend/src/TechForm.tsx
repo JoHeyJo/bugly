@@ -28,7 +28,9 @@ function TechForm({ projectTech }: TechFormProp) {
 
   /** Updates selection of technologies  */
   function updateSelected(newTech: ITech) {
+    console.log('tech in tech', newTech)
     setSelected(tech => [...tech, newTech])
+    setTechnologies(selected => [...selected, newTech]);
   }
 
   /**Submits tech data */
@@ -36,6 +38,7 @@ function TechForm({ projectTech }: TechFormProp) {
     // setSelected([])
     console.log("data submitted")
   }
+
 
   useEffect(()=>setSelected(projectTech),[projectTech])
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -49,7 +49,10 @@ function DropMenu({ list, updateState, selected, submit }: DropMenuProp) {
       ?
       <Dropdown.Item
         disabled={selectedIds.includes(item.id)}
-        onClick={() => updateState(item)}
+        onClick={() => {
+          updateState(item);
+          setSearchText('');
+        }}
         data-bs-theme="dark"
         key={item.id}>
         {item.tech}
@@ -57,7 +60,10 @@ function DropMenu({ list, updateState, selected, submit }: DropMenuProp) {
       :
       <Dropdown.Item
         disabled={selectedIds.includes(item.id)}
-        onClick={() => updateState(item)}
+        onClick={() => {
+          updateState(item);
+          setSearchText('');
+        }}
         data-bs-theme="dark"
         key={0}>
         + create....
@@ -73,7 +79,7 @@ function DropMenu({ list, updateState, selected, submit }: DropMenuProp) {
     return items;
   }, [])
 
-  console.log('>>>>', searchQuery)
+  // useEffect(()=>{},[selected])
   return (
     <>
       <DropdownButton
@@ -86,7 +92,7 @@ function DropMenu({ list, updateState, selected, submit }: DropMenuProp) {
         variant="outline-dark"
         title={<FontAwesomeIcon icon={faPlus} />}>
         <Form.Group className="mb" controlId="exampleForm.ControlInput1">
-          <Form.Control onChange={handleChange} type="tech" placeholder="search..." />
+          <Form.Control value={searchText} onChange={handleChange} type="tech" placeholder="search..." />
         </Form.Group>
         {
         (searchQuery.length < 1)
