@@ -12,9 +12,9 @@ type TechListProp = {
 function TechList({ tech }: TechListProp) {
   return (
     <>
-      <ul>
+      <ul className="d-flex">
         {tech.map((t, idx) =>
-          <li key={idx}>{t.tech}</li>
+          <li className="px-3" key={idx}>{t.tech}</li>
         )}
       </ul>
     </>

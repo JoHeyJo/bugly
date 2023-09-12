@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import DropMenu from "./DropMenu";
 import { techGet, infoPost } from './api';
 import { ITech } from "./interface";
 import Form from 'react-bootstrap/Form';
+import { ProjectContext } from "./userContext";
 
 type TechFormProp = {
   projectTech: ITech[];
@@ -17,6 +18,8 @@ function TechForm({ projectTech }: TechFormProp) {
   const [technologies, setTechnologies] = useState<ITech[]>([{ tech: '', id: 0 }]);
   const [selected, setSelected] = useState<ITech[]>([]);
 
+  const { projectId } = useContext(ProjectContext);
+
   /** fetches all technologies */
   useEffect(() => {
     async function fetchTech() {
@@ -26,16 +29,21 @@ function TechForm({ projectTech }: TechFormProp) {
     fetchTech()
   }, [])
 
-  /** Updates selection of technologies  */
+  /** Updates state with placeholder so that newly created techs can be shown in UI w/o needless server request.  */
   function updateSelected(newTech: ITech) {
-    const placeHolderTech = { ...newTech, id: 0 };
-    setSelected(tech => [...tech, placeHolderTech])
-    setTechnologies(tech => [...tech, placeHolderTech])
+    let tempTech = newTech;
+    if (newTech.id === undefined) tempTech = { ...newTech, id: 0 };
+    /* tech ID placeholder id if it doesn't exists so that it can properly be rendered in dropdown. 
+    techId=0 - allows tech name it be rendered
+    itechId=undefined - means it's newly created and 'create...' will render instead of the tech name.
+    */
+    setSelected(tech => [...tech, tempTech])
+    setTechnologies(tech => [...tech, tempTech])
   }
 
   /**Submits tech data */
   async function submitData() {
-    // await infoPost()
+    await infoPost(projectId, { "tech": selected })
     console.log("data submitted")
   }
 
