@@ -1,19 +1,24 @@
 import React from "react";
-import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownButton from 'react-bootstrap/DropdownButton';
+import { ITech } from './interface'
+
+type TechListProp = {
+  tech: ITech[];
+}
 
 /** Renders list of tech
  * 
- * 
+ * RenderInfo -> TechList
  */
-function TechList() {
+function TechList({ tech }: TechListProp) {
   return (
-    <DropdownButton id="dropdown-item-button" title="Dropdown button">
-      <Dropdown.ItemText>Dropdown item text</Dropdown.ItemText>
-      <Dropdown.Item as="button">Action</Dropdown.Item>
-      <Dropdown.Item as="button">Another action</Dropdown.Item>
-      <Dropdown.Item as="button">Something else</Dropdown.Item>
-    </DropdownButton>
+    <>
+      <ul className="d-flex">
+        {tech.map((t, idx) =>
+          <li className="px-3" key={idx}>{t.tech}</li>
+        )}
+      </ul>
+    </>
+
   );
 }
 

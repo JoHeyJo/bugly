@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { UserContext } from "./userContext";
-import DropDown from "./DropDown";
+import DropDown from "./LoginOut";
 import { useLocation } from 'react-router-dom';
 
 type NavBarProp = {

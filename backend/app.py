@@ -508,8 +508,20 @@ def projects_delete(project_id):
 def get_info(project_id):
     """Gets information of post: info:{tech,details}"""
     info = tech_and_detail(db, project_id)
+    print('info in app', info)
     return info
 
+@app.get("/tech")
+def get_get():
+    """Returns all tech in database"""
+    try:
+        tech = Tech.query.all()
+        serialized = [Tech.serialize(t) for t in tech]
+        return jsonify(serialized)
+    except Exception as e:
+        print('post_info error =>', e)
+        return jsonify({"error": f"{str(e)}"})
+    
 @app.post("/info/<project_id>")
 @jwt_required()
 def post_info(project_id):
@@ -521,7 +533,6 @@ def post_info(project_id):
 
     if email != jwt_identity:
         return jsonify({"error": "Unauthorized access"}), 401
-    print('*********',request.json)
     try:
         details = request.json.get("details", None)
         if details is not None:
@@ -529,13 +540,19 @@ def post_info(project_id):
                 new_detail = Detail(detail=detail,project_id=project_id)
                 db.session.add(new_detail)
 
-        tech = request.json.get("tech", None)
-        if tech is not None:
-            new_tech = Tech(tech=tech)
-        
-            project = Project.query.get_or_404(project_id)
-            project.technologies.append(new_tech)
-            db.session.add(new_tech)
+        technologies = request.json.get("tech", None)
+        if technologies is not None:
+            for tech_data in technologies:
+                project = Project.query.get_or_404(project_id)
+                if tech_data["id"] == 0:
+                    new_tech = Tech(tech=tech_data["tech"])
+                    project.technologies.append(new_tech)
+                    db.session.add(new_tech)
+                else:
+                    tech = Tech.query.get_or_404(tech_data["id"])
+                    is_tech_referenced = ProjectTech.query.filter_by(tech_id=tech_data["id"], project_id=project_id).first() is not None
+                    if is_tech_referenced == False:
+                        project.technologies.append(tech)
 
         db.session.commit()
 
@@ -545,7 +562,16 @@ def post_info(project_id):
     except Exception as e:
         print('post_info error =>', e)
         return jsonify({"error": f"{str(e)}"})
-
+    
+# @app.post("/tech/<project_id>")
+# def post_tech(project_id):
+#     """Adds tech to corresponding project"""
+#     try:
+#         tech = request.get
+#     except Exception as e:
+#         print('post_tech error =>', e)
+#         return jsonify({"error": f"{str(e)}"})
+    
 @app.patch("/details/<int:detail_id>")
 @jwt_required()
 def update_info(detail_id):

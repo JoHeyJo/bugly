@@ -1,4 +1,21 @@
 #RenderInfo-add {
   display: flex;
-  justify-content: space-between;
+}
+
+.RenderInfo-sections {
+
+  border-bottom: 3px solid rgba(84, 84, 84, .5);
+  width: 33%;
+}
+
+.RenderInfo-sections:hover{
+  border-bottom: 5px hidden rgba(84, 84, 84, .5);
+}
+
+.RenderInfo-buttons {
+  all: unset;
+}
+
+.active {
+  border-bottom: none;
 }
