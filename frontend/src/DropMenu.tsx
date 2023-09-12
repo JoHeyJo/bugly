@@ -41,11 +41,9 @@ function DropMenu({ list, updateState, selected, submit }: DropMenuProp) {
   }
 
   const selectedIds = selected.map(item => item.id)
-console.log('selectedIds', selectedIds)
   /** creates dynamic react element */
   const dropdownElement = (item: ITech) => {
-    item = item.id ? item : { ...item, tech: searchText }
-    console.log('item',item,item.id)
+    item = item.id !== undefined ? item : { ...item, tech: searchText }
     return item.id !== undefined
       ?
       <Dropdown.Item
@@ -67,7 +65,7 @@ console.log('selectedIds', selectedIds)
         }}
         data-bs-theme="dark"
         key={0}>
-        { item.id === 0 ? item.tech : "+ create...."}
+        {item.id === 0 ? item.tech : "+ create...."}
       </Dropdown.Item>
   }
 
@@ -80,7 +78,6 @@ console.log('selectedIds', selectedIds)
     return items;
   }, [])
 
-  // useEffect(()=>{},[selected])
   return (
     <>
       <DropdownButton
@@ -96,11 +93,11 @@ console.log('selectedIds', selectedIds)
           <Form.Control value={searchText} onChange={handleChange} type="tech" placeholder="search..." />
         </Form.Group>
         {
-        (searchQuery.length < 1)
-          ?
-          dropdownElement({ id: undefined, tech: '+ create....' })
-          :
-          searchQuery.map((item) => item)
+          (searchQuery.length < 1)
+            ?
+            dropdownElement({ id: undefined, tech: '+ create....' })
+            :
+            searchQuery.map((item) => item)
         }
       </DropdownButton>
     </>
