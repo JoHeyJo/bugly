@@ -533,7 +533,6 @@ def post_info(project_id):
 
     if email != jwt_identity:
         return jsonify({"error": "Unauthorized access"}), 401
-    print('*********',request.json)
     try:
         details = request.json.get("details", None)
         if details is not None:
@@ -541,13 +540,22 @@ def post_info(project_id):
                 new_detail = Detail(detail=detail,project_id=project_id)
                 db.session.add(new_detail)
 
-        tech = request.json.get("tech", None)
-        if tech is not None:
-            new_tech = Tech(tech=tech)
-        
-            project = Project.query.get_or_404(project_id)
-            project.technologies.append(new_tech)
-            db.session.add(new_tech)
+        technologies = request.json.get("tech", None)
+        if technologies is not None:
+            for tech_data in technologies:
+                project = Project.query.get_or_404(project_id)
+                print('......',tech_data)
+                if tech_data["id"] == 0:
+                    print('*******')
+                    new_tech = Tech(tech=tech_data["tech"])
+                    project.technologies.append(new_tech)
+                    db.session.add(new_tech)
+                else:
+                    print('$$$$$',tech_data["id"])
+                    tech = Tech.query.get_or_404(tech_data["id"])
+                    is_tech_referenced = ProjectTech.query.filter_by(tech_id=tech_data["id"], project_id=project_id).first() is not None
+                    if is_tech_referenced == False:
+                        project.technologies.append(tech)
 
         db.session.commit()
 
