@@ -64,7 +64,8 @@ function RenderInfo(data: InfoProp) {
 
       </span>
       {section.details && <DetailsList list={data.projectData.details} />}
-      {section.tech && <TechList tech={data.projectData.tech} />}
+      {section.tech && <h3>Coming soon...</h3>}
+      {/* {section.tech && <TechList tech={data.projectData.tech} />} */}
       {section.specs && <h3>Coming soon...</h3>}
     </>
   )
