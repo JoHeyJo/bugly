@@ -544,14 +544,11 @@ def post_info(project_id):
         if technologies is not None:
             for tech_data in technologies:
                 project = Project.query.get_or_404(project_id)
-                print('......',tech_data)
                 if tech_data["id"] == 0:
-                    print('*******')
                     new_tech = Tech(tech=tech_data["tech"])
                     project.technologies.append(new_tech)
                     db.session.add(new_tech)
                 else:
-                    print('$$$$$',tech_data["id"])
                     tech = Tech.query.get_or_404(tech_data["id"])
                     is_tech_referenced = ProjectTech.query.filter_by(tech_id=tech_data["id"], project_id=project_id).first() is not None
                     if is_tech_referenced == False:
