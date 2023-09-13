@@ -42,18 +42,18 @@ function TechForm({ projectTech }: TechFormProp) {
   function updateSelected(newTech: ITech) {
     let tempTech = newTech;
     if (newTech.id === undefined) tempTech = { ...newTech, id: 0 };
+    if (newTech.id === undefined) setTechnologies(tech => [...tech, tempTech])
     /* tech ID placeholder id if it doesn't exists so that it can properly be rendered in dropdown. 
     techId=0 - allows tech name it be rendered
     itechId=undefined - means it's newly created and 'create...' will render instead of the tech name.
     */
     setSelected(tech => [...tech, tempTech])
-    setTechnologies(tech => [...tech, tempTech])
   }
 
   /**Submits tech data */
   async function submitData() {
     // await infoPost(projectId, { "tech": selected })
-    console.log("data submitted")
+    console.log("data submitted", { "tech": selected })
   }
 
 

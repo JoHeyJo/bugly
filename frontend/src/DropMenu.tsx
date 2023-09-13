@@ -42,10 +42,12 @@ function DropMenu({ list, updateState, selected, submit }: DropMenuProp) {
 
   /** allows Dropdown button to serve a dual purpose by submitting data only when dropdown is open */
   function submitIfOpen() {
+    console.log('firing button')
     if (isOpen) submit();
   }
 
   const selectedIds = selected.map(item => item.id)
+
   /** creates dynamic react element */
   const dropdownElement = (item: ITech) => {
     item = item.id !== undefined ? item : { ...item, tech: searchText }
@@ -53,9 +55,10 @@ function DropMenu({ list, updateState, selected, submit }: DropMenuProp) {
       ?
       <Dropdown.Item
         disabled={selectedIds.includes(item.id)}
-        onClick={() => {
+        onClick={(e) => {
           updateState(item);
           setSearchText('');
+          e.stopPropagation();
         }}
         data-bs-theme="dark"
         key={item.id}>
@@ -64,9 +67,10 @@ function DropMenu({ list, updateState, selected, submit }: DropMenuProp) {
       :
       <Dropdown.Item
         disabled={selectedIds.includes(item.id)}
-        onClick={() => {
+        onClick={(e) => {
           updateState(item);
           setSearchText('');
+          e.stopPropagation();
         }}
         data-bs-theme="dark"
         key={0}>
@@ -85,20 +89,19 @@ function DropMenu({ list, updateState, selected, submit }: DropMenuProp) {
 
   return (
     <>
+      {/* <div style={{position:"relative", zIndex:"1"}}>
       <DropdownButton
+        style={{ position: "relative", zIndex: "1" }}
+        disabled={isOpen}
         onToggle={handleDropdownToggle}
         show={isOpen}
-        onClick={submitIfOpen}
-        autoClose="outside"
-        className="custom-dropdown"
+        autoClose="inside"
+        className="custom-dropdown py-1"
         id="dropdown-basic-button"
         variant="outline-dark"
-        title={isOpen
-          ?
-          <SubmitButton userEmail={user?.email} handleClose={() => { }} variant={"warning"} action={"addTech"} />
-          :
-          <FontAwesomeIcon icon={faPlus} />
-        }>
+        // title={<FontAwesomeIcon icon={faPlus} />}>
+        // title={isOpen ? <SubmitButton userEmail={user?.email} handleClose={submitIfOpen} variant={"warning"} action={"addTech"} /> : <FontAwesomeIcon icon={faPlus} />}>
+          title={isOpen ? <div style={{ position: "relative", zIndex: "9999" }}><SubmitButton userEmail={user?.email} handleClose={submitIfOpen} variant={"warning"} action={"addTech"} /> </div> : <FontAwesomeIcon icon={faPlus} />}>
         <Form.Group className="mb" controlId="exampleForm.ControlInput1">
           <Form.Control value={searchText} onChange={handleChange} type="tech" placeholder="search..." />
         </Form.Group>
@@ -110,6 +113,35 @@ function DropMenu({ list, updateState, selected, submit }: DropMenuProp) {
             searchQuery.map((item) => item)
         }
       </DropdownButton>
+      </div> */}
+      <Dropdown autoClose={false} onToggle={handleDropdownToggle}>
+        {isOpen
+          ?
+          // <Dropdown.Toggle className="custom-dropdown">
+            <SubmitButton userEmail={user?.email} handleClose={submitIfOpen} variant={"warning"} action={"addTech"} />
+          // </Dropdown.Toggle>
+          :
+          <Dropdown.Toggle className="custom-dropdown" variant="outline-dark">
+            <FontAwesomeIcon icon={faPlus} />
+          </Dropdown.Toggle>
+        }
+        {/* <Dropdown.Toggle className="custom-dropdown"> */}
+          <SubmitButton userEmail={user?.email} handleClose={submitIfOpen} variant={"warning"} action={"addTech"} />
+        {/* </Dropdown.Toggle> */}
+        
+        <Dropdown.Menu variant="outline-dark">
+          <Form.Group className="mb">
+            <Form.Control value={searchText} onChange={handleChange} type="tech" placeholder="search..." />
+          </Form.Group>
+          {
+            (searchQuery.length < 1)
+              ?
+              dropdownElement({ id: undefined, tech: '+ create....' })
+              :
+              searchQuery.map((item) => item)
+          }
+        </Dropdown.Menu>
+      </Dropdown>{' '}
     </>
   );
 }
