@@ -46,9 +46,16 @@ export const actionProperties: actionProperties = {
   },
   addDetails: {
     label: 'Add details',
-    class:"",
+    class: "",
     variant: "outline-warning",
-    style:"",
-    message:"You need to be logged in to add details"
+    style: "",
+    message: "You need to be logged in to add details"
+  },
+  addTech: {
+    label: "add",
+    class: "my-0 mx-0 py-0 px-0",
+    variant: "outline-warning",
+    style: "",
+    message: "You need to be logged in to add tech"
   }
 }

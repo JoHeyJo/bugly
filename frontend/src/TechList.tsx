@@ -1,5 +1,6 @@
 import React from "react";
 import { ITech } from './interface'
+import './style/TechList.css';
 
 type TechListProp = {
   tech: ITech[];
@@ -12,7 +13,7 @@ type TechListProp = {
 function TechList({ tech }: TechListProp) {
   return (
     <>
-      <ul className="d-flex">
+      <ul id="TechList-list" className="d-flex">
         {tech.map((t, idx) =>
           <li className="px-3" key={idx}>{t.tech}</li>
         )}

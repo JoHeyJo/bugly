@@ -9,8 +9,17 @@ type TechFormProp = {
   projectTech: ITech[];
 }
 
-/** Renders pre-populated list of technologies in a dropdown with an option
- * to create additional "tech" options.
+/** Processes data for dropdown and holds state for technologies available and technologies
+ * selected. Data processed => {tech:[{},{},{}...]}
+ * 
+ * Props:
+ * - projectTech => array of Tech objects
+ * 
+ * State:
+ * - technologies - existing choices of tech
+ * - selected - tech that has been assigned to corresponding project.
+ *   Includes previously assigned and currently assigned tech which is reflected in dropdown by being disabled from selection.
+ * 
  * RendererInfo -> TechForm
   */
 
@@ -43,7 +52,7 @@ function TechForm({ projectTech }: TechFormProp) {
 
   /**Submits tech data */
   async function submitData() {
-    await infoPost(projectId, { "tech": selected })
+    // await infoPost(projectId, { "tech": selected })
     console.log("data submitted")
   }
 

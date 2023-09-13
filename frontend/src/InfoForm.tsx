@@ -40,7 +40,7 @@ function InfoForm({ handleClose }: InfoFormProp) {
   /** Adjusts submit button label if post exists. Disables button and renders
  *  overlay if there is no logged in user  */
   function renderSubmitButton() {
-    return <div className="">
+    return <div>
       {user?.email === 'jpf0628@gmail.com'
         ? <Button type="submit" variant="primary" onClick={handleClose}>Submit</Button>
         : <AlertBubble action={"addDetails"} />

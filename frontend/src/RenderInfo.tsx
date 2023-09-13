@@ -58,14 +58,14 @@ function RenderInfo(data: InfoProp) {
             onClick={selectSection} className="RenderInfo-buttons">Specs
           </button>
         </h3>
-        {section.details && <PopOut id={projectId} action={"new info"} getProject={() => { }} postId={undefined} />}
-        {section.tech && <TechForm projectTech={data.projectData.tech}/>}
-        {section.specs && <PopOut id={projectId} action={"new specs"} getProject={() => { }} postId={undefined} />}
-
+        <span style={{width: "10%"}}>
+          {section.details && <PopOut id={projectId} action={"new info"} getProject={() => { }} postId={undefined} />}
+          {section.tech && <TechForm projectTech={data.projectData.tech} />}
+          {section.specs && <PopOut id={projectId} action={"new specs"} getProject={() => { }} postId={undefined} />}
+        </span>
       </span>
       {section.details && <DetailsList list={data.projectData.details} />}
-      {section.tech && <h3>Coming soon...</h3>}
-      {/* {section.tech && <TechList tech={data.projectData.tech} />} */}
+      {section.tech && <TechList tech={data.projectData.tech} />}
       {section.specs && <h3>Coming soon...</h3>}
     </>
   )

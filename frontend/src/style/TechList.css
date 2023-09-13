@@ -1,0 +1,8 @@
+#TechList-list{
+  flex-wrap: wrap;
+}
+
+li {
+  list-style: none;
+  padding-top: .5rem;
+}

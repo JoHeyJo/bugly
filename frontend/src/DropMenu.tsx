@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState, useContext } from 'react'
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import './style/DropMenu.css'
 import { ITech } from './interface';
 import Form from 'react-bootstrap/Form';
-/** Dropdown menu 
- */
+import SubmitButton from './utils/SubmitButton';
+import { UserContext } from './userContext';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 type DropMenuProp = {
   list: ITech[];
@@ -17,10 +17,15 @@ type DropMenuProp = {
 }
 
 
-
+/** Dropdown menu renders list of available technoloties to choose from with 
+ * the option to create new ones.
+ * InfoForm -> DropMenu
+*/
 function DropMenu({ list, updateState, selected, submit }: DropMenuProp) {
   const [searchText, setSearchText] = useState<string>("");
   const [isOpen, setIsOpen] = useState(false);
+
+  const { user } = useContext(UserContext);
 
   /** updates searchText state */
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -85,10 +90,15 @@ function DropMenu({ list, updateState, selected, submit }: DropMenuProp) {
         show={isOpen}
         onClick={submitIfOpen}
         autoClose="outside"
-        className="custom-dropdown py-1"
+        className="custom-dropdown"
         id="dropdown-basic-button"
         variant="outline-dark"
-        title={<FontAwesomeIcon icon={faPlus} />}>
+        title={isOpen
+          ?
+          <SubmitButton userEmail={user?.email} handleClose={() => { }} variant={"warning"} action={"addTech"} />
+          :
+          <FontAwesomeIcon icon={faPlus} />
+        }>
         <Form.Group className="mb" controlId="exampleForm.ControlInput1">
           <Form.Control value={searchText} onChange={handleChange} type="tech" placeholder="search..." />
         </Form.Group>

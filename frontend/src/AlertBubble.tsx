@@ -11,19 +11,23 @@ type AlertBubbleProp = {
 
 
 
-function AlertBubble({action, icon}: AlertBubbleProp) {
+function AlertBubble({ action, icon }: AlertBubbleProp) {
   const [show, setShow] = useState(false);
   const target = useRef(null);
 
-  if(show){
-    setTimeout(()=>
-      setShow(false),1500
+  if (show) {
+    setTimeout(() =>
+      setShow(false), 1500
     )
   }
 
   return (
     <>
-      <Button className={actionProperties[action].class} variant={actionProperties[action].variant} ref={target} onClick={() => setShow(!show)}>
+      <Button
+        className={actionProperties[action].class}
+        variant={actionProperties[action].variant}
+        ref={target}
+        onClick={() => setShow(!show)}>
         {actionProperties[action].label}
       </Button>
       <Overlay target={target.current} show={show} placement="right">
