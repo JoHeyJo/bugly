@@ -19,3 +19,16 @@
   background-color: #AC8307;
   /* Dark color for the dropdown menu */
 }
+
+.dropdown-toggle.active {
+  background-color: none;
+  color: none;
+}
+
+/* button.btn.btn-primary {
+  background-color: none;
+} */
+
+/* .none {
+  background-color: transparent;
+} */

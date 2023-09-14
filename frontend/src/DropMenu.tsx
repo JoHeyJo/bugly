@@ -8,6 +8,7 @@ import SubmitButton from './utils/SubmitButton';
 import { UserContext } from './userContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import AlertBubble from "./AlertBubble";
 
 type DropMenuProp = {
   list: ITech[];
@@ -89,47 +90,16 @@ function DropMenu({ list, updateState, selected, submit }: DropMenuProp) {
 
   return (
     <>
-      {/* <div style={{position:"relative", zIndex:"1"}}>
-      <DropdownButton
-        style={{ position: "relative", zIndex: "1" }}
-        disabled={isOpen}
-        onToggle={handleDropdownToggle}
-        show={isOpen}
-        autoClose="inside"
-        className="custom-dropdown py-1"
-        id="dropdown-basic-button"
-        variant="outline-dark"
-        // title={<FontAwesomeIcon icon={faPlus} />}>
-        // title={isOpen ? <SubmitButton userEmail={user?.email} handleClose={submitIfOpen} variant={"warning"} action={"addTech"} /> : <FontAwesomeIcon icon={faPlus} />}>
-          title={isOpen ? <div style={{ position: "relative", zIndex: "9999" }}><SubmitButton userEmail={user?.email} handleClose={submitIfOpen} variant={"warning"} action={"addTech"} /> </div> : <FontAwesomeIcon icon={faPlus} />}>
-        <Form.Group className="mb" controlId="exampleForm.ControlInput1">
-          <Form.Control value={searchText} onChange={handleChange} type="tech" placeholder="search..." />
-        </Form.Group>
-        {
-          (searchQuery.length < 1)
-            ?
-            dropdownElement({ id: undefined, tech: '+ create....' })
-            :
-            searchQuery.map((item) => item)
-        }
-      </DropdownButton>
-      </div> */}
-      <Dropdown autoClose={false} onToggle={handleDropdownToggle}>
+      <Dropdown data-bs-theme="dark" autoClose="outside" onToggle={handleDropdownToggle}>
         {isOpen
           ?
-          // <Dropdown.Toggle className="custom-dropdown">
-            <SubmitButton userEmail={user?.email} handleClose={submitIfOpen} variant={"warning"} action={"addTech"} />
-          // </Dropdown.Toggle>
+          <SubmitButton userEmail={user?.email} handleClose={submitIfOpen} variant={"none"} action={"addTech"} />
           :
-          <Dropdown.Toggle className="custom-dropdown" variant="outline-dark">
+          <Dropdown.Toggle variant='none'>
             <FontAwesomeIcon icon={faPlus} />
           </Dropdown.Toggle>
         }
-        {/* <Dropdown.Toggle className="custom-dropdown"> */}
-          <SubmitButton userEmail={user?.email} handleClose={submitIfOpen} variant={"warning"} action={"addTech"} />
-        {/* </Dropdown.Toggle> */}
-        
-        <Dropdown.Menu variant="outline-dark">
+        <Dropdown.Menu variant="outline-dark px-1">
           <Form.Group className="mb">
             <Form.Control value={searchText} onChange={handleChange} type="tech" placeholder="search..." />
           </Form.Group>
@@ -141,7 +111,7 @@ function DropMenu({ list, updateState, selected, submit }: DropMenuProp) {
               searchQuery.map((item) => item)
           }
         </Dropdown.Menu>
-      </Dropdown>{' '}
+      </Dropdown>
     </>
   );
 }

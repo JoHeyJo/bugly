@@ -54,7 +54,7 @@ export const actionProperties: actionProperties = {
   addTech: {
     label: "add",
     class: "my-0 mx-0 py-0 px-0",
-    variant: "outline-warning",
+    variant: "none",
     style: "",
     message: "You need to be logged in to add tech"
   }
