@@ -16,7 +16,7 @@ function TechList({ tech }: TechListProp) {
     <>
       <ul id="TechList-list" className="d-flex">
         {tech.map((t, idx) =>
-          <li className="px-3" key={idx}><PillButton label={t.tech}/></li>
+          <li className="px-3" key={idx}><PillButton label={t.tech} id={t.id}/></li>
         )}
       </ul>
     </>
