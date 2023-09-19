@@ -620,11 +620,36 @@ def update_tech(project_id, tech_id):
     except Exception as e:
         print('update_tech error =>', e)
         return jsonify({"error": f"{str(e)}"})
+    
+@app.delete("/tech/<tech_id>")
+@jwt_required()
+def delete_tech(tech_id):
+    """Deletes tech"""
+
+    tech = Tech.query.get_or_404(tech_id)
+    user_id = tech.projects[0].user_id
+    email = User.query.get_or_404(user_id).email
+    jwt_identity = get_jwt_identity()
+
+    if email != jwt_identity:
+        return jsonify({"error": "Unauthorized access"}), 401
+
+    tech_references = ProjectTech.query.filter_by(tech_id=tech_id).all()
+    if len(tech_references) > 1:
+        return jsonify({"error":"Cannot delete tech associated to other projects"}),422
+    try:
+        db.session.delete(tech)
+        db.session.commit()
+        return jsonify({'message': "Tech deleted"})
+    except Exception as e:
+        print('delete_tech error =>', e)
+        return jsonify({"error": f"{str(e)}"})
+
 
 @app.delete("/info/<project_id>/tech/<tech_id>")
 @jwt_required()
-def delete_tech(project_id, tech_id):
-    """Delete tech"""
+def delete_tech_project(project_id, tech_id):
+    """Dissociates tech from project"""
 
     jwt_identity = get_jwt_identity()
 
@@ -642,11 +667,11 @@ def delete_tech(project_id, tech_id):
         for record in project_tech_associations:
             db.session.delete(record)
             db.session.commit()  
-        db.session.delete(tech)
+        # db.session.delete(tech) only delete references not actual tech from db
         db.session.commit()
-        return jsonify({'message':'Tech deleted'})
+        return jsonify({'message':'Association deleted'})
     except Exception as e:
-        print('delete_tech error =>', e)
+        print('delete_tech_project error =>', e)
         return jsonify({"error": f"{str(e)}"})
 
 @app.delete("/details/<int:detail_id>")
