@@ -636,7 +636,8 @@ def delete_tech(tech_id):
 
     tech_references = ProjectTech.query.filter_by(tech_id=tech_id).all()
     if len(tech_references) > 1:
-        return jsonify({"error":"Cannot delete tech associated to other projects"}),422
+        return jsonify({"error":"Cannot delete tech while associated to more than one project."}),422
+    
     try:
         db.session.delete(tech)
         db.session.commit()
