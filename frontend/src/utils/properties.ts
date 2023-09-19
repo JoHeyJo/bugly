@@ -1,6 +1,6 @@
 type actionProperties = {
   [key: string]: {
-    label: string;
+    label: string | undefined;
     class: string;
     variant: string;
     style: string;
@@ -57,5 +57,12 @@ export const actionProperties: actionProperties = {
     variant: "none",
     style: "",
     message: "You need to be logged in to add tech"
+  },
+  deleteTech: {
+    label: undefined,
+    class: "my-0 mx-0 py-0 px-0",
+    variant: "none",
+    style: "",
+    message: "log in to delete tech"
   }
 }

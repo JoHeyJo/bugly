@@ -374,11 +374,24 @@ async function techUpdate(projectId: number, techId: number, techData: string) {
   }
 }
 
-/** Delete tech */
-async function techDelete(projectId: number, techId: number) {
+/**Dissociates tech from project  */
+async function techProjectDelete(projectId: number, techId: number) {
   const headers = { Authorization: `Bearer ${BuglyApi.token}` }
   try {
     const res = await axios.delete(`${BASE_URL}/info/${projectId}/tech/${techId}`, { headers })
+    return res
+  } catch (error: any) {
+    errorHandling('techProjectDelete', error)
+    throw error.response.data
+  }
+}
+
+/*Deletes tech */
+async function techDelete(techId: number | undefined) {
+  const headers = { Authorization: `Bearer ${BuglyApi.token}` }
+  try {
+    const res = await axios.delete(`${BASE_URL}/tech/${techId}`, { headers })
+    console.log('api', res)
     return res
   } catch (error: any) {
     errorHandling('techDelete', error)

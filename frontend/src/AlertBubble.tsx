@@ -28,7 +28,7 @@ function AlertBubble({ action, icon }: AlertBubbleProp) {
         variant={actionProperties[action].variant}
         ref={target}
         onClick={() => setShow(!show)}>
-        {actionProperties[action].label}
+        {actionProperties[action].label ? actionProperties[action].label : icon}
       </Button>
       <Overlay target={target.current} show={show} placement="right">
         {(props) => (

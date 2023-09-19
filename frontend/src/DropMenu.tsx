@@ -11,6 +11,9 @@ import AlertBubble from "./AlertBubble";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button } from 'react-bootstrap';
+import { errorHandling } from './utils/errorHandling';
+import { techDelete } from './api';
+import AlertPopUp from './AlertPopUp';
 
 type DropMenuProp = {
   list: ITech[];
@@ -68,7 +71,16 @@ function DropMenu({ list, updateState, selected, submit }: DropMenuProp) {
           key={item.id}>
           {item.tech}
         </Dropdown.Item>
-        <Button variant='outline-dark'><FontAwesomeIcon icon={faXmark} /></Button>
+        {user?.email === "jpf0628@gmail.com"
+          ?
+          <Button onClick={() => deleteTech(item.id)} variant='outline-dark'>
+            <FontAwesomeIcon icon={faXmark} />
+          </Button>
+          :
+          <Button variant="none">
+            <AlertBubble action={"deleteTech"} icon={<FontAwesomeIcon icon={faXmark} />}/>
+          </Button>
+        }
       </div>
       :
       <Dropdown.Item
@@ -79,7 +91,7 @@ function DropMenu({ list, updateState, selected, submit }: DropMenuProp) {
           e.stopPropagation();
         }}
         data-bs-theme="dark"
-        key={0}>
+        key={list.length}>
         {item.id === 0 ? item.tech : "+ create...."}
       </Dropdown.Item>
   }
@@ -93,18 +105,28 @@ function DropMenu({ list, updateState, selected, submit }: DropMenuProp) {
     return items;
   }, [])
 
+  /**Deletes tech from db so it can no longer be selected */
+  async function deleteTech(techId: number | undefined) {
+    try {
+      await techDelete(techId)
+    } catch (error: any) {
+
+      errorHandling("DropMenu -> deleteTech", error)
+    }
+  }
+
   return (
     <>
       <Dropdown data-bs-theme="dark" autoClose="outside" onToggle={handleDropdownToggle}>
         {isOpen
           ?
-          <SubmitButton userEmail={user?.email} handleClose={submitIfOpen} variant={"none"} action={"addTech"} />
+          <SubmitButton userEmail={user?.email} handleAction={submitIfOpen} variant={"none"} action={"addTech"} />
           :
           <Dropdown.Toggle variant='none'>
             <FontAwesomeIcon icon={faPlus} />
           </Dropdown.Toggle>
         }
-        <Dropdown.Menu variant="outline-dark px-1">
+        <Dropdown.Menu variant="dark px-1">
           <Form.Group className="mb">
             <Form.Control value={searchText} onChange={handleChange} type="tech" placeholder="search..." />
           </Form.Group>
