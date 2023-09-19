@@ -6,9 +6,11 @@ import { ITech } from './interface';
 import Form from 'react-bootstrap/Form';
 import SubmitButton from './utils/SubmitButton';
 import { UserContext } from './userContext';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import AlertBubble from "./AlertBubble";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Button } from 'react-bootstrap';
 
 type DropMenuProp = {
   list: ITech[];
@@ -54,17 +56,20 @@ function DropMenu({ list, updateState, selected, submit }: DropMenuProp) {
     item = item.id !== undefined ? item : { ...item, tech: searchText }
     return item.id !== undefined
       ?
-      <Dropdown.Item
-        disabled={selectedIds.includes(item.id)}
-        onClick={(e) => {
-          updateState(item);
-          setSearchText('');
-          e.stopPropagation();
-        }}
-        data-bs-theme="dark"
-        key={item.id}>
-        {item.tech}
-      </Dropdown.Item>
+      <div className='d-flex'>
+        <Dropdown.Item
+          disabled={selectedIds.includes(item.id)}
+          onClick={(e) => {
+            updateState(item);
+            setSearchText('');
+            e.stopPropagation();
+          }}
+          data-bs-theme="dark"
+          key={item.id}>
+          {item.tech}
+        </Dropdown.Item>
+        <Button variant='outline-dark'><FontAwesomeIcon icon={faXmark} /></Button>
+      </div>
       :
       <Dropdown.Item
         disabled={selectedIds.includes(item.id)}
