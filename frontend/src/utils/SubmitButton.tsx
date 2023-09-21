@@ -11,17 +11,17 @@ type SubmitButtonProp = {
 
 function SubmitButton({ userEmail, handleAction, variant, action }: SubmitButtonProp) {
   return (
-    <div>
+    <>
       {userEmail === 'jpf0628@gmail.com'
         ?
         <Button type="submit" variant={variant}
           onClick={handleAction}>Submit
         </Button>
         :
-        <Button variant="none" onClick={(e) => e.stopPropagation()} ><AlertBubble action={action} />
+        <Button style={{all:"unset"}} variant="none" onClick={(e) => e.stopPropagation()} ><AlertBubble action={action} />
         </Button>
       }
-    </div>
+    </>
   )
 }
 
