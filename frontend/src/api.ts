@@ -375,7 +375,7 @@ async function techUpdate(projectId: number, techId: number, techData: string) {
 }
 
 /**Dissociates tech from project  */
-async function techProjectDelete(projectId: number, techId: number) {
+async function techProjectDelete(projectId: number | undefined, techId: number) {
   const headers = { Authorization: `Bearer ${BuglyApi.token}` }
   try {
     const res = await axios.delete(`${BASE_URL}/info/${projectId}/tech/${techId}`, { headers })

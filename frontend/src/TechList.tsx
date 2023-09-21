@@ -7,7 +7,7 @@ import { errorHandling } from "./utils/errorHandling";
 
 type TechListProp = {
   tech: ITech[];
-  projectId: number;
+  projectId: number | undefined;
 }
 
 /** Renders list of tech, handles removal of tech.
