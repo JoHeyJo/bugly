@@ -64,5 +64,12 @@ export const actionProperties: actionProperties = {
     variant: "none",
     style: "",
     message: "log in to delete tech"
+  },
+  removeTech:{
+    label: "remove",
+    class: "PillButton",
+    variant: "danger",
+    style: "",
+    message: "log in to remove tech"
   }
 }

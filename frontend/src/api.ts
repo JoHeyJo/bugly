@@ -412,5 +412,5 @@ async function detailDelete(projectId: number, detailId: number) {
 }
 
 
-export { techGet, detailDelete, techDelete, infoPost, techUpdate, detailUpdate, techEdit, detailEdit, infoGet, login, signup, projectDelete, projectPostsGet, projectPostAdd, projectGet, projectsGetAll, userGet, usersGet, userAdd, userUpdate, userDelete, userEdit, postsGetAll, postGet, postAdd, postEdit, postUpdate, postDelete, projectAdd, projectUpdate, projectEdit, projectsGet };
+export { techProjectDelete, techGet, detailDelete, techDelete, infoPost, techUpdate, detailUpdate, techEdit, detailEdit, infoGet, login, signup, projectDelete, projectPostsGet, projectPostAdd, projectGet, projectsGetAll, userGet, usersGet, userAdd, userUpdate, userDelete, userEdit, postsGetAll, postGet, postAdd, postEdit, postUpdate, postDelete, projectAdd, projectUpdate, projectEdit, projectsGet };
 
