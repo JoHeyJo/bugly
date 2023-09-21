@@ -21,17 +21,11 @@ function PillButton({ label, id }: PillButtonProps) {
   const { user } = useContext(UserContext);
 
   function handleClick() {
-    setIsRemoving(true);
+    setIsRemoving(!isRemoving);
+    setTimeout(()=>{
+      setIsRemoving(false)
+    },3000)
   }
-
-  /**Dissociate tech from project  */
-  // function remove() {
-  //   try {
-  //     await techProjectDelete(projectId, techId)
-  //   } catch (error:any) {
-  //     errorHandling("PillButton")
-  //   }
-  // }
 
   return (
     <>
@@ -41,7 +35,7 @@ function PillButton({ label, id }: PillButtonProps) {
           {label}
         </Button>
         :
-        <SubmitButton userEmail={user?.email} handleAction={()=>{}} variant={"danger"} action={"removeTech"} />
+        <SubmitButton userEmail={user?.email} handleAction={handleClick} variant={"danger"} action={"removeTech"} />
       }
     </>
   );
