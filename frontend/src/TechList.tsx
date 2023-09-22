@@ -34,7 +34,7 @@ function TechList({ projectId, tech }: TechListProp) {
 
 useEffect(()=>{
   setTechList(tech);
-},[])
+},[tech])
   return (
     <>
       <ul id="TechList-list" className="d-flex">
