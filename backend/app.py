@@ -662,12 +662,8 @@ def delete_tech_project(project_id, tech_id):
         return jsonify({"error": "Unauthorized access"}), 401
     
     try:
-        tech = Tech.query.get_or_404(tech_id)
-        project_tech_associations= ProjectTech.query.filter(ProjectTech.tech_id == tech_id).all()
-        for record in project_tech_associations:
-            db.session.delete(record)
-            db.session.commit()  
-        # db.session.delete(tech) only delete references not actual tech from db
+        record = ProjectTech.query.filter_by(project_id=project_id,tech_id=tech_id)
+        db.session.delete(record)
         db.session.commit()
         return jsonify({'message':'Association deleted'})
     except Exception as e:
