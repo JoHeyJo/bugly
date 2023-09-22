@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { ITech } from './interface'
 import './style/TechList.css';
 import PillButton from "./components/PIllButton";
@@ -15,30 +15,33 @@ type TechListProp = {
  * RenderInfo -> TechList
  */
 function TechList({ projectId, tech }: TechListProp) {
-  let techList = tech;
+  const [techList , setTechList] = useState<ITech[]>();
+  // let techList = tech;
 
   /**Removes tech from tech list */
   function removeTech(techId:any){
-    techList = tech.filter(t => t.id !== techId)
+    setTechList(tech.filter(t => t.id !== techId))
   }
 
   /**Dissociate tech from project  */
-  async function deleteTechReference(techId: number) {
+  async function deleteTechReference(techId: number | undefined) {
     try {
       await techProjectDelete(projectId, techId)
+      removeTech(techId);
     } catch (error:any) {
       errorHandling("TechList -> deleteTechReference", error)
     }
   }
 
-/** removes tech form list and deletes tech reference to project */
-
+useEffect(()=>{
+  setTechList(tech);
+},[])
   return (
     <>
       <ul id="TechList-list" className="d-flex">
-        {techList.map((t, idx) =>
+        {techList?.map((t, idx) =>
         <>
-          <li className="px-3" key={idx}><PillButton label={t.tech} id={t.id}/></li>
+          <li className="px-3" key={idx}><PillButton handleAction={deleteTechReference} label={t.tech} id={t.id}/></li>
         </>
         )}
       </ul>

@@ -11,12 +11,13 @@ import SubmitButton from "../utils/SubmitButton";
 type PillButtonProps = {
   label: string;
   id: number | undefined;
+  handleAction: (techId: number | undefined) => Promise<void>;
 };
 
 /** Not a functioning button. Redesigned UI, delete actions is no longer facilitated through this component. 
  * [TechList] -> PillButton
 */
-function PillButton({ label, id }: PillButtonProps) {
+function PillButton({ label, id, handleAction }: PillButtonProps) {
   const [isRemoving, setIsRemoving] = useState(false);
   const { user } = useContext(UserContext);
 
@@ -27,6 +28,11 @@ function PillButton({ label, id }: PillButtonProps) {
     },3000)
   }
 
+  /** Removes tech association from project */
+  function remove(){
+    handleAction(id);
+  }
+
   return (
     <>
       {!isRemoving
@@ -35,7 +41,7 @@ function PillButton({ label, id }: PillButtonProps) {
           {label}
         </Button>
         :
-        <SubmitButton userEmail={user?.email} handleAction={handleClick} variant={"danger"} action={"removeTech"} />
+        <SubmitButton userEmail={user?.email} handleAction={remove} variant={"danger"} action={"removeTech"} />
       }
     </>
   );
