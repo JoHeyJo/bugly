@@ -16,7 +16,6 @@ type TechListProp = {
  */
 function TechList({ projectId, tech }: TechListProp) {
   const [techList , setTechList] = useState<ITech[]>();
-  // let techList = tech;
 
   /**Removes tech from tech list */
   function removeTech(techId:any){
