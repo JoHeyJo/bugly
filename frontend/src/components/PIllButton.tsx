@@ -1,24 +1,48 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Button from 'react-bootstrap/Button';
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { UserContext } from "../userContext";
+import AlertBubble from "../AlertBubble";
+import { techProjectDelete } from "../api";
+import { errorHandling } from "../utils/errorHandling";
+import SubmitButton from "../utils/SubmitButton";
 
 type PillButtonProps = {
   label: string;
   id: number | undefined;
+  handleAction: (techId: number | undefined) => Promise<void>;
 };
 
-/** Not a functioning button. Redesigned UI, delete actions is no longer facilitated through this component. */
-function PillButton({ label, id }: PillButtonProps) {
-  const [isDeleting, setIsDeleting] = useState(false);
+/** Not a functioning button. Redesigned UI, delete actions is no longer facilitated through this component. 
+ * [TechList] -> PillButton
+*/
+function PillButton({ label, id, handleAction }: PillButtonProps) {
+  const [isRemoving, setIsRemoving] = useState(false);
+  const { user } = useContext(UserContext);
 
   function handleClick() {
-    setIsDeleting(true);
+    setIsRemoving(!isRemoving);
+    setTimeout(()=>{
+      setIsRemoving(false)
+    },3000)
+  }
+
+  /** Removes tech association from project */
+  function remove(){
+    handleAction(id);
   }
 
   return (
     <>
-        <Button disabled onClick={handleClick} variant="dark" className="PillButton">
+      {!isRemoving
+        ?
+        <Button onClick={handleClick} variant="outline-dark" className="PillButton">
           {label}
-        </Button> 
+        </Button>
+        :
+        <SubmitButton userEmail={user?.email} handleAction={remove} variant={"danger"} action={"removeTech"} />
+      }
     </>
   );
 }

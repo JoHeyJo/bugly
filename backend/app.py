@@ -5,7 +5,6 @@ from flask import Flask, request, redirect, jsonify
 from models import db, connect_db, User, Post, Project, Detail, ProjectTech, Tech
 from flask_cors import CORS
 from flask_debugtoolbar import DebugToolbarExtension
-# from werkzeug.exceptions import BadRequest
 from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 from flask_jwt_extended import JWTManager, jwt_required, get_jwt_identity
 from datetime import timedelta
@@ -15,7 +14,7 @@ from data_service import tech_and_detail
 app = Flask(__name__)
 CORS(app)
 load_dotenv()
-# CORS(app, resources={r"/*": {"origins": "https://bugly-olive.vercel.app"}})
+# CORS(app, resources={r"/*": {"origins": "https://bugly-olive.vercel.app"}})>
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///blogly_fs'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -663,12 +662,8 @@ def delete_tech_project(project_id, tech_id):
         return jsonify({"error": "Unauthorized access"}), 401
     
     try:
-        tech = Tech.query.get_or_404(tech_id)
-        project_tech_associations= ProjectTech.query.filter(ProjectTech.tech_id == tech_id).all()
-        for record in project_tech_associations:
-            db.session.delete(record)
-            db.session.commit()  
-        # db.session.delete(tech) only delete references not actual tech from db
+        record = ProjectTech.query.filter_by(project_id=project_id,tech_id=tech_id).first()
+        db.session.delete(record)
         db.session.commit()
         return jsonify({'message':'Association deleted'})
     except Exception as e:
@@ -690,7 +685,7 @@ def delete_details(detail_id):
         detail = Detail.query.get_or_404(detail_id)
         db.session.delete(detail)
         db.session.commit()
-        return jsonify({"Message":"Detail deleted"})
+        return jsonify({"message":"Detail deleted"})
     except Exception as e:
         print('delete_tech error =>', e)
         return jsonify({"error": f"{str(e)}"})
