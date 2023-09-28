@@ -23,7 +23,7 @@ type DropMenuProp = {
 }
 
 
-/** Dropdown menu renders list of available technoloties to choose from with 
+/** Dropdown menu renders list of available technologies to choose from with 
  * the option to create new ones.
  * InfoForm -> DropMenu
 */
