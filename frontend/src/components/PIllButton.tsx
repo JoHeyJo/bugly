@@ -1,11 +1,6 @@
 import React, { useState, useContext } from "react";
 import Button from 'react-bootstrap/Button';
-import { faXmark } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { UserContext } from "../userContext";
-import AlertBubble from "../AlertBubble";
-import { techProjectDelete } from "../api";
-import { errorHandling } from "../utils/errorHandling";
 import SubmitButton from "../utils/SubmitButton";
 
 type PillButtonProps = {
@@ -14,7 +9,7 @@ type PillButtonProps = {
   handleAction: (techId: number | undefined) => Promise<void>;
 };
 
-/** Not a functioning button. Redesigned UI, delete actions is no longer facilitated through this component. 
+/**  Renders PillButton with tech info or renders button to remove tech from list 
  * [TechList] -> PillButton
 */
 function PillButton({ label, id, handleAction }: PillButtonProps) {
