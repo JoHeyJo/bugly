@@ -18,13 +18,13 @@ function PillButton({ label, id, handleAction }: PillButtonProps) {
 
   function handleClick() {
     setIsRemoving(!isRemoving);
-    setTimeout(()=>{
+    setTimeout(() => {
       setIsRemoving(false)
-    },3000)
+    }, 3000)
   }
 
   /** Removes tech association from project */
-  function remove(){
+  function remove() {
     handleAction(id);
   }
 
@@ -38,6 +38,7 @@ function PillButton({ label, id, handleAction }: PillButtonProps) {
         :
         <SubmitButton userEmail={user?.email} handleAction={remove} variant={"danger"} action={"removeTech"} label={"remove"} />
       }
+
     </>
   );
 }
