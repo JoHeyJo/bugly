@@ -118,7 +118,20 @@ class Detail(db.Model):
 
     def serialize(self):
         """Serialize to dict"""
-        return { "id": self.id, "detail": self.detail, "projecft_id": self.project_id}
+        return { "id": self.id, "detail": self.detail, "project_id": self.project_id}
+
+class Spec(db.Model):
+    """Spec model."""
+
+    __tablename__ = "specs"
+
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    spec = db.Column(db.Text, nullable=False)
+    project_id = db.Column(db.Integer, db.ForeignKey('projects.id'), nullable=False)
+
+    def serialize(self):
+        """Serialize to dict"""
+        return { "id": self.id, "detail": self.spec, "project_id": self.project_id}
     
 class Tech (db.Model):
     """Tech model. Projects can be assigned to this."""
