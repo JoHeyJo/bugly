@@ -592,6 +592,29 @@ def update_info(detail_id):
     except Exception as e:
         print('update_info error =>', e)
         return jsonify({"error": f"{str(e)}"})
+    
+
+@app.patch("/specs/<int:detail_id>")
+@jwt_required()
+def update_specs(detail_id):
+    """Updates project specs"""
+
+    jwt_identity = get_jwt_identity()
+    email = Detail.query.get_or_404(detail_id).project.user.email
+
+    if email != jwt_identity:
+        return jsonify({"error": "Unauthorized access"}), 401
+
+    try:
+        updated_detail = request.json["details"]
+        detail = Detail.query.get_or_404(detail_id)
+        detail.detail = updated_detail
+        db.session.add(detail)
+        db.session.commit()
+        return jsonify(Detail.serialize(detail))
+    except Exception as e:
+        print('update_info error =>', e)
+        return jsonify({"error": f"{str(e)}"})
 
 @app.patch("/info/<int:project_id>/tech/<tech_id>")
 @jwt_required()
