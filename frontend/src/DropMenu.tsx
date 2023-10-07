@@ -5,7 +5,7 @@ import './style/DropMenu.css'
 import { ITech } from './interface';
 import Form from 'react-bootstrap/Form';
 import SubmitButton from './utils/SubmitButton';
-import { UserContext } from './userContext';
+import { ProjectContext, UserContext } from './userContext';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import AlertBubble from "./AlertBubble";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
@@ -32,7 +32,6 @@ function DropMenu({ list, updateState, selected, submit }: DropMenuProp) {
   const [isOpen, setIsOpen] = useState(false);
 
   const { user } = useContext(UserContext);
-  
 
   /** updates searchText state */
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -95,7 +94,6 @@ function DropMenu({ list, updateState, selected, submit }: DropMenuProp) {
         key={list.length}>
         {item.id === 0 ? item.tech : "+ create...."}
       </Dropdown.Item>
-      
   }
 
   const listElements = list.map(item => dropdownElement(item));

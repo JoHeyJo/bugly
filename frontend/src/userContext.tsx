@@ -18,7 +18,7 @@ export type ProjectContextType = {
   fetchProjectPosts: () => void ;
   setProjects: Dispatch<SetStateAction<IProject[]>>;
   getProject: () => void;
-  infoGet: (projectId: number) => any;
+  infoGet: (projectId: number | undefined) => any;
 }
 
 export const ProjectContext = createContext<ProjectContextType>({
@@ -27,7 +27,7 @@ export const ProjectContext = createContext<ProjectContextType>({
   fetchProjectPosts: () => { },
   setProjects: () => { },
   getProject: () => { },
-  infoGet: async (projectId: number) => {},
+  infoGet: async (projectId: number | undefined) => {},
 });
 
 

@@ -27,7 +27,7 @@ function TechForm({ projectTech }: TechFormProp) {
   const [technologies, setTechnologies] = useState<ITech[]>([{ tech: '', id: 0 }]);
   const [selected, setSelected] = useState<ITech[]>([]);
 
-  const { projectId } = useContext(ProjectContext);
+  const { projectId, infoGet } = useContext(ProjectContext);
 
   /** fetches all technologies */
   useEffect(() => {
@@ -53,6 +53,7 @@ function TechForm({ projectTech }: TechFormProp) {
   /**Submits tech data */
   async function submitData() {
     await infoPost(projectId, { "tech": selected })
+    infoGet(projectId);
     console.log("data submitted", { "tech": selected })
   }
 

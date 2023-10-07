@@ -41,9 +41,6 @@ function RenderInfo(data: InfoProp) {
     })
   }
 
-  useEffect(()=>{
-
-  },[data])
   return (
     <>
       <span id="RenderInfo-add">

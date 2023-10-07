@@ -31,14 +31,6 @@ function TechList({ projectId, tech }: TechListProp) {
       errorHandling("TechList -> deleteTechReference", error)
     }
   }
-/**Updates techlist with added tech */
-function updateTechList(tech: ITech){
-  setTechList(techList => {
-    const newTechList = techList;
-    newTechList?.push(tech)
-    return newTechList
-  })
-}
 
 useEffect(()=>{
   setTechList(tech);
