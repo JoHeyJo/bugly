@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction, createContext } from 'react';
 import { IUser, IProject } from './interface';
+import { infoGet } from './api';
 
 export type UserContextType = {
   user: IUser | null;
@@ -17,6 +18,7 @@ export type ProjectContextType = {
   fetchProjectPosts: () => void ;
   setProjects: Dispatch<SetStateAction<IProject[]>>;
   getProject: () => void;
+  infoGet: (projectId: number) => any;
 }
 
 export const ProjectContext = createContext<ProjectContextType>({
@@ -25,6 +27,7 @@ export const ProjectContext = createContext<ProjectContextType>({
   fetchProjectPosts: () => { },
   setProjects: () => { },
   getProject: () => { },
+  infoGet: async (projectId: number) => {},
 });
 
 

@@ -32,6 +32,7 @@ function DropMenu({ list, updateState, selected, submit }: DropMenuProp) {
   const [isOpen, setIsOpen] = useState(false);
 
   const { user } = useContext(UserContext);
+  
 
   /** updates searchText state */
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -94,6 +95,7 @@ function DropMenu({ list, updateState, selected, submit }: DropMenuProp) {
         key={list.length}>
         {item.id === 0 ? item.tech : "+ create...."}
       </Dropdown.Item>
+      
   }
 
   const listElements = list.map(item => dropdownElement(item));

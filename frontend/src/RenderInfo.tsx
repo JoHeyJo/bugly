@@ -1,5 +1,5 @@
 //dependencies
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 //componnent/modules
 import { ProjectContext } from './userContext';
 import DetailsList from './DetailsList';
@@ -40,6 +40,10 @@ function RenderInfo(data: InfoProp) {
       return toggledSection
     })
   }
+
+  useEffect(()=>{
+
+  },[data])
   return (
     <>
       <span id="RenderInfo-add">
