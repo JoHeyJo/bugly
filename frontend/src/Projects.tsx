@@ -62,7 +62,8 @@ function Projects({ userId }: ProjectProps) {
     fetchProjectPosts,
     setProjects,
     getProject,
-    infoGet: () => infoGet(projectData.id)
+    infoGet: () => infoGet(projectData.id),
+    updateTechList
   }
 
   /**gets projects */

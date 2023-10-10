@@ -53,7 +53,6 @@ function TechForm({ projectTech }: TechFormProp) {
   /**Submits tech data */
   async function submitData() {
     await infoPost(projectId, { "tech": selected })
-    await infoGet(projectId);
     console.log("data submitted", { "tech": selected })
   }
 
