@@ -8,15 +8,16 @@ type SubmitButtonProp = {
   variant: string;
   action: string;
   label: string;
+  classType: string | undefined;
 
 }
 
-function SubmitButton({ userEmail, handleAction, variant, action, label }: SubmitButtonProp) {
+function SubmitButton({ classType, userEmail, handleAction, variant, action, label }: SubmitButtonProp) {
   return (
     <>
       {userEmail === 'jpf0628@gmail.com'
         ?
-        <Button type="submit" variant={variant}
+        <Button className={classType} type="submit" variant={variant}
           onClick={handleAction}>{label}
         </Button>
         :

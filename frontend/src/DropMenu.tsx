@@ -120,7 +120,7 @@ function DropMenu({ list, updateState, selected, submit }: DropMenuProp) {
       <Dropdown data-bs-theme="dark" autoClose="outside" onToggle={handleDropdownToggle}>
         {isOpen
           ?
-          <SubmitButton userEmail={user?.email} handleAction={submitIfOpen} variant={"none"} action={"addTech"} label={"Submit"}/>
+          <SubmitButton classType={undefined} userEmail={user?.email} handleAction={submitIfOpen} variant={"none"} action={"addTech"} label={"Submit"}/>
           :
           <Dropdown.Toggle variant='none'>
             <FontAwesomeIcon icon={faPlus} />

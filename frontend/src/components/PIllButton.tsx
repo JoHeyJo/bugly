@@ -36,7 +36,7 @@ function PillButton({ label, id, handleAction }: PillButtonProps) {
           {label}
         </Button>
         :
-        <SubmitButton userEmail={user?.email} handleAction={remove} variant={"danger"} action={"removeTech"} label={"remove"} />
+        <SubmitButton classType={"PillButton"} userEmail={user?.email} handleAction={remove} variant={"danger"} action={"removeTech"} label={"remove"} />
       }
 
     </>
