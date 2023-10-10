@@ -19,7 +19,7 @@ export type ProjectContextType = {
   setProjects: Dispatch<SetStateAction<IProject[]>>;
   getProject: () => void;
   infoGet: (projectId: number | undefined) => any;
-  updateTechList: (projectId: number) => void;
+  updateTechList: (projectId: number | undefined) => void;
 }
 
 export const ProjectContext = createContext<ProjectContextType>({

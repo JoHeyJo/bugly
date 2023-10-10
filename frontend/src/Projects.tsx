@@ -95,7 +95,7 @@ function Projects({ userId }: ProjectProps) {
   }
 
   /**Fetch project info after tech has been added to techList */
-  async function updateTechList(projectId: number){
+  async function updateTechList(projectId: number | undefined){
     const infoData = await infoGet(projectId);
     setProjectInfo(infoData)
   }
