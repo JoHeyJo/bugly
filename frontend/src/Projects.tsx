@@ -93,6 +93,12 @@ function Projects({ userId }: ProjectProps) {
     setPosts(res)
   }
 
+  /**Fetch project info after tech has been added to techList */
+  async function updateTechList(projectId: number){
+    const infoData = await infoGet(projectId);
+    setProjectInfo(infoData)
+  }
+
   /** controls when slideover opens/closes */
   async function handleOpenPosts(id?: number, projectId?: number) {
     // if closed, isPostsOpen slideover
