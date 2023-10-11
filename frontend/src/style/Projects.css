@@ -9,6 +9,10 @@
   outline: none;
 }
 
+.Projects-projects-details-container{
+  height: 15rem;
+}
+
 .font-icon {
   padding-left: 20px;
   opacity: 0;

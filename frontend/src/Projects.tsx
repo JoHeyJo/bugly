@@ -153,7 +153,7 @@ function Projects({ userId }: ProjectProps) {
         <PopOut id={projectData.id} getProject={getProject} action={'new project'} postId={undefined} fetchEditPost={undefined} />
       </h3>
 
-      <Row>
+      <Row className="Projects-projects-details-container">
         <Col xs={6} className="mx-2 my-1">
           <ListGroup>
             {
