@@ -9,7 +9,7 @@
   outline: none;
 }
 
-.Projects-projects-details-container{
+.Projects-projects-details-container {
   height: 15rem;
 }
 
@@ -34,9 +34,9 @@
   background-color: #AC8307;
   border: none;
   border-bottom: 1px solid transparent;
-    box-shadow:
-        0 8px 12px rgba(0, 0, 0, 0.15),
-        0 -1px 6px rgba(0, 0, 0, 0.3);
+  box-shadow:
+    0 8px 12px rgba(0, 0, 0, 0.15),
+    0 -1px 6px rgba(0, 0, 0, 0.3);
 }
 
 .Projects-project:hover {
@@ -69,6 +69,15 @@
   padding: .3rem;
   box-shadow: inset 0px -1px 5px #664D02;
 
+}
+
+.Projects-ListGroup {
+  max-height: 14rem;
+}
+
+.list-group {
+  overflow: scroll;
+  padding-right: 3px;
 }
 
 .Projects-post-title {
