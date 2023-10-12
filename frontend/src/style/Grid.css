@@ -1,0 +1,16 @@
+.grid {
+  display: flex;
+  flex-direction: column;
+  /* display: inline-block */
+}
+
+.row {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.cell {
+  width: 20px;
+  height: 20px;
+  border: 1px solid black;
+}

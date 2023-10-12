@@ -8,6 +8,7 @@ import "./style/HomePage.css"
 import { errorHandling } from "./utils/errorHandling";
 import DraftEditorConvertFromRaw from "./DraftEditorConvertFromRaw";
 import LoadingSpinner from "./LoadingSpinner";
+import Grid from "./Grid";
 
 /** Homepage for Bugly. Shows 5 most recent posts 
  * 
@@ -44,6 +45,7 @@ function HomePage() {
 
   return (
     <div id="Homepage">
+      <Grid />/
       <h1 className="Homepage-title">Bugly Recent Posts</h1>
       {posts.map((post, i) =>
         <section className="Homepage-post" key={i}>
