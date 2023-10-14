@@ -45,7 +45,11 @@ npm start
 ## Upcoming features
 
 - Search for projects and posts.
-- Section for project technical details and short blurb.
+- Section for:
+    - ~~project technologies~~
+    - ~~details and~~
+    - short blurb.
+- Landing page will have a grid that represents the github grid
 
 
 
