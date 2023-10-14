@@ -62,7 +62,7 @@ function LoginForm({ login }:any) {
                 <label className="form-label">Username</label>
                 <input
                   name="email"
-                  className="form-control"
+                  className="LoginForm-form-control"
                   value={formData.email}
                   onChange={handleChange}
                   autoComplete="email"
@@ -74,7 +74,7 @@ function LoginForm({ login }:any) {
                 <input
                   type="password"
                   name="password"
-                  className="form-control"
+                  className="LoginForm-form-control"
                   value={formData.password}
                   onChange={handleChange}
                   autoComplete="current-password"

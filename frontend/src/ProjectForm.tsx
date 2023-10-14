@@ -10,6 +10,7 @@ import AlertBubble from './AlertBubble';
 import { UserContext, ProjectContext } from './userContext';
 // style
 import AlertPopUp from './AlertPopUp';
+import './style/ProjectForm.css';
 
 const defaultProject: IProject = { id: undefined, name: undefined, description: undefined, user_id: undefined };
 const defaultAlert: IAlert = { error: null };
