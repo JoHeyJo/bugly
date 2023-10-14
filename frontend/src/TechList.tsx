@@ -37,7 +37,7 @@ useEffect(()=>{
 },[tech])
 
   return (
-    <>
+    <div id="TechList-container">
       <ul id="TechList-list" className="d-flex">
         {techList?.map((t, idx) =>
         <>
@@ -45,7 +45,7 @@ useEffect(()=>{
         </>
         )}
       </ul>
-    </>
+    </div>
 
   );
 }

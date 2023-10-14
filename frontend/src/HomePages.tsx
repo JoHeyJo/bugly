@@ -45,7 +45,7 @@ function HomePage() {
 
   return (
     <div id="Homepage">
-      <Grid />/
+      {/* <Grid /> */}
       <h1 className="Homepage-title">Bugly Recent Posts</h1>
       {posts.map((post, i) =>
         <section className="Homepage-post" key={i}>

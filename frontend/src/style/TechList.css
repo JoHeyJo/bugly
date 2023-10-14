@@ -24,3 +24,7 @@ li {
   padding-left: 5px;
   color: transparent;
 }
+
+#TechList-container{
+  height: 9rem;
+}
