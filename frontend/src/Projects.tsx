@@ -153,9 +153,9 @@ function Projects({ userId }: ProjectProps) {
         <PopOut id={projectData.id} getProject={getProject} action={'new project'} postId={undefined} fetchEditPost={undefined} />
       </h3>
 
-      <Row>
+      <Row className="Projects-projects-details-container">
         <Col xs={6} className="mx-2 my-1">
-          <ListGroup>
+          <ListGroup className="Projects-ListGroup">
             {
               projects.map(project =>
                 <ListGroup.Item key={project.id} className={projectData.id === project.id ? "Projects-project selected d-flex justify-content-start" : "Projects-project d-flex justify-content-start"}
