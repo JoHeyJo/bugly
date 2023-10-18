@@ -2,7 +2,7 @@ from flask_jwt_extended.exceptions import JWTDecodeError
 from dotenv import load_dotenv
 import os
 from flask import Flask, request, redirect, jsonify
-from models import db, connect_db, User, Post, Project, Detail, ProjectTech, Tech
+from models import db, connect_db, User, Post, Project, Detail, ProjectTech, Tech, Spec
 from flask_cors import CORS
 from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy.exc import IntegrityError, SQLAlchemyError
@@ -534,6 +534,13 @@ def post_info(project_id):
     if email != jwt_identity:
         return jsonify({"error": "Unauthorized access"}), 401
     try:
+
+        specs = request.json.get("details", None)
+        if specs is not None:
+            for spec in specs:
+                new_spec = Spec(spec=spec,project_id=project_id)
+                db.session.add(new_spec)
+
         details = request.json.get("details", None)
         if details is not None:
             for detail in details:
