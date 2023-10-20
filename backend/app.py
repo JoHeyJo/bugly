@@ -594,27 +594,27 @@ def update_info(detail_id):
         return jsonify({"error": f"{str(e)}"})
     
 
-# @app.patch("/specs/<int:detail_id>")
-# @jwt_required()
-# def update_specs(detail_id):
-#     """Updates project specs"""
+@app.patch("/specs/<int:spec_id>")
+@jwt_required()
+def update_specs(spec_id):
+    """Updates project specs"""
 
-#     jwt_identity = get_jwt_identity()
-#     email = Detail.query.get_or_404(detail_id).project.user.email
+    jwt_identity = get_jwt_identity()
+    email = Spec.query.get_or_404(spec_id).project.user.email
 
-#     if email != jwt_identity:
-#         return jsonify({"error": "Unauthorized access"}), 401
+    if email != jwt_identity:
+        return jsonify({"error": "Unauthorized access"}), 401
 
-#     try:
-#         updated_detail = request.json["details"]
-#         detail = Detail.query.get_or_404(detail_id)
-#         detail.detail = updated_detail
-#         db.session.add(detail)
-#         db.session.commit()
-#         return jsonify(Detail.serialize(detail))
-#     except Exception as e:
-#         print('update_info error =>', e)
-#         return jsonify({"error": f"{str(e)}"})
+    try:
+        updated_spec = request.json["spec"]
+        spec = Spec.query.get_or_404(spec_id)
+        spec.spec = updated_spec
+        db.session.add(spec)
+        db.session.commit()
+        return jsonify(spec.serialize(spec))
+    except Exception as e:
+        print('update_info error =>', e)
+        return jsonify({"error": f"{str(e)}"})
 
 # refactor to handle specs
 @app.delete("/tech/<tech_id>")
