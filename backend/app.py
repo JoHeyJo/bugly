@@ -617,30 +617,30 @@ def update_specs(spec_id):
         return jsonify({"error": f"{str(e)}"})
 
 # refactor to handle specs
-@app.delete("/tech/<tech_id>")
-@jwt_required()
-def delete_tech(tech_id):
-    """Deletes spec"""
+# @app.delete("/tech/<tech_id>")
+# @jwt_required()
+# def delete_tech(tech_id):
+#     """Deletes spec"""
 
-    tech = Tech.query.get_or_404(tech_id)
-    user_id = tech.projects[0].user_id
-    email = User.query.get_or_404(user_id).email
-    jwt_identity = get_jwt_identity()
+#     tech = Tech.query.get_or_404(tech_id)
+#     user_id = tech.projects[0].user_id
+#     email = User.query.get_or_404(user_id).email
+#     jwt_identity = get_jwt_identity()
 
-    if email != jwt_identity:
-        return jsonify({"error": "Unauthorized access"}), 401
+#     if email != jwt_identity:
+#         return jsonify({"error": "Unauthorized access"}), 401
 
-    tech_references = ProjectTech.query.filter_by(tech_id=tech_id).all()
-    if len(tech_references) > 1:
-        return jsonify({"error": "Cannot delete tech while associated to more than one project."}), 422
+#     tech_references = ProjectTech.query.filter_by(tech_id=tech_id).all()
+#     if len(tech_references) > 1:
+#         return jsonify({"error": "Cannot delete tech while associated to more than one project."}), 422
 
-    try:
-        db.session.delete(tech)
-        db.session.commit()
-        return jsonify({'message': "Tech deleted"})
-    except Exception as e:
-        print('delete_tech error =>', e)
-        return jsonify({"error": f"{str(e)}"})
+#     try:
+#         db.session.delete(tech)
+#         db.session.commit()
+#         return jsonify({'message': "Tech deleted"})
+#     except Exception as e:
+#         print('delete_tech error =>', e)
+#         return jsonify({"error": f"{str(e)}"})
 
 @app.patch("/info/<int:project_id>/tech/<tech_id>")
 @jwt_required()
