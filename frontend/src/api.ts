@@ -313,7 +313,7 @@ async function techGet() {
   }
 }
 
-/** Posts new info : {details, tech} */
+/** Posts new info : {details, tech, spec} */
 async function infoPost(projectId: number | undefined, infoData: {}) {
 
   const headers = { Authorization: `Bearer ${BuglyApi.token}` }
