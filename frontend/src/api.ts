@@ -326,6 +326,8 @@ async function infoPost(projectId: number | undefined, infoData: {}) {
   }
 }
 
+/** Edit spec */
+
 /** Edits details */
 async function detailEdit(detailId: number) {
   const headers = { Authorization: `Bearer ${BuglyApi.token}` }
