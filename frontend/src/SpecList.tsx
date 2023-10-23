@@ -1,5 +1,10 @@
 import React from "react";
 import "./style/SpecList.css";
+
+/** Renders a list of project specs
+ * 
+ * RenderInfo -> SpecList
+ */
 function SpecList(){
   return(
     <div id="SpecList-container">

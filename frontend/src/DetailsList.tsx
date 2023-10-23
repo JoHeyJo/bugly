@@ -6,7 +6,7 @@ type ListProp = {
   list: string[]
 }
 /** Handles a list 
- * RenderInfo -> List
+ * RenderInfo -> DetailsList
 */
 function DetailsList({ list }: ListProp) {
   return (
