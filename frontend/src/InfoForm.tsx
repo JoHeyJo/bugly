@@ -15,12 +15,21 @@ type InfoFormProp = {
 }
 
 /** Handles dynamic rendering of detail forms and data submission 
+ * 
+ * props:
+ * - handlesClose: closes popOut on submission
+ * 
+ * state:
+ * - details:[{},{},...]
+ * - projectId: num
+ * 
  * PopOut -> InfoForm
  */
 
 function InfoForm({ handleClose }: InfoFormProp) {
   const [details, setNewDetail] = useState(['']);
   const { projectId } = useContext(ProjectContext);
+
   const { user } = useContext(UserContext);
 
   /** Creates additional fields to add more details */
@@ -53,7 +62,7 @@ function InfoForm({ handleClose }: InfoFormProp) {
     e.preventDefault()
     try {
       await infoPost(projectId, {"details":details})
-    } catch (error: any) {
+    } catch (error: any) { 
       errorHandling('submitDetails in InfoForm', error)
     }
   }
