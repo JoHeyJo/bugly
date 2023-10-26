@@ -49,7 +49,7 @@ function PopOut({ id, getProject, action, postId, fetchEditPost }: PopOutProp) {
 
   function modalAction() {
     if (action === 'new specs') return <InfoForm form={"specs"} handleClose={handleClose} />;
-    if (action === 'new info') return <InfoForm form={"info"} handleClose={handleClose} />;
+    if (action === 'new info') return <InfoForm form={"details"} handleClose={handleClose} />;
     return action === 'new project'
       ? <ProjectForm handleClose={handleClose} getProject={getProject} />
       : <PostForm handleClose={handleClose} postId={postId} fetchEditPost={fetchEditPost} />
