@@ -11,7 +11,7 @@ import './style/InfoForm.css';
 
 type InfoFormProp = {
   handleClose: () => void | undefined;
-  // projectId: number | undefined;
+  form: string;
 }
 
 /** Handles dynamic rendering of detail forms and data submission 
@@ -20,29 +20,29 @@ type InfoFormProp = {
  * - handlesClose: closes popOut on submission
  * 
  * state:
- * - details:[{},{},...]
+ * - info:[{},{},...]
  * - projectId: num
  * 
  * PopOut -> InfoForm
  */
 
-function InfoForm({ handleClose }: InfoFormProp) {
-  const [details, setNewDetail] = useState(['']);
+function InfoForm({ handleClose, form }: InfoFormProp) {
+  const [info, setNewInfo] = useState(['']);
   const { projectId } = useContext(ProjectContext);
 
   const { user } = useContext(UserContext);
 
-  /** Creates additional fields to add more details */
+  /** Creates additional fields to add more info */
   function createDetailField() {
-    setNewDetail([...details, ''])
+    setNewInfo([...info, ''])
   }
 
-  /** Update details state */
+  /** Update info state */
   function updateDetails(index: number, char: string | undefined) {
-    setNewDetail(prevDetail => {
-      const details = [...prevDetail];
-      details[index] = char!
-      return details;
+    setNewInfo(prevDetail => {
+      const info = [...prevDetail];
+      info[index] = char!
+      return info;
     })
   }
 
@@ -57,22 +57,22 @@ function InfoForm({ handleClose }: InfoFormProp) {
     </div>
   }
 
-  /** Submits project details */
-  async function submitDetails(e: any) {
+  /** Submits project info/specs */
+  async function submitInfo(e: any) {
     e.preventDefault()
     try {
-      await infoPost(projectId, {"details":details})
-    } catch (error: any) { 
-      errorHandling('submitDetails in InfoForm', error)
+      await infoPost(projectId, { [form]: info })
+    } catch (error: any) {
+      errorHandling('submitInfo in InfoForm', error)
     }
   }
 
   return (
     <>
-      <Button className="mx-1 my-2" variant="outline-warning" onClick={createDetailField}>additional detail</Button>
-      <Form onSubmit={submitDetails}>
+      <Button className="mx-1 my-2" variant="outline-warning" onClick={createDetailField}>additional {form}</Button>
+      <Form onSubmit={submitInfo}>
         <ul id="InfoForm-detail-list">
-          {details.map((detail, i) =>
+          {info.map((detail, i) =>
             <li key={i} className="InfoForm-detail py-2"><InfoInput updateState={updateDetails} index={i} /></li>
           )}
         </ul>
