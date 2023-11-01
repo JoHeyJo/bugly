@@ -54,6 +54,7 @@ export interface IProject {
 export interface IDetailData {
   details: string[];
   tech: ITech[];
+  specs: string[];
 }
 
 export interface ITech {

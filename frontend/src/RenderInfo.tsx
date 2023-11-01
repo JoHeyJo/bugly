@@ -2,14 +2,13 @@
 import React, { useState, useContext, useEffect } from "react";
 //componnent/modules
 import { ProjectContext } from './userContext';
-import DetailsList from './InfoList';
+import InfoList from './InfoList';
 import { IDetailData } from "./interface";
 import PopOut from './PopOut';
 import TechList from './TechList';
 // style
 import './style/RenderInfo.css';
 import TechForm from "./TechForm";
-import SpecList from "./SpecList";
 
 type InfoProp = {
   projectData: IDetailData
@@ -66,9 +65,9 @@ function RenderInfo(data: InfoProp) {
           {section.specs && <PopOut id={projectId} action={"new specs"} getProject={() => { }} postId={undefined} />}
         </span>
       </span>
-      {section.details && <DetailsList list={data.projectData.details} />}
+      {section.details && <InfoList list={data.projectData.details} />}
       {section.tech && <TechList projectId={projectId} tech={data.projectData.tech} />}
-      {section.specs && <SpecList />}
+      {section.specs && <InfoList list={data.projectData.specs}/>}
     </>
   )
 }
