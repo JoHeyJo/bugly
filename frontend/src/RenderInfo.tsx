@@ -9,6 +9,7 @@ import TechList from './TechList';
 // style
 import './style/RenderInfo.css';
 import TechForm from "./TechForm";
+import SpecList from "./SpecList";
 
 type InfoProp = {
   projectData: IDetailData
@@ -67,7 +68,8 @@ function RenderInfo(data: InfoProp) {
       </span>
       {section.details && <InfoList list={data.projectData.details} />}
       {section.tech && <TechList projectId={projectId} tech={data.projectData.tech} />}
-      {section.specs && <InfoList list={data.projectData.specs}/>}
+      {section.specs && <SpecList />}
+      {/* {section.specs && <InfoList list={data.projectData.specs}/>} */}
     </>
   )
 }

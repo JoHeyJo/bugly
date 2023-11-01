@@ -8,7 +8,7 @@ type SpecListProp = {
  * 
  * RenderInfo -> SpecList
  */
-function SpecList({ list }: SpecListProp) {
+function SpecList() {
   return (
     <div id="SpecList-container">
       <h3>Coming soon...</h3>
