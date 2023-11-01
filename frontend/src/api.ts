@@ -318,11 +318,8 @@ async function infoPost(projectId: number | undefined, infoData: {}) {
 
   const headers = { Authorization: `Bearer ${BuglyApi.token}` }
   try {
-    debugger
     const res = await axios.post(`${BASE_URL}/info/${projectId}`, infoData, { headers })
-    debugger
     return res
-    debugger
   } catch (error: any) {
     errorHandling('infoPost', error)
     throw error.response.data

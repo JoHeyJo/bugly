@@ -5,11 +5,12 @@ import Form from 'react-bootstrap/Form';
 type InfoInputProp = {
   updateState: (index:number, char:string) => void;
   index: number;
+  form: string;
 }
 /** Handles individual detail input state while allowing more "detail" to be created
  * InfoForm -> InfoInput
  */
-function InfoInput({ updateState, index }: InfoInputProp) {
+function InfoInput({ updateState, index, form }: InfoInputProp) {
   const [detailData, setDetailData] = useState<string>('')
 
 
@@ -26,7 +27,7 @@ function InfoInput({ updateState, index }: InfoInputProp) {
       value={detailData}
       name="detail"
       type="text"
-      placeholder="Add detail..."
+      placeholder={`Add ${[form]}...`}
       onChange={handleChange}
     />
   )

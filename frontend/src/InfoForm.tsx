@@ -73,7 +73,7 @@ function InfoForm({ handleClose, form }: InfoFormProp) {
       <Form onSubmit={submitInfo}>
         <ul id="InfoForm-detail-list">
           {info.map((detail, i) =>
-            <li key={i} className="InfoForm-detail py-2"><InfoInput updateState={updateDetails} index={i} /></li>
+            <li key={i} className="InfoForm-detail py-2"><InfoInput updateState={updateDetails} index={i} form={form} /></li>
           )}
         </ul>
         {renderSubmitButton()}

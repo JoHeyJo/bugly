@@ -2,7 +2,7 @@
 import React, { useState, useContext, useEffect } from "react";
 //componnent/modules
 import { ProjectContext } from './userContext';
-import DetailsList from './DetailsList';
+import DetailsList from './InfoList';
 import { IDetailData } from "./interface";
 import PopOut from './PopOut';
 import TechList from './TechList';

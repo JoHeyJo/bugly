@@ -1,14 +1,14 @@
 import React from "react";
 import './style/List.css';
-import './style/DetailsList.css';
+import './style/InfoList.css';
 
 type ListProp = {
   list: string[]
 }
 /** Handles a list 
- * RenderInfo -> DetailsList
+ * RenderInfo -> InfoList
 */
-function DetailsList({ list }: ListProp) {
+function InfoList({ list }: ListProp) {
   return (
     <div className="List-container">
       <ul style={{paddingLeft: "1px"}}>
@@ -18,4 +18,4 @@ function DetailsList({ list }: ListProp) {
   )
 }
 
-export default DetailsList;
+export default InfoList;
