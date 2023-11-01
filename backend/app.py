@@ -535,7 +535,7 @@ def post_info(project_id):
         return jsonify({"error": "Unauthorized access"}), 401
     try:
 
-        specs = request.json.get("details", None)
+        specs = request.json.get("specs", None)
         if specs is not None:
             for spec in specs:
                 new_spec = Spec(spec=spec,project_id=project_id)

@@ -24,7 +24,7 @@ type Section = {
 
 const defaultSections = { 'details': false, 'tech': false, 'specs': false }
 /** Renders project's specs, tech, details 
- * DetailsSlidOver -> Info
+ * DetailsSlidOver -> RenderInfo -> [PopOut, TechForm, InfoList, TechList]
 */
 function RenderInfo(data: InfoProp) {
   const [section, setSection] = useState<Section>(defaultSections)
@@ -68,8 +68,8 @@ function RenderInfo(data: InfoProp) {
       </span>
       {section.details && <InfoList list={data.projectData.details} />}
       {section.tech && <TechList projectId={projectId} tech={data.projectData.tech} />}
-      {section.specs && <SpecList />}
-      {/* {section.specs && <InfoList list={data.projectData.specs}/>} */}
+      {/* {section.specs && <SpecList />} */}
+      {section.specs && <InfoList list={data.projectData.specs}/>}
     </>
   )
 }

@@ -23,7 +23,7 @@ type InfoFormProp = {
  * - info:[{},{},...]
  * - projectId: num
  * 
- * PopOut -> InfoForm
+ * PopOut -> InfoForm -> [DropMenu, InfoInput]
  */
 
 function InfoForm({ handleClose, form }: InfoFormProp) {
