@@ -67,9 +67,8 @@ function RenderInfo(data: InfoProp) {
         </span>
       </span>
       {section.details && <InfoList list={data.projectData.details} />}
-      {section.tech && <TechList projectId={projectId} tech={data.projectData.tech} />}
-      {/* {section.specs && <SpecList />} */}
       {section.specs && <InfoList list={data.projectData.specs}/>}
+      {section.tech && <TechList projectId={projectId} tech={data.projectData.tech} />}
     </>
   )
 }
