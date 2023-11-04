@@ -5,7 +5,7 @@ from flask import Flask, request, redirect, jsonify
 from models import db, connect_db, User, Post, Project, Detail, ProjectTech, Tech, Spec
 from flask_cors import CORS
 from flask_debugtoolbar import DebugToolbarExtension
-from sqlalchemy.exc import IntegrityError, SQLAlchemyError
+from sqlalchemy.exc import IntegrityError
 from flask_jwt_extended import JWTManager, jwt_required, get_jwt_identity
 from datetime import timedelta
 from data_service import tech_and_detail
@@ -18,7 +18,6 @@ load_dotenv()
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///blogly_fs'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-# app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 app.config['SECRET_KEY'] = os.environ['SECRET_KEY']
 app.config["JWT_SECRET_KEY"] = os.environ['JWT_SECRET_KEY']
 app.config['JWT_ACCESS_TOKEN_EXPIRES'] = timedelta(days=7)
@@ -27,10 +26,8 @@ jwt = JWTManager(app)
 
 # Having the Debug Toolbar show redirects explicitly is often useful;
 # however, if you want to turn it off, you can uncomment this line
-#
+
 # app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
-# maybe do this....
-# db = SQLAlchemy(app)
 
 toolbar = DebugToolbarExtension(app)
 connect_db(app)
@@ -404,7 +401,6 @@ def projects_get(user_id):
     try:
         projects = Project.query.filter(Project.user_id == user_id)
         serialized = [Project.serialize(project) for project in projects]
-        print('>>>>>',serialized)
         return jsonify(serialized)
     except Exception as e:
         db.session.rollback()
