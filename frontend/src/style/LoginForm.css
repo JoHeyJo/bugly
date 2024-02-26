@@ -4,6 +4,7 @@
 
 .card-body-loginForm {
   background-color: #212529;
+  border-radius: 5%;
 }
 
 .LoginForm-form-control {
@@ -14,3 +15,20 @@
   background-color: #212529;
   color: #adb5bd;
 }
+
+.btn-primary {
+  background-color: #007bff;
+  /* Ensure consistency, though this is the default */
+  border: none;
+  /* Remove default border */
+  padding: 10px;
+  margin-top: 16px;
+  /* Ensure some space above the button */
+  width: 100%;
+  /* Match input width for consistency */
+  font-size: 16px;
+  /* Larger font for better readability */
+  border-radius: 4px;
+  /* Rounded corners for the button */
+}
+
