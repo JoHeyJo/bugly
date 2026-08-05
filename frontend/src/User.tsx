@@ -7,6 +7,8 @@ import Col from 'react-bootstrap/Col';
 import { IUser } from './interface'
 import { userGet, userDelete } from './api'
 import Projects from "./Projects";
+import LoadingSpinner from "./LoadingSpinner";
+
 // style
 import './style/User.css'
 
@@ -22,6 +24,7 @@ const defaultUser: IUser = { id: 0, firstName: '', lastName: '', image: '', emai
 function User() {
   const [user, setUser] = useState<IUser>(defaultUser)
   const [postId, setPostId] = useState<number | undefined>(undefined);
+  const [isLoading, setIsLoading] = useState(true);
 
   const navigate = useNavigate();
   const params = useParams();
@@ -32,6 +35,7 @@ function User() {
       async function fetchUser(id: number | undefined) {
         const res = await userGet(id);
         setUser(res)
+        setIsLoading(false);
       }
       fetchUser(+params.user_id!)
     }, [postId])
@@ -54,6 +58,8 @@ function User() {
       console.error("User: Issue removing user" + error)
     }
   }
+
+  if (isLoading) return <LoadingSpinner />;
 
   return (
     <>
