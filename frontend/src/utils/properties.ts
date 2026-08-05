@@ -1,4 +1,4 @@
-type actionProperties = {
+type actionPropertiesTypes = {
   [key: string]: {
     label: string | undefined;
     class: string;
@@ -8,7 +8,7 @@ type actionProperties = {
   }
 }
 
-export const actionProperties: actionProperties = {
+export const actionProperties: actionPropertiesTypes = {
   addPost: {
     label: 'Add Post',
     class: "my-0",
