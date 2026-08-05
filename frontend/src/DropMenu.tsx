@@ -1,11 +1,10 @@
 import React, { useState, useContext } from 'react'
 import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownButton from 'react-bootstrap/DropdownButton';
 import './style/DropMenu.css'
 import { ITech } from './interface';
 import Form from 'react-bootstrap/Form';
 import SubmitButton from './utils/SubmitButton';
-import { ProjectContext, UserContext } from './userContext';
+import { UserContext } from './userContext';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import AlertBubble from "./AlertBubble";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
@@ -13,7 +12,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button } from 'react-bootstrap';
 import { errorHandling } from './utils/errorHandling';
 import { techDelete } from './api';
-import AlertPopUp from './AlertPopUp';
 
 type DropMenuProp = {
   list: ITech[];

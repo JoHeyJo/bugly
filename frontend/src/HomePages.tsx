@@ -8,7 +8,6 @@ import "./style/HomePage.css"
 import { errorHandling } from "./utils/errorHandling";
 import DraftEditorConvertFromRaw from "./DraftEditorConvertFromRaw";
 import LoadingSpinner from "./LoadingSpinner";
-import Grid from "./Grid";
 
 /** Homepage for Bugly. Shows 5 most recent posts 
  * 

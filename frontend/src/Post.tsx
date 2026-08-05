@@ -1,11 +1,9 @@
 //dependencies
 import React, { useState, useEffect, useContext } from "react";
-import Button from 'react-bootstrap/Button';
 import { useParams } from "react-router-dom";
-import { Container } from "react-bootstrap";
 import Stack from 'react-bootstrap/Stack';
 //components / modules
-import { postDelete, postGet } from './api';
+import { postGet } from './api';
 import { ProjectContext } from "./userContext";
 import PopOut from "./PopOut";
 import DraftEditorConvertFromRaw from "./DraftEditorConvertFromRaw";
@@ -28,7 +26,6 @@ type PostProp = {
  */
 function Post({ initialPost, handlePostRender, fetchEditPost }: any) {
   const [post, setPost] = useState(initialPost)
-  const { fetchProjectPosts, projectId } = useContext(ProjectContext);
   const postId = +useParams().post_id!;
 
   if (!post) {

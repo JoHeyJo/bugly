@@ -1,7 +1,7 @@
 //dependencies
 import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter} from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 // components/modules
 import { IUser } from './interface'

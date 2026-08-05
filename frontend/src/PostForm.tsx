@@ -3,9 +3,8 @@ import React, { useState, useEffect, useContext } from "react";
 import { useParams } from 'react-router-dom';
 import { Container, Row, Col, Button } from "react-bootstrap";
 import Form from 'react-bootstrap/Form';
-import InputGroup from 'react-bootstrap/InputGroup';
 //modules/components
-import { userGet, postAdd, postEdit, postUpdate, projectPostAdd, postDelete } from './api';
+import { userGet, postEdit, postUpdate, projectPostAdd, postDelete } from './api';
 import { IUser, IPost, IAlert } from "./interface";
 import AlertPopUp from './AlertPopUp';
 import { ProjectContext, PostContext, UserContext } from "./userContext";
@@ -39,7 +38,6 @@ function PostForm({ handleClose, postId, fetchEditPost }: PostFormProp) {
   const { user } = useContext(UserContext);
   const { setIsPostRendering } = useContext(PostContext);
 
-  const params = useParams();
   const userId = user?.id;
 
 

@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import Collapse from 'react-bootstrap/Collapse';
 import './style/SlideOver.css';
 import Card from 'react-bootstrap/Card';

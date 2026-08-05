@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons'
 import "./style/AlertModal.css";
 import { projectDelete } from './api';
-import { UserContextType, UserContext } from './userContext';
+import { UserContext } from './userContext';
 import AlertBubble from './AlertBubble';
 
 type ProjectData = {
@@ -33,7 +33,7 @@ function AlertModal({ projectData, projectGet, isOpen }: AlertModalProps) {
   /**Deletes project and associated posts */
   async function deleteProject() {
     try {
-      const res = await projectDelete(projectData.id,)
+      await projectDelete(projectData.id,)
       projectGet();
       isOpen(false);
     } catch (error: any) {

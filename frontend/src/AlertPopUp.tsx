@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Alert from 'react-bootstrap/Alert';
 
 type AlertProp = {
@@ -17,17 +17,8 @@ type AlertProp = {
 
 /** Alert component that can be used for a variaty of notifications */
 function AlertPopUp({ variant, message }: AlertProp) {
-  const [isShowing, setIsShowing] = useState<boolean>(true);
+  const [isShowing] = useState<boolean>(true);
 
-  // const show = () => {
-  //   setIsShowing(true)
-
-  //   setTimeout(() => {
-  //     setIsShowing(false)
-  //   }, 2000)
-  // }
-
-  // useEffect(() => show(),[])
   return (
     <>
       {message.map((m) =>

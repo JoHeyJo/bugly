@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from 'react';
 import { Editor, EditorState, convertToRaw, RichUtils, convertFromRaw } from 'draft-js';
 import Form from 'react-bootstrap/Form';
-import InputGroup from 'react-bootstrap/InputGroup';
 //modules / components
 //styles
 import './style/DraftEditor.css';
